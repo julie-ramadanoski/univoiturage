@@ -48,11 +48,12 @@ Faire des modifications
 	Avant de commencer à travailler mettez-vous à jour
 	>git pull
 
-## Fusion des modifications du master vers sa branche de dev
+## Fusion des modifications de sa branche de dev vers master
 	Se positionner sur sa branche master
 	>git checkout master
 	>git merge mafonctionnalite
 	Régler les conflits au besoin
+	L'inverse est possible
 
 
 
