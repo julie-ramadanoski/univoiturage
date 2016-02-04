@@ -33,7 +33,7 @@ Pour se faire Veillez à séparer vos commits comme ajouter un controller ne ser
 	>git remote add upstream https://github.com/julie-ramadanoski/univoiturage
 
 ## Branche de développement d'une fonctionnalité
-	Dans le panneau admin de GitHub créer une nouvelle branche et cliquer le bouton New pull request pour autoriser les push des contributeurs
+	
 	Dans le dépôt local
 	>git checkout -b mafonctionnalite
 
@@ -42,7 +42,7 @@ Faire des modifications
 	>git commit -m "mon message explicatif"
 
 	Une fois la fonctionnalité terminée
-	>git push
+	>git push --set-upstream origin mafonctionnalite
 
 ## Récupération des modification du dépôt distant
 	Avant de commencer à travailler mettez-vous à jour
