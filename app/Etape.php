@@ -1,0 +1,44 @@
+<?php namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Etape extends Model {
+
+    /**
+     * Generated
+     */
+
+    protected $table = 'etape';
+    protected $fillable = ['idEtape', 'adresseEtape', 'inseeVille'];
+
+
+    public function ville() {
+        return $this->belongsTo(\App\Ville::class, 'inseeVille', 'inseeVille');
+    }
+
+    public function trajets() {
+        return $this->belongsToMany(\App\Trajet::class, 'etapetrajet', 'idEtape', 'idTraj');
+    }
+
+    public function alertes() {
+        return $this->hasMany(\App\Alerte::class, 'idEtapeDepartAlerte', 'idEtape');
+    }
+
+    public function alertes() {
+        return $this->hasMany(\App\Alerte::class, 'idEtapeArriveeAlerte', 'idEtape');
+    }
+
+    public function etapetrajets() {
+        return $this->hasMany(\App\Etapetrajet::class, 'idEtape', 'idEtape');
+    }
+
+    public function inscrits() {
+        return $this->hasMany(\App\Inscrit::class, 'idEtapeDepartInscrit', 'idEtape');
+    }
+
+    public function inscrits() {
+        return $this->hasMany(\App\Inscrit::class, 'idEtapeArriveeInscrit', 'idEtape');
+    }
+
+
+}
