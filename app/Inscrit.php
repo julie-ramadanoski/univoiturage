@@ -12,11 +12,11 @@ class Inscrit extends Model {
     protected $fillable = ['idMemb', 'idTraj', 'avisCInscrit', 'commentaireCInscrit', 'dateCommentCInscrit', 'avisVInscrit', 'commentaireVInscrit', 'dateCommentVInscrit', 'valideInscrit', 'idEtapeDepartInscrit', 'idEtapeArriveeInscrit'];
 
 
-    public function etape() {
+    public function etapeDepart() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeDepartInscrit', 'idEtape');
     }
 
-    public function etape() {
+    public function etapeArrivee() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeArriveeInscrit', 'idEtape');
     }
 

@@ -12,11 +12,11 @@ class Alerte extends Model {
     protected $fillable = ['idAlerte', 'dateAlerte', 'heureAlerte', 'idEtapeDepartAlerte', 'idEtapeArriveeAlerte', 'idMemb'];
 
 
-    public function etape() {
+    public function etapeDepart() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeDepartAlerte', 'idEtape');
     }
 
-    public function etape() {
+    public function etapeArrivee() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeArriveeAlerte', 'idEtape');
     }
 

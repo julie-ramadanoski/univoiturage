@@ -20,11 +20,11 @@ class Etape extends Model {
         return $this->belongsToMany(\App\Trajet::class, 'etapetrajet', 'idEtape', 'idTraj');
     }
 
-    public function alertes() {
+    public function alertesDepart() {
         return $this->hasMany(\App\Alerte::class, 'idEtapeDepartAlerte', 'idEtape');
     }
 
-    public function alertes() {
+    public function alertesArrivee() {
         return $this->hasMany(\App\Alerte::class, 'idEtapeArriveeAlerte', 'idEtape');
     }
 
@@ -32,11 +32,11 @@ class Etape extends Model {
         return $this->hasMany(\App\Etapetrajet::class, 'idEtape', 'idEtape');
     }
 
-    public function inscrits() {
+    public function inscritsDepart() {
         return $this->hasMany(\App\Inscrit::class, 'idEtapeDepartInscrit', 'idEtape');
     }
 
-    public function inscrits() {
+    public function inscritsArrivee() {
         return $this->hasMany(\App\Inscrit::class, 'idEtapeArriveeInscrit', 'idEtape');
     }
 
