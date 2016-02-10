@@ -11,7 +11,8 @@ class Ville extends Model {
     protected $table = 'ville';
     protected $fillable = ['inseeVille', 'codePostalVille', 'nomVille', 'latitudeVille', 'longitudeVille'];
 
-
+    public $timestamps = false;
+    
     public function etapes() {
         return $this->hasMany(\App\Etape::class, 'inseeVille', 'inseeVille');
     }

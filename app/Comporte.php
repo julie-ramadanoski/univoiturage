@@ -11,7 +11,8 @@ class Comporte extends Model {
     protected $table = 'comporte';
     protected $fillable = ['idSite', 'idForm'];
 
-
+    public $timestamps = false;
+    
     public function formation() {
         return $this->belongsTo(\App\Formation::class, 'idForm', 'idForm');
     }

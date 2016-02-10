@@ -11,6 +11,7 @@ class Trajet extends Model {
     protected $table = 'trajet';
     protected $fillable = ['idTraj', 'dateTraj', 'heureTraj', 'nbPlacesTraj', 'tarifTraj', 'autoRoutTraj', 'detoursTraj', 'depaDecTraj', 'bagageTraj', 'infoTraj', 'distTraj', 'dureeTraj', 'idMemb', 'idVeh', 'listeInseeEtapeTrajet', 'listeDistEtapeTrajet'];
 
+    public $timestamps = false;
 
     public function membre() {
         return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');

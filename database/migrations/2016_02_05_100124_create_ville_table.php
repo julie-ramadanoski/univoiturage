@@ -15,7 +15,7 @@ class CreateVilleTable extends Migration {
 		Schema::create('ville', function(Blueprint $table)
 		{
 			$table->integer('inseeVille')->primary();
-			$table->integer('codePostalVille');
+			$table->string('codePostalVille', 10);
 			$table->string('nomVille', 45);
 			$table->string('latitudeVille', 45)->nullable();
 			$table->string('longitudeVille', 45)->nullable();

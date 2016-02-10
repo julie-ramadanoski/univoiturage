@@ -11,7 +11,8 @@ class Marque extends Model {
     protected $table = 'marque';
     protected $fillable = ['idMarq', 'nomMarq'];
 
-
+    public $timestamps = false;
+    
     public function modeles() {
         return $this->hasMany(\App\Modele::class, 'idMarq', 'idMarq');
     }

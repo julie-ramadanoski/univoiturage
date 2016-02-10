@@ -11,7 +11,8 @@ class Etapetrajet extends Model {
     protected $table = 'etapetrajet';
     protected $fillable = ['idEtape', 'idTraj', 'numOrdreEtapeTrajet', 'distEtapeTrajet', 'prixEtapeTrajet', 'dureeEtapeTrajet', 'placePrisesEtapeTrajet'];
 
-
+    public $timestamps = false;
+    
     public function etape() {
         return $this->belongsTo(\App\Etape::class, 'idEtape', 'idEtape');
     }

@@ -11,7 +11,8 @@ class Etape extends Model {
     protected $table = 'etape';
     protected $fillable = ['idEtape', 'adresseEtape', 'inseeVille'];
 
-
+    public $timestamps = false;
+    
     public function ville() {
         return $this->belongsTo(\App\Ville::class, 'inseeVille', 'inseeVille');
     }

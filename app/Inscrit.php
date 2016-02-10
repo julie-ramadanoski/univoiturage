@@ -11,7 +11,8 @@ class Inscrit extends Model {
     protected $table = 'inscrit';
     protected $fillable = ['idMemb', 'idTraj', 'avisCInscrit', 'commentaireCInscrit', 'dateCommentCInscrit', 'avisVInscrit', 'commentaireVInscrit', 'dateCommentVInscrit', 'valideInscrit', 'idEtapeDepartInscrit', 'idEtapeArriveeInscrit'];
 
-
+    public $timestamps = false;
+    
     public function etapeDepart() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeDepartInscrit', 'idEtape');
     }

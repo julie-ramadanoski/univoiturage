@@ -11,7 +11,8 @@ class Formation extends Model {
     protected $table = 'formation';
     protected $fillable = ['idForm', 'nomForm'];
 
-
+    public $timestamps = false;
+    
     public function sites() {
         return $this->belongsToMany(\App\Site::class, 'comporte', 'idForm', 'idSite');
     }

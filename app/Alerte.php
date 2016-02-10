@@ -11,7 +11,8 @@ class Alerte extends Model {
     protected $table = 'alerte';
     protected $fillable = ['idAlerte', 'dateAlerte', 'heureAlerte', 'idEtapeDepartAlerte', 'idEtapeArriveeAlerte', 'idMemb'];
 
-
+    public $timestamps = false;
+    
     public function etapeDepart() {
         return $this->belongsTo(\App\Etape::class, 'idEtapeDepartAlerte', 'idEtape');
     }

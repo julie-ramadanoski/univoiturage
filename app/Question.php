@@ -11,6 +11,7 @@ class Question extends Model {
     protected $table = 'question';
     protected $fillable = ['idQuest', 'libQuest', 'repQuest', 'idTraj'];
 
+    public $timestamps = false;
 
     public function trajet() {
         return $this->belongsTo(\App\Trajet::class, 'idTraj', 'idTraj');

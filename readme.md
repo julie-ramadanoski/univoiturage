@@ -26,34 +26,45 @@ Pour se faire Veillez à séparer vos commits comme ajouter un controller ne ser
     >cd projectname
     >composer install
     >php artisan key:generate
-    Créer une base de donnée locale et mettez les identifiant ainsi que la clé locale dans  .env
+
+    Créer une base de donnée locale 
+    >mettez les identifiants ainsi que la clé locale dans le fichier .env
     >php artisan serve pour lancer l'appli sur http://localhost:8000/
+
+## Générer le jeu d'essai
+	Mettez à jour composer :
+	>composer dump-autoload
+	la base de donnée doit être vide pour pouvoir recréer toute la base :
+	>php artisan migrate --seed
+	Après des tests, supprimer ses entrées
+	>php artisan migrate:refresh --seed
 	
 ## Configurer GIT
 	>git remote add upstream https://github.com/julie-ramadanoski/univoiturage
 
 ## Branche de développement d'une fonctionnalité
-	
+	Dans le dépôt distant (GitHub)
+	>Créer une nouvelle branche
 	Dans le dépôt local
 	>git checkout -b mafonctionnalite
+	>git commit -m "mon premier commit"
+	>git push --set-upstream origin mafonctionnalite
 
 Faire des modifications
 	>git add ./mesfichiersCréé ou modifiés
-	>git commit -m "mon message explicatif"
+	>git push
 
-	Une fois la fonctionnalité terminée
-	>git push --set-upstream origin mafonctionnalite
+Une fois la fonctionnalité terminée, dans GitHub allez sur votre branche et cliquez sur "pullRequest"
 
-## Récupération des modification du dépôt distant
+## Récupération des modifications du dépôt distant
 	Avant de commencer à travailler mettez-vous à jour
 	>git pull
 
-## Fusion des modifications de sa branche de dev vers master
-	Se positionner sur sa branche master
-	>git checkout master
-	>git merge mafonctionnalite
+## Fusion des modifications de sa branche de master vers mafonctionnalite
+	Se positionner sur sa branche mafonctionnalite
+	>git checkout mafonctionnalite
+	>git merge master
 	Régler les conflits au besoin
-	L'inverse est possible
 
 
 

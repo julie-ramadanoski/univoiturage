@@ -11,7 +11,8 @@ class Type extends Model {
     protected $table = 'type';
     protected $fillable = ['idType', 'libType'];
 
-
+    public $timestamps = false;
+    
     public function vehicules() {
         return $this->hasMany(\App\Vehicule::class, 'idType', 'idType');
     }

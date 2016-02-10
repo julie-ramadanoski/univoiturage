@@ -11,7 +11,8 @@ class Site extends Model {
     protected $table = 'site';
     protected $fillable = ['idSite', 'nomSite', 'adr1Site', 'adr2Site', 'idUniv', 'inseeVille'];
 
-
+    public $timestamps = false;
+    
     public function ville() {
         return $this->belongsTo(\App\Ville::class, 'inseeVille', 'inseeVille');
     }

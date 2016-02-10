@@ -11,6 +11,7 @@ class Universite extends Model {
     protected $table = 'universite';
     protected $fillable = ['idUniv', 'nomUniv', 'adr1Univ', 'adr2Univ', 'telUniv', 'mailUniv', 'photoUniv', 'logoUniv', 'latUniv', 'longUniv', 'inseeVille'];
 
+    public $timestamps = false;
 
     public function ville() {
         return $this->belongsTo(\App\Ville::class, 'inseeVille', 'inseeVille');

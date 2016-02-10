@@ -10,6 +10,8 @@ class Membre extends Model {
 
     protected $table = 'membre';
     protected $fillable = ['idMemb', 'nomMemb', 'prenomMemb', 'mailMemb', 'telMobMemb', 'sexeMemb', 'anNaisMemb', 'pseudoMemb', 'presentMemb', 'prefMemb', 'casqueMemb', 'photoMemb', 'photoValidMemb', 'nbAvisC', 'nbAvisV', 'totAvisC', 'totAvisM', 'nbInscrit', 'site_idSite'];
+    
+    public $timestamps = false;
      /**
      * The attributes excluded from the model's JSON form.
      *

@@ -11,7 +11,8 @@ class Modele extends Model {
     protected $table = 'modele';
     protected $fillable = ['idMod', 'nomMod', 'idMarq'];
 
-
+    public $timestamps = false;
+    
     public function marque() {
         return $this->belongsTo(\App\Marque::class, 'idMarq', 'idMarq');
     }
