@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', ['as'=>'home', function () {   return view('recherche.form'); }]);
+Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 /*
 |--------------------------------------------------------------------------
 | Application Routes

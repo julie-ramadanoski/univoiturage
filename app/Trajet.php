@@ -37,5 +37,9 @@ class Trajet extends Model {
         return $this->hasMany(\App\Question::class, 'idTraj', 'idTraj');
     }
 
+    public function scopeTrajetsTrouves(){
+        // ecrire la requete pour trouver les trajets correspondants à une demande
+
+    }
 
 }
