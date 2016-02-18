@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', ['as'=>'home', function () {   return view('recherche.form'); }]);
+Route::get('/', ['as'=>'home', function () {   
+	$columnSizes = [
+              'sm' => [4, 8],
+              'lg' => [2, 10]
+            ];
+	return view('recherche.form', compact('columnSizes')); 
+}]);
 Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 /*
 |--------------------------------------------------------------------------

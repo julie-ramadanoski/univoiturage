@@ -17,9 +17,10 @@ class RechercheController extends Controller
      */
     public function show(Request $request)
     {
-        $trajets = Trajet::etapetrajets()->get();
-       //dd($trajets);
+        $trajets = Trajet::TrajetsTrouves();
+        
+       dd($request);
 
-        return view('recherche.resultats', compact('trajet'));
+        return view('recherche.resultats', compact('trajets'));
     }
 }

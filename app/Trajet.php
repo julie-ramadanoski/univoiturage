@@ -39,6 +39,7 @@ class Trajet extends Model {
 
     public function scopeTrajetsTrouves(){
         // ecrire la requete pour trouver les trajets correspondants à une demande
+        return 'ci git la liste des trajets';
 
     }
 
