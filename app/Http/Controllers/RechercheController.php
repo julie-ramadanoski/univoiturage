@@ -24,7 +24,26 @@ class RechercheController extends Controller
         $dateRecherche = $date->format('Y-m-d');
         
         $trajets = Trajet::TrajetsTrouves( $dateRecherche, $request->input('villedepart'),  $request->input('villearrivee'),  $request->input('vehicule'));
-        
+        // dd($trajets);
+
+        // formulaire prérempli pour le champs de recherche
+        // Données calculées en km et en temps GoogleMaps
+        // Charger les données trajets correspondants
+        // Regénérer le tableau 
+               /* array[            
+                    0 => {
+                        idTraj=>
+                        dateTraj=>
+                        heureTraj=>
+                        etapes => { 
+
+                        }
+                        membre => {
+                            
+                        }
+                    }
+                ]*/
+            // Récupération des profils 
         return view('recherche.resultats', compact('trajets'));
     }
 }
