@@ -15,6 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix'=>'trajet'],function(){
+	Route::get(
+		'/', 
+		['as' => 'affichageTrajets', 'uses' => 'TrajetController@affichageTrajets']
+	);
+	Route::get(
+		'add',
+		['as' => 'ajoutTrajet', 'uses' => 'TrajetController@ajoutTrajet']
+	);
+	Route::post(
+		'add',
+		['as' => 'traitementAjoutTrajet', 'uses' => 'TrajetController@traitementAjoutTrajet']
+	);
+	Route::get(
+		'{id}',
+		['as' => 'affichageTrajet', 'uses' => 'TrajetController@affichageTrajet']
+	);
+});
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
+	Route::resource('posts','PostsController');
+});
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
