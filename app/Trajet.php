@@ -76,7 +76,7 @@ class Trajet extends Model {
                 'longitudeVilleDep' => $rowVillesDep[0]->longitudeVille,
                 'nomVilleArr'       => $rowVillesArr[0]->nomVille
             ) ); 
-        
+       // dd($results);
         return $results; 
     }
 }

@@ -18,15 +18,25 @@ class RechercheController extends Controller
      */
     public function show(Request $request)
     {
+        $villedepart  = $request->input('villedepart');
+        $villearrivee = $request->input('villearrivee');
+        $vehicule = $request->input('vehicule');
 
         //dd($request->input('datedepart')); "02/17/2016 12:00 AM"
         $date = DateTime::createFromFormat('m/d/Y H:i A', $request->input('datedepart') );
         $dateRecherche = $date->format('Y-m-d');
         
-        $trajets = Trajet::TrajetsTrouves( $dateRecherche, $request->input('villedepart'),  $request->input('villearrivee'),  $request->input('vehicule'));
-        // dd($trajets);
+        $trajets = Trajet::TrajetsTrouves( $dateRecherche, $villedepart,  $villearrivee,  $vehicule);
+        
+        $recherche = [
+            'villedepart'  => $request->input('villedepart'),
+            'villearrivee' => $request->input('villearrivee'),
+            'vehicule'     => $request->input('vehicule'),
+            'dateRecherche'=> $request->input('datedepart')
+        ];
+        //dd($recherche);
 
-        // formulaire prérempli pour le champs de recherche
+        
         // Données calculées en km et en temps GoogleMaps
         // Charger les données trajets correspondants
         // Regénérer le tableau 
@@ -44,6 +54,6 @@ class RechercheController extends Controller
                     }
                 ]*/
             // Récupération des profils 
-        return view('recherche.resultats', compact('trajets'));
+        return view('recherche.resultats', compact('trajets','recherche'));
     }
 }
