@@ -40,8 +40,7 @@ class Trajet extends Model {
 
     public function scopeTrajetsTrouves( $queryTraj, $dateRecherche, $villeDepart, $villeArrivee, $vehicule){
         
-        // ecrire la requete pour trouver les trajets correspondants à une demande
-              
+        // Prendre les infos des villes recherchées
         $rowVillesDep = DB::table('ville')
                     ->where('nomVille', $villeDepart)
                     ->get();
@@ -49,7 +48,8 @@ class Trajet extends Model {
                     ->where('nomVille', $villeArrivee)
                     ->get();
 
-        $query = "select *
+        // Requete préparée permettant de trouver les trajets correspondant
+        $query = "select distinct idTraj
         from etapeTrajet as et2
         where et2.idTraj in(
             -- Selectionne trajet ville de départ
@@ -75,8 +75,19 @@ class Trajet extends Model {
                 'latitudeVilleDep'  => $rowVillesDep[0]->latitudeVille,
                 'longitudeVilleDep' => $rowVillesDep[0]->longitudeVille,
                 'nomVilleArr'       => $rowVillesArr[0]->nomVille
-            ) ); 
-       // dd($results);
-        return $results; 
+            ) );
+
+        // Passage de stdClass vers array
+        $arrTraj = array();
+        foreach ($results as $res) {
+           $arrTraj[] = $res->idTraj;  
+        }
+
+        // Ajout des relations pour chaque trajets
+        $queryTraj->with('membre', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
+                ->whereIn('idTraj', $arrTraj)
+                ->get();
+
+        return $queryTraj; 
     }
 }

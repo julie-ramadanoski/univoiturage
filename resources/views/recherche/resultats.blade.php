@@ -8,16 +8,22 @@
         <p>liste reçue de RechercheController@show</p>
 
         {{--*/ $moyenneDist = 0 /*--}}
-        {{--*/ $moyenneTps = 0 /*--}}
-
-        <p>{{ count($trajets) }} trajet(s) du site de Gap à Marseille. Distance {{ $moyenneDist }}km durée moyenne {{ $moyenneTps }}</p>
+        {{--*/ $moyenneTps = 0  /*--}}
+         <p>{{ count($trajets) }} trajet(s) du site de Gap à Marseille. Distance {{ $moyenneDist }}km durée moyenne {{ $moyenneTps }}</p>
 			
 	        @foreach ($trajets as $trajet)
-	    		<p>This is trajet {{ $trajet->idTraj }}</p>
-
+                <p>numéro du trajet : {{ $trajet->idTraj }}</p>
+	    		<p>Nom du conducteur : {{ $trajet->membre->nomMemb }} {{ $trajet->membre->prenomMemb }}</p>
+                @foreach ($trajet->etapetrajets as $etapetrajet)
+                    {{ $etapetrajet->etape->ville->nomVille }} > 
+                    {{--*/ $moyenneDist += $etapetrajet->distEtapeTrajet /*--}}
+                    {{--*/ $moyenneTps += $etapetrajet->dureeEtapeTrajet  /*--}}
+                    
+                @endforeach
 			@endforeach
 
-		
+		{{--*/ $truc = ($moyenneTps / count($trajets) ) /*--}}
+        {{ $truc }}
     </div>
 </div>
 @endsection
