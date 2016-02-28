@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
     	Model::unguard();
     	
     	factory(App\User::class, 50)->create();
+	    $this->call(UsersTableSeeder::class);
+    	
 
 	    $this->call(VilleTableSeeder::class);
 	    $this->call(UniversiteTableSeeder::class);
