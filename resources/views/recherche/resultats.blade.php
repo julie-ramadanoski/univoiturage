@@ -9,6 +9,7 @@
 
         {{--*/ $moyenneDist = 0 /*--}}
         {{--*/ $moyenneTps = 0  /*--}}
+        {{--*/ $truc = 0  /*--}}
          <p>{{ count($trajets) }} trajet(s) du site de Gap à Marseille. Distance {{ $moyenneDist }}km durée moyenne {{ $moyenneTps }}</p>
 			
 	        @foreach ($trajets as $trajet)
@@ -21,8 +22,9 @@
                     
                 @endforeach
 			@endforeach
-
-		{{--*/ $truc = ($moyenneTps / count($trajets) ) /*--}}
+        @if ( count($trajets) > 0)
+		  {{--*/ $truc = ($moyenneTps / count($trajets) ) /*--}}
+        @endif
         {{ $truc }}
     </div>
 </div>

@@ -11,13 +11,18 @@
 |
 */
 
-Route::get('/', ['as'=>'home', function () {   
-	$columnSizes = [
-              'sm' => [4, 8],
-              'lg' => [2, 10]
-            ];
-	return view('recherche.form', compact('columnSizes')); 
-}]);
+
+
+ Route::get('/', ['as'=>'home', function () {   
+		
+		$columnSizes = [
+	              'sm' => [4, 8],
+	              'lg' => [2, 10]
+	            ];
+
+		return view('recherche.form', compact('columnSizes')); 
+	}])->middleware(['web']); // gestions des erreurs de formulaire
+
 Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +36,7 @@ Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@s
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
+
+
 });

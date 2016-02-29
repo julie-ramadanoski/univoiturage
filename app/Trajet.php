@@ -40,6 +40,7 @@ class Trajet extends Model {
 
     public function scopeTrajetsTrouves( $queryTraj, $dateRecherche, $villeDepart, $villeArrivee, $vehicule){
         
+        
         // Prendre les infos des villes recherchées
         $rowVillesDep = DB::table('ville')
                     ->where('nomVille', $villeDepart)
@@ -49,6 +50,7 @@ class Trajet extends Model {
                     ->get();
 
         // Requete préparée permettant de trouver les trajets correspondant
+        //$query = DB::table('etapeTrajet')->select('idTraj')->get();
         $query = "select distinct idTraj
         from etapeTrajet as et2
         where et2.idTraj in(
