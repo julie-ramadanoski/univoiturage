@@ -8,7 +8,7 @@ class Membre extends Authenticatable {
      * Generated
      */
     protected $table = 'membre';
-    protected $fillable = ['idMemb', 'nomMemb', 'prenomMemb', 'mailMemb', 'telMobMemb', 'sexeMemb', 'anNaisMemb', 'pseudoMemb', 'presentMemb', 'prefMemb', 'casqueMemb', 'photoMemb', 'photoValidMemb', 'nbAvisC', 'nbAvisV', 'totAvisC', 'totAvisM', 'nbInscrit', 'site_idSite', 'mdpMemb'];
+    protected $fillable = ['id', 'name', 'prenomMemb', 'email', 'telMobMemb', 'sexeMemb', 'anNaisMemb', 'pseudoMemb', 'presentMemb', 'prefMemb', 'casqueMemb', 'photoMemb', 'photoValidMemb', 'nbAvisC', 'nbAvisV', 'totAvisC', 'totAvisM', 'nbInscrit', 'site_idSite', 'password'];
     
     public $timestamps = false;
      /**
@@ -17,7 +17,7 @@ class Membre extends Authenticatable {
      * @var array
      */
     protected $hidden = [
-        'mdpMemb',
+        'password',
     ];
     
 }
