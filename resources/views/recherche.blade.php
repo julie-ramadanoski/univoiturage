@@ -16,11 +16,26 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="/js/jquery.min.js" ></script>
         <script src="/js/moment.min.js" ></script>
+        <script src="http://codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
         <script type="text/javascript">
             $(function () {
                 $('#datetimepicker1').datetimepicker();
+
+                $('input:text').bind({
+
+                });
+                $("#villedepart").autocomplete({
+                    minLength: 1,
+                    autoFocus: true,
+                    source:'{{ URL('/autocompleteVille') }}'
+                 });
+                $("#villearrivee").autocomplete({
+                    minLength: 1,
+                    autoFocus: true,
+                    source:'{{ URL('/autocompleteVille') }}'
+                 });
             });
         </script>
     </body>
