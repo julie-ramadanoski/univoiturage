@@ -29,8 +29,9 @@ class RechercheController extends Controller
             'datedepart'   => 'required',
             'vehicule'     => 'required',
         ]);
+
         $data = $request->session()->all();
-        //dd($data);
+
         if ($validator->fails()) {
 
             // get the error messages from the validator
@@ -54,6 +55,7 @@ class RechercheController extends Controller
         $dateRecherche = $date->format('Y-m-d');
         
         $trajets = Trajet::TrajetsTrouves( $dateRecherche, $recherche->villedepart, $recherche->villearrivee, $recherche->vehicule)->get();
+        
         
         return view('recherche.resultats', compact('trajets','recherche'));
         

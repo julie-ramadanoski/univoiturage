@@ -87,7 +87,10 @@ Une fois la fonctionnalité terminée, dans GitHub allez sur votre branche et cl
 	>    mix.copy('resources/assets/js/jquery.min.js','public/js/jquery.min.js' );
 	>    mix.copy('resources/assets/css/datepicker.css', 'public/css/datepicker.css');
 	>});
-
+	
+	>$ gulp
+	En cours de modification :
+	>$ gulp watcher 
 
 ## License
 
