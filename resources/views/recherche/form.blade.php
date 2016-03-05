@@ -8,11 +8,11 @@
 			
 			
 			@if ( $errors->has() )
-
 			    <div class="alert alert-danger">			        
 			        <p>Veuillez remplir les champs</p>			           			        
 			    </div>
 			@endif
+			
 	        {!! BootForm::openHorizontal($columnSizes)->post()->action('/recherche') !!}
 
 				{!! BootForm::text('Ville de départ', 'villedepart')->placeholder('Gap')->required('required');; !!}
