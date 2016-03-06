@@ -47,7 +47,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
             'prenomMemb' => 'required|max:255',
             'telMobMemb' => 'required|max:255',
-            'anNaisMemb' => 'required|max:255',
+            'anNaisMemb' => 'required|date|max:10',
         ]);
     }
     /**
