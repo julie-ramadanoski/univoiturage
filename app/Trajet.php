@@ -43,43 +43,54 @@ class Trajet extends Model {
         
         // Prendre les infos des villes recherchées
         $rowVillesDep = DB::table('ville')
+                    ->join('site', 'ville.inseeVille', '=', 'site.inseeVille')
                     ->where('nomVille', $villeDepart)
+                    ->orWhere('nomSite', $villeDepart)
                     ->get();
+
         $rowVillesArr = DB::table('ville')
+                    ->join('site', 'ville.inseeVille', '=', 'site.inseeVille')
                     ->where('nomVille', $villeArrivee)
+                    ->orWhere('nomSite', $villeArrivee)
                     ->get();
 
-        // Requete préparée permettant de trouver les trajets correspondant
-        //$query = DB::table('etapeTrajet')->select('idTraj')->get();
-        $query = "select distinct idTraj
-        from etapeTrajet as et2
-        where et2.idTraj in(
-            -- Selectionne trajet ville de départ
-            select et.idTraj
-            from etapeTrajet as et
-            natural join etape as e
-            natural join trajet as t
-            natural join ville as v
-            where t.dateTraj = :dateRecherche
-            and get_distance_kms(v.latitudeVille, v.longitudeVille, :latitudeVilleDep, :longitudeVilleDep) <= t.detoursTraj
-            and et.idTraj in ( 
-            -- selectionne ville d'arrivée sur le meme trajet
-                select et1.idTraj
-                from etapeTrajet as et1
-                natural join etape as e1
-                natural join ville as v1
-                where v1.nomVille = :nomVilleArr
-                and et1.numOrdreEtapeTrajet > et.numOrdreEtapeTrajet))";
+         if( $rowVillesDep != null && $rowVillesArr != null){
 
-        // SAFE QUERY http://fideloper.com/laravel-raw-queries
-       $results = DB::select( DB::raw($query), array(
-                'dateRecherche'     => $dateRecherche,
-                'latitudeVilleDep'  => $rowVillesDep[0]->latitudeVille,
-                'longitudeVilleDep' => $rowVillesDep[0]->longitudeVille,
-                'nomVilleArr'       => $rowVillesArr[0]->nomVille
-            ) );
+            // Requete préparée permettant de trouver les trajets correspondant
+            $query = "select distinct idTraj
+            from etapeTrajet as et2
+            where et2.idTraj in(
+                -- Selectionne trajet ville de départ
+                select et.idTraj
+                from etapeTrajet as et
+                natural join etape as e
+                natural join trajet as t
+                natural join ville as v
+                where t.dateTraj = :dateRecherche
+                and get_distance_kms(v.latitudeVille, v.longitudeVille, :latitudeVilleDep, :longitudeVilleDep) <= t.detoursTraj
+                and et.idTraj in ( 
+                -- selectionne ville d'arrivée sur le meme trajet
+                    select et1.idTraj
+                    from etapeTrajet as et1
+                    natural join etape as e1
+                    natural join ville as v1
+                    where v1.nomVille = :nomVilleArr
+                    and et1.numOrdreEtapeTrajet > et.numOrdreEtapeTrajet))";
 
-        // Passage de stdClass vers array
+            // SAFE QUERY http://fideloper.com/laravel-raw-queries
+           $results = DB::select( DB::raw($query), array(
+                    'dateRecherche'     => $dateRecherche,
+                    'latitudeVilleDep'  => $rowVillesDep[0]->latitudeVille,
+                    'longitudeVilleDep' => $rowVillesDep[0]->longitudeVille,
+                    'nomVilleArr'       => $rowVillesArr[0]->nomVille
+                ) );
+
+        } else {
+
+            $results = array();
+        }
+
+        // Passage de stdClass vers array  
         $arrTraj = array();
         foreach ($results as $res) {
            $arrTraj[] = $res->idTraj;  
@@ -87,9 +98,8 @@ class Trajet extends Model {
 
         // Ajout des relations pour chaque trajets
         $queryTraj->with('membre', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
-                ->whereIn('idTraj', $arrTraj)
-                ->get();
-
+                ->whereIn('idTraj', $arrTraj);
+        
         return $queryTraj; 
     }
 }

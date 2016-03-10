@@ -1,4 +1,4 @@
-@extends('recherche')
+    @extends('recherche')
 
 @section('content')
 
