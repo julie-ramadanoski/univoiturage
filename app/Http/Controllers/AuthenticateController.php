@@ -21,16 +21,15 @@ class AuthenticateController extends Controller
 
     public function index()
     {
-        // retourne l'utilisateur courant
         $user = User::all();
         return $user;
-
     }
 
     public function getAuthenticatedUser()
     {
         try {
 
+           
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
