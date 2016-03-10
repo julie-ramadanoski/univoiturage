@@ -13,9 +13,15 @@
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function ()    {
-        return view('welcome');
+        return view('home');
     });
 });
+
+Route::get('home', array('as' => 'home', 'uses' => function(){
+  	Route::get('/', function ()    {
+        return view('home');
+    });
+}));
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -32,6 +38,9 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 	
+Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

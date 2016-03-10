@@ -38,7 +38,10 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">
+                    <h4>Nom : {{ Auth::user()->name }}</h4>
+                    <h4>Email : {{ Auth::user()->email }}</h4>
+                </div>
             </div>
         </div>
     </body>

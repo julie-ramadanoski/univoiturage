@@ -2,6 +2,7 @@
 
 define('LARAVEL_START', microtime(true));
 ini_set('xdebug.max_nesting_level', 500);
+ini_set('curl.cainfo', "\cacert.pem");
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
