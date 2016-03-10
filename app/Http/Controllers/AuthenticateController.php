@@ -23,7 +23,7 @@ class AuthenticateController extends Controller
     {
         // Retrieve all the users in the database and return them
 
-        $user = Auth::user();
+        $user = User::all();
         return $user;
 
     }
@@ -31,6 +31,7 @@ class AuthenticateController extends Controller
     {
         try {
 
+           
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
