@@ -147,7 +147,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,7 +209,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'BootForm'  => AdamWathan\BootForms\Facades\BootForm::class,  
         'Socialite' => Laravel\Socialite\Facades\Socialite::class
-
+        
     ],
 
 ];

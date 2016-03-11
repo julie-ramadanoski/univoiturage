@@ -40,22 +40,6 @@
 							</div>
 						</div>
 
-						
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Email</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Mot de passe</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
 						<div class="form-group">
 							<label class="col-md-4 control-label">Confirmer</label>
 							<div class="col-md-6">
@@ -85,7 +69,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Année de Naissance</label>
+							<label class="col-md-4 control-label">Année de naissance</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="anNaisMemb" value="{{ old('anNaisMemb') }}">
 							</div>
