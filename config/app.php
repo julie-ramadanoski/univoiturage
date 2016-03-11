@@ -161,6 +161,7 @@ return [
          * Twitter Bootstrap Formulaires
          */
         AdamWathan\BootForms\BootFormsServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -207,6 +208,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'BootForm'  => AdamWathan\BootForms\Facades\BootForm::class,
+        'View'      => Illuminate\Support\Facades\View::class,
+        'View'      => Illuminate\Support\Facades\View::class,           
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
 
     ],
 
