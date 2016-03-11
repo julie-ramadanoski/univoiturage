@@ -11,10 +11,74 @@
 |
 */
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Input;
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
+
+Route::group(['middleware' => ['web']], function () {
+	Route::get('/', ['as'=>'home', function () {   
+		
+		$columnSizes = [
+	              'sm' => [4, 8],
+	              'lg' => [2, 10]
+	            ];
+
+		return view('recherche.form', compact('columnSizes')); 
+	}]);
+	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+});
+
+Route::any('/autocompleteVille', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("site")->distinct('nomSite')->where('nomsite', 'like', $term.'%')->groupBy('nomSite')->take(10)->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( 'value' => $value->nomSite );
+	}
+
+	return Response::json($jsonArr);
+});
+
+Route::any('/autocompleteUniv', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("universite")->distinct('nomUniv', 'idUniv')->where('nomUniv', 'like', $term.'%')->groupBy('nomUniv')->take(10)->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( 'value' => $value->nomUniv );
+	}
+
+	return Response::json($jsonArr);
+});
+Route::any('/autocompleteSite', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( $value->idSite => $value->nomSite );
+	}
+
+	return Response::json($jsonArr);
+});
+
+
+
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function ()    {
-        return view('home');
-    });
+
 });
 
 Route::get('home', array('as' => 'home', 'uses' => function(){
@@ -37,21 +101,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
+
 	
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});

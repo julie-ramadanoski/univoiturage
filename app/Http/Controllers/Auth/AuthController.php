@@ -4,6 +4,7 @@ use App\User;
 use Auth;
 use Socialite;
 use Validator;
+use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -26,6 +27,7 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $redirectPath = '/home';
     /**
      * Create a new authentication controller instance.
      *
@@ -43,13 +45,14 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'prenomMemb' => 'required|max:255',
-            'telMobMemb' => 'required|max:255',
-            'anNaisMemb' => 'required|date|max:10',
+            'password' => 'required|confirmed|min:4',
+            'telMobMemb'=>'required|numeric|min:8',
+            'anNaisMemb'=> 'numeric',
+            'site'=>'required'
         ]);
     }
     /**
@@ -64,13 +67,12 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'prenomMemb' => $data['prenomMemb'],
-            'telMobMemb' => $data['telMobMemb'],
-            'anNaisMemb' => $data['anNaisMemb'],
+            'prenomMemb'=>$data['prenomMemb'],
+            'telMobMemb'=>$data['telMobMemb'],
+            'anNaisMemb'=>$data['anNaisMemb'],
+            'idSite'=>$data['site']
         ]);
     }
-
-     protected $redirectPath = '/home';
 
     /**
      * Redirect the user to the Facebook authentication page.
@@ -80,8 +82,6 @@ class AuthController extends Controller
     public function redirectToProvider()
     {
         return Socialite::driver('facebook')->redirect();
-    }
-
     /**
      * Obtain the user information from Facebook.
      *
@@ -96,9 +96,7 @@ class AuthController extends Controller
         }
 
         $authUser = $this->findOrCreateUser($user);
-
         Auth::login($authUser, true);
-
         return redirect()->route('home');
     }
 
@@ -115,7 +113,7 @@ class AuthController extends Controller
         if ($authUser){
             return $authUser;
         }
-
+        
         return User::create([
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,

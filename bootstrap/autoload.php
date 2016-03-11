@@ -2,7 +2,7 @@
 
 define('LARAVEL_START', microtime(true));
 ini_set('xdebug.max_nesting_level', 500);
-ini_set('curl.cainfo', "\cacert.pem");
+ini_set('curl.cainfo', __DIR__."/../vendor/guzzle/guzzle/src/Guzzle/Http/Resources/cacert.pem");
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
@@ -33,3 +33,5 @@ $compiledPath = __DIR__.'/cache/compiled.php';
 if (file_exists($compiledPath)) {
     require $compiledPath;
 }
+
+

@@ -16,8 +16,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('facebook_id')->nullable()->unique();
             $table->string('name');
-            $table->string('prenomMemb', 45)->nullable();
             $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->string('facebook_id')->nullable()->unique();
+            $table->string('remember_token', 100)->nullable();
+            $table->string('prenomMemb', 45)->nullable();
             $table->string('telMobMemb', 45)->nullable();
             $table->integer('sexeMemb')->nullable();
             $table->integer('anNaisMemb')->nullable();
@@ -25,17 +28,15 @@ class CreateUsersTable extends Migration
             $table->boolean('presentMemb')->nullable();
             $table->integer('prefMemb')->nullable();
             $table->boolean('casqueMemb')->nullable();
-            $table->string('photoMemb', 45)->nullable();
+            $table->text('photoMemb')->nullable();
             $table->boolean('photoValidMemb')->nullable();
             $table->integer('nbAvisC')->nullable();
             $table->integer('nbAvisV')->nullable();
             $table->integer('totAvisC')->nullable();
             $table->integer('totAvisM')->nullable();
             $table->integer('nbInscrit')->nullable();
-            $table->string('password', 60);
-            $table->rememberToken();
             $table->timestamps();
-            $table->integer('site_idSite')->index('fk_membre_site1_idx');
+            $table->integer('idSite')->index('fk_users_site1_idx');
         });
     }
 
