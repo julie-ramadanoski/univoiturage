@@ -78,8 +78,14 @@ Route::any('/autocompleteSite', function(){
 
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
 });
+
+Route::get('home', array('as' => 'home', 'uses' => function(){
+  	Route::get('/', function ()    {
+        return view('home');
+    });
+}));
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

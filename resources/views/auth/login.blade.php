@@ -18,7 +18,8 @@
 						</div>
 					@endif
 					<a class="btn btn-info" href="facebook" role="button">Login with Facebook</a>
-					
+
+
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						{!! csrf_field() !!}
 

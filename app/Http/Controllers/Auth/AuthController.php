@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\User;
+use Auth;
+use Socialite;
 use Validator;
 use Socialite;
 use App\Http\Controllers\Controller;
@@ -72,7 +74,7 @@ class AuthController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Redirect the user to the Facebook authentication page.
      *
      * @return Response
@@ -80,7 +82,6 @@ class AuthController extends Controller
     public function redirectToProvider()
     {
         return Socialite::driver('facebook')->redirect();
-    }
     /**
      * Obtain the user information from Facebook.
      *
@@ -93,10 +94,12 @@ class AuthController extends Controller
         } catch (Exception $e) {
             return redirect('auth/facebook');
         }
+
         $authUser = $this->findOrCreateUser($user);
         Auth::login($authUser, true);
         return redirect()->route('home');
     }
+
     /**
      * Return user if exists; create and return if doesn't
      *
@@ -106,9 +109,11 @@ class AuthController extends Controller
     private function findOrCreateUser($facebookUser)
     {
         $authUser = User::where('facebook_id', $facebookUser->id)->first();
+
         if ($authUser){
             return $authUser;
         }
+        
         return User::create([
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
