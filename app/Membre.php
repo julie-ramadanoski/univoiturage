@@ -1,15 +1,15 @@
-<?php namespace App;
+<?php 
 
+namespace App;
 use Illuminate\Database\Eloquent\Model;
-
-class Membre extends Model {
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Membre extends Authenticatable {
     /**
      * Generated
      */
-
     protected $table = 'membre';
-    protected $fillable = ['idMemb', 'nomMemb', 'prenomMemb', 'mailMemb', 'telMobMemb', 'sexeMemb', 'anNaisMemb', 'pseudoMemb', 'presentMemb', 'prefMemb', 'casqueMemb', 'photoMemb', 'photoValidMemb', 'nbAvisC', 'nbAvisV', 'totAvisC', 'totAvisM', 'nbInscrit', 'site_idSite'];
+    protected $fillable = ['id', 'name', 'prenomMemb', 'email', 'telMobMemb', 'sexeMemb', 'anNaisMemb', 'pseudoMemb', 'presentMemb', 'prefMemb', 'casqueMemb', 'photoMemb', 'photoValidMemb', 'nbAvisC', 'nbAvisV', 'totAvisC', 'totAvisM', 'nbInscrit', 'site_idSite', 'password'];
+
     
     public $timestamps = false;
      /**
@@ -17,9 +17,7 @@ class Membre extends Model {
      *
      * @var array
      */
-    protected $hidden = [
-        'mdpMemb',
-    ];
+    protected $hidden = ['password'];
 
     public function site() {
         return $this->belongsTo(\App\Site::class, 'site_idSite', 'idSite');
@@ -43,3 +41,4 @@ class Membre extends Model {
 
 
 }
+    

@@ -1,7 +1,7 @@
 <?php
 
 define('LARAVEL_START', microtime(true));
-
+ini_set('xdebug.max_nesting_level', 500);
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
@@ -33,5 +33,4 @@ if (file_exists($compiledPath)) {
     require $compiledPath;
 }
 
-ini_set('xdebug.max_nesting_level', 120);
 

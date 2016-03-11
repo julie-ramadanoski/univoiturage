@@ -14,8 +14,8 @@ class Trajet extends Model {
 
     public $timestamps = false;
 
-    public function membre() {
-        return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');
+    public function user() {
+        return $this->belongsTo(\App\User::class, 'idMemb', 'id');
     }
 
     public function vehicule() {
@@ -97,7 +97,7 @@ class Trajet extends Model {
         }
 
         // Ajout des relations pour chaque trajets
-        $queryTraj->with('membre', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
+        $queryTraj->with('user', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
                 ->whereIn('idTraj', $arrTraj);
         
         return $queryTraj; 

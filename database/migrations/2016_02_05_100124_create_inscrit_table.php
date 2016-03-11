@@ -14,8 +14,8 @@ class CreateInscritTable extends Migration {
 	{
 		Schema::create('inscrit', function(Blueprint $table)
 		{
-			$table->integer('idMemb')->index('fk_membre_has_trajet_membre1_idx');
-			$table->integer('idTraj')->index('fk_membre_has_trajet_trajet1_idx');
+			$table->integer('idMemb')->index('fk_user_has_trajet_users1_idx')->unsigned();
+			$table->integer('idTraj')->index('fk_user_has_trajet_trajet1_idx');
 			$table->integer('avisCInscrit')->nullable();
 			$table->string('commentaireCInscrit')->nullable();
 			$table->date('dateCommentCInscrit')->nullable();

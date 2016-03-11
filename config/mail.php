@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'fl.tonnelier@gmail.com', 'name' => "Univoiturage"],
 
     /*
     |--------------------------------------------------------------------------
