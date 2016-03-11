@@ -54,8 +54,8 @@ class RechercheController extends Controller
         $date = DateTime::createFromFormat('m/d/Y H:i A', $recherche->dateRecherche );
         $dateRecherche = $date->format('Y-m-d');
         
-        $trajets = Trajet::TrajetsTrouves( $dateRecherche, $recherche->villedepart, $recherche->villearrivee, $recherche->vehicule)->get();
-        
+        $trajets = Trajet::TrajetsTrouves( $dateRecherche, $recherche->villedepart, $recherche->villearrivee, $recherche->vehicule)
+                                        ->get();
         
         return view('recherche.resultats', compact('trajets','recherche'));
         

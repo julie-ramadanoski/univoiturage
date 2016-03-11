@@ -15,7 +15,8 @@
 			
 	        {!! BootForm::openHorizontal($columnSizes)->post()->action('/recherche') !!}
 
-				{!! BootForm::text('Ville de départ', 'villedepart')->placeholder('Gap')->required('required');; !!}
+				{!! BootForm::text('Université', 'universite')->placeholder('aix marseille')->required('required'); !!}
+				{!! BootForm::text('Ville de départ', 'villedepart')->placeholder('Gap')->required('required'); !!}
 				{!! BootForm::text('Ville d\'arrivée', 'villearrivee')->placeholder('Marseille')->required('required'); !!}
 
 				<div class="form-group">

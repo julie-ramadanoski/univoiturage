@@ -34,14 +34,14 @@
                           
                             <div class="col-xs-6 col-sm-4">
                                 
-                                <img src="{{ $trajet->membre->photoMemb }}" alt="photo de profil" /><br>
+                                <img src="{{ $trajet->user->photoMemb }}" alt="photo de profil" /><br>
                                 
-                                {{ $trajet->membre->nomMemb }} {{ $trajet->membre->prenomMemb }} <br>
-                                age {{{ $trajet->membre->ageMemb or 'inconnu' }}}<br>
-                                level {{ $trajet->membre->totAvisM or 'innonnu' }}<br>
+                                {{ $trajet->user->name }} {{ $trajet->user->prenomMemb }} <br>
+                                age {{{ $trajet->user->ageMemb or 'inconnu' }}}<br>
+                                level {{ $trajet->user->totAvisM or 'innonnu' }}<br>
                                 
                                 @for ($i = 0; $i < 3 ; $i++)                                
-                                    <img src="images/pref_{{ substr($trajet->membre->prefMemb,$i, 1 ) }}.png" alt="préférence conducteur,">
+                                    <img src="images/pref_{{ substr($trajet->user->prefMemb,$i, 1 ) }}.png" alt="préférence conducteur,">
                                 @endfor 
 
                             </div>
