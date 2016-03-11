@@ -14,7 +14,7 @@ class AddForeignKeysToTrajetTable extends Migration {
 	{
 		Schema::table('trajet', function(Blueprint $table)
 		{
-			$table->foreign('idMemb', 'fk_trajet_membre1')->references('idMemb')->on('membre')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('idMemb', 'fk_trajet_users1')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('idVeh', 'fk_trajet_vehicule1')->references('idVeh')->on('vehicule')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
@@ -29,7 +29,7 @@ class AddForeignKeysToTrajetTable extends Migration {
 	{
 		Schema::table('trajet', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_trajet_membre1');
+			$table->dropForeign('fk_trajet_users1');
 			$table->dropForeign('fk_trajet_vehicule1');
 		});
 	}
