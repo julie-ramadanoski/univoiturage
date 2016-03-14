@@ -32,9 +32,15 @@ class AuthenticateController extends Controller
         
         // Si la requete précédente valide le token de l'utilisateur
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
+
+
             $alerte = new Alerte;
             // Retrouner la liste des alertes
-            return response()->json($alerte->etapeDepart());
+            return response()->json($alerte->join('etape', 'idEtapeDepartAlerte', '=', 'idEtape')
+                                    ->join('ville', 'etape.insee', '=', 'ville.insee')
+                                    ->where('idEtapeDepartAlerte', '=', 'inseeVille')
+                                    ->where('nomVille', $depart)
+                                    );
         }
     }
     
