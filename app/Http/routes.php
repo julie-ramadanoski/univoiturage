@@ -37,6 +37,19 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 });
 
+Route::group(['middleware' => ['web']], function () {
+	Route::get('/profil', ['as'=>'home', function () {   
+		
+		$columnSizes = [
+	              'sm' => [4, 8],
+	              'lg' => [2, 10]
+	            ];
+
+		return view('profil.form', compact('columnSizes')); 
+	}]);
+	Route::post('/profil', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+});
+
 Route::any('/autocompleteVille', function(){
 
 	$term = Str::lower(Input::get('term'));

@@ -98,7 +98,7 @@
                                     break;
                                 }
                             }
-                            $("#site").append('<option value=' + i + '>' + first + '</option>'); 
+                            $("#site").append('<option value=' + key + '>' + first + '</option>'); 
                             
                         });
                     },
