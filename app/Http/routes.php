@@ -10,10 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('add', function () {
+    return view('ajout_trajet');
+});
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('ajout_trajet');
 });
+
+
 
 Route::group(['prefix'=>'trajet'],function(){
 	Route::get(
@@ -54,3 +59,4 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 Route::group(['middleware' => ['web']], function () {
     //
 });
+

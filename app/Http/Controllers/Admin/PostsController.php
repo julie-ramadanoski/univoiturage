@@ -18,9 +18,5 @@ class PostsController extends Controller
 
     }
 
-    public function index(){
-        User::create(['email'=>'test@exemple.fr', 'password'=>Hash::make('azerty01'), 'name'=>'florian']) //Création et enregistrement d'un utilisateur
-        Auth::attempt(['email'=>'test@exemple.fr', 'password' => 'azerty01']); //Test la connexion de l'utilisateur donné
-        Auth::check();
-    }
+    public function index(){}
 }
