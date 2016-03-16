@@ -27,7 +27,7 @@ class AuthenticateController extends Controller
     }
 
     
-    public function getAlertes(Request $request, $depart = 'marseille' )
+    public function getAlertes(Request $request, $depart = null )
     {
         
         // Si la requete précédente valide le token de l'utilisateur
@@ -36,11 +36,25 @@ class AuthenticateController extends Controller
 
             $alerte = new Alerte;
             // Retrouner la liste des alertes
-            return response()->json($alerte->join('etape', 'idEtapeDepartAlerte', '=', 'idEtape')
-                                    ->join('ville', 'etape.insee', '=', 'ville.insee')
-                                    ->where('idEtapeDepartAlerte', '=', 'inseeVille')
+            if($depart == null){                
+                return response()->json($alerte
+                                    ->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
+                                    ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
+                                    ->join('users', 'alerte.idMemb', '=', 'users.id')
+                                    ->with('etapeArrivee.ville')
+                                    ->with('etapeDepart.ville')
+                                    ->get()
+                                    ); 
+            } else {
+                return response()->json($alerte->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
+                                    ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
+                                    ->join('users', 'alerte.idMemb', '=', 'users.id')
                                     ->where('nomVille', $depart)
+                                    ->with('etapeArrivee.ville')
+                                    ->with('etapeDepart.ville')
+                                    ->get()
                                     );
+            }
         }
     }
     
