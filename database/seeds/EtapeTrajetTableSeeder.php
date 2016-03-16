@@ -15,7 +15,7 @@ class EtapeTrajetTableSeeder extends Seeder
     {
         
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>1,
 		'idTraj'=>1,
 		'numOrdreEtapeTrajet'=>1,
@@ -27,7 +27,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>2,
 		'idTraj'=>1,
 		'numOrdreEtapeTrajet'=>2,
@@ -39,7 +39,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>3,
 		'idTraj'=>1,
 		'numOrdreEtapeTrajet'=>3,
@@ -51,7 +51,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>4,
 		'idTraj'=>2,
 		'numOrdreEtapeTrajet'=>1,
@@ -63,7 +63,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>5,
 		'idTraj'=>2,
 		'numOrdreEtapeTrajet'=>2,
@@ -75,7 +75,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>6,
 		'idTraj'=>2,
 		'numOrdreEtapeTrajet'=>3,
@@ -87,7 +87,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>7,
 		'idTraj'=>3,
 		'numOrdreEtapeTrajet'=>1,
@@ -99,7 +99,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>8,
 		'idTraj'=>3,
 		'numOrdreEtapeTrajet'=>2,
@@ -111,7 +111,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>9,
 		'idTraj'=>3,
 		'numOrdreEtapeTrajet'=>3,
@@ -123,7 +123,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>10,
 		'idTraj'=>4,
 		'numOrdreEtapeTrajet'=>1,
@@ -135,7 +135,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>11,
 		'idTraj'=>4,
 		'numOrdreEtapeTrajet'=>2,
@@ -147,7 +147,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>12,
 		'idTraj'=>4,
 		'numOrdreEtapeTrajet'=>3,
@@ -159,7 +159,7 @@ class EtapeTrajetTableSeeder extends Seeder
 
 					
 
-		Etapetrajet::create( [
+		EtapeTrajet::create( [
 		'idEtape'=>13,
 		'idTraj'=>4,
 		'numOrdreEtapeTrajet'=>4,

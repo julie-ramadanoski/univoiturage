@@ -66,7 +66,31 @@ Une fois la fonctionnalité terminée, dans GitHub allez sur votre branche et cl
 	>git merge master
 	Régler les conflits au besoin
 
+## Intégrer des ressources scripts js ou css
+	Dans le répertoire resources/assets contient un répertoire sass/app.sass
+	Il est possible de créer une arborescence contenant assets/css et assets/js pour permettre à laravel de les gérer et les implémenter dans le dossier public
+	Le plus dur est d'installer les librairies dans le projet : mettre a jour node.js et/ou composer
+	>npm install npm@latest -g
+	Et lancer l'installation des dépendances de Laravel
+	>npm install
+	Et si vous avez des erreurs installer gulp et laravel-elixir
+	>npm install gulp -g
+	>npm install laravel-elixir
 
+	Dans le fichier gulpfile.js indiquer ce que vous voulez faire de vos scripts (compiler, fusionner ou juste copier)
+	[Guide Laracast Video](https://laracasts.com/series/laravel-5-from-scratch/episodes/6?autoplay=true)
+	[Guide Laravel](https://laravel.com/docs/master/elixir#plain-css)
+	Exemple 
+	>elixir(function(mix) {
+	>    mix.sass('app.scss');
+	>    mix.copy('resources/assets/js/bootstrap-datepicker.js', 'public/js/bootstrap-datepicker.js');
+	>    mix.copy('resources/assets/js/jquery.min.js','public/js/jquery.min.js' );
+	>    mix.copy('resources/assets/css/datepicker.css', 'public/css/datepicker.css');
+	>});
+	
+	>$ gulp
+	En cours de modification :
+	>$ gulp watcher 
 
 ## License
 

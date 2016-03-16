@@ -13,6 +13,6 @@ class VilleTableSeeder extends Seeder
     public function run()
     {
     	$path = database_path();
-         DB::unprepared(File::get( $path.'\ville.sql'));
+         DB::unprepared(File::get( $path.'/ville.sql'));
     }
 }
