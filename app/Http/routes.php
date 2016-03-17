@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Input;
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', function () {   
 		
