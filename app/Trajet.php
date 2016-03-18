@@ -58,11 +58,11 @@ class Trajet extends Model {
 
             // Requete préparée permettant de trouver les trajets correspondant
             $query = "select distinct idTraj
-            from etapeTrajet as et2
+            from etapetrajet as et2
             where et2.idTraj in(
                 -- Selectionne trajet ville de départ
                 select et.idTraj
-                from etapeTrajet as et
+                from etapetrajet as et
                 natural join etape as e
                 natural join trajet as t
                 natural join ville as v
@@ -71,7 +71,7 @@ class Trajet extends Model {
                 and et.idTraj in ( 
                 -- selectionne ville d'arrivée sur le meme trajet
                     select et1.idTraj
-                    from etapeTrajet as et1
+                    from etapetrajet as et1
                     natural join etape as e1
                     natural join ville as v1
                     where v1.nomVille = :nomVilleArr
