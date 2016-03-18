@@ -82,6 +82,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+/* Florian G. */
+/* Routes en rapport avec les ajouts de trajets */
+Route::get('trajet/add', 'TrajetController@getView'); //On apelle la vue qui correspond à l'ajout d'un trajet
+Route::post('trajet/add', 'TrajetController@add'); //Cette page est apellée en AJAX avec en paramètre l'objet trajet (Json)
+
+
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
