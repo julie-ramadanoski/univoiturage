@@ -45,7 +45,7 @@ init = function(event){
 	linkVarToInput(trajet,"cgu",			_id("cgu"),				function(){ /* nothing */}	);
 
 	_id("addStep").addEventListener("click",addStepInput);
-	_id("confirmation").addEventListener("click", save);
+	_id("confirmation").addEventListener("click",save);
 
 	/* Ajout d'une étape vide */
 	addStepInput();

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class TrajetController extends Controller
 {
     /* Fonction d'affichage de la page d'ajout de trajet */
-    public function getView(Guard $auth){
+    public function getView(){
     	/*Récupération des voitures de l'utilisateur connecté*/
     	//$user = $auth->user()->vehicules()->get();
     	/*Affichage de la vue avec les voitures passées en paramètre*/
