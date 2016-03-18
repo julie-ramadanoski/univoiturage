@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class EtapeTrajet extends Model {
+class Etapetrajet extends Model {
 
     /**
      * Generated
