@@ -20,12 +20,6 @@ class AuthenticateController extends Controller
          $this->middleware('jwt.auth', [ 'except' => ['authenticate'] ]);
     }
 
-    public function index()
-    {
-        $user = User::all();
-        return $user;
-    }
-
     
     public function getAlertes(Request $request, $depart = null )
     {
