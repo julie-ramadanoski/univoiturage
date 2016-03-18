@@ -9,26 +9,47 @@
 			        <p>Veuillez remplir les champs</p>			           			        
 			    </div>
 			@endif
-			
 	        {!! BootForm::openHorizontal($columnSizes)->post()->action('/profil') !!}
-
-				{!! BootForm::text('Nom', 'name')->placeholder(auth()->user()->name)->required('required'); !!}
-				{!! BootForm::text('Ville de départ', 'villedepart')->placeholder('Gap')->required('required'); !!}
-				{!! BootForm::text('Ville d\'arrivée', 'villearrivee')->placeholder('Marseille')->required('required'); !!}
-
+	        	<div class="form-group">
+	        		<div class="col-md-10">
+		        	Genre : 
+		        	@if ( auth()->user()->sexeMemb == "0" )
+		        		M
+				    @else		
+				    	F
+					@endif
+					</div>
+				</div>
 				<div class="form-group">
-					{!! BootForm::label('Choisir le jour')->forId('datetimepicker1'); !!}
-	                <div class='input-group date' id='datetimepicker1'>
-	                    <input type='text' class="form-control" name="datedepart" id="datedepart" required/>
-	                    <span class="input-group-addon">
-	                        <span class="glyphicon glyphicon-calendar"></span>
-	                    </span>
-	                </div>
-                </div>
-
-                {!! BootForm::radio('Voiture', 'vehicule')->defaultToChecked(); !!}
-                {!! BootForm::radio('Moto', 'vehicule'); !!}
-				
+				    <label for="name" class="control-label col-md-2">Nom</label>
+				    <div class="col-md-10">
+				        <input type="text" name="name" value="{!!auth()->user()->name!!}" class="form-control" required>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="prenomMemb" class="control-label col-md-2">Prénom</label>
+				    <div class="col-md-10">
+				        <input type="text" name="prenomMemb" value="{!!auth()->user()->prenomMemb!!}" class="form-control" required>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="email" class="control-label col-md-2">Email</label>
+				    <div class="col-md-10">
+				        <input type="text" name="email" value="{!!auth()->user()->email!!}" class="form-control" required>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="telMobMemb" class="control-label col-md-2">Téléphone</label>
+				    <div class="col-md-10">
+				        <input type="text" name="telMobMemb" value="{!!auth()->user()->telMobMemb!!}" class="form-control" required>
+				    </div>
+				</div>				
+				<div class="form-group">
+				    <label for="anNaisMemb" class="control-label col-md-2">Année de naissance</label>
+				    <div class="col-md-10">
+				        <input type="text" name="anNaisMemb" value="{!!auth()->user()->anNaisMemb!!}" class="form-control">
+				    </div>
+				</div>			
 				{!! BootForm::submit('Submit') !!}
 			{!! BootForm::close() !!}
 			

@@ -22,7 +22,6 @@
                     </button>
                     <a class="navbar-brand" href="#">Laravel</a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/') }}">Welcome</a></li>
@@ -60,53 +59,5 @@
         <script src="http://codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-
-                $('input:text').bind({
-
-                });
-                $("#villedepart").autocomplete({
-                    minLength: 1,
-                    autoFocus: true,
-                    source:'{{ URL('/autocompleteVille') }}',
-                    select: $("#universite").value
-                 });
-                $("#villearrivee").autocomplete({
-                    minLength: 1,
-                    autoFocus: true,
-                    source:'{{ URL('/autocompleteVille') }}',
-                    select: $("#universite").value
-                 });
-                $("#universite").autocomplete({
-                    minLength: 1,
-                    autoFocus: true,
-                    source:'{{ URL('/autocompleteUniv') }}'
-                 });
-
-                $.ajax({
-                    url: '{{ URL('/autocompleteSite') }}',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        $.map(data, function (value, key) {                                     
-                            var first;
-                            for (var i in value) {
-                                if (value.hasOwnProperty(i) && typeof(i) !== 'function') {
-                                    first = value[i];
-                                    break;
-                                }
-                            }
-                            $("#site").append('<option value=' + key + '>' + first + '</option>'); 
-                            
-                        });
-                    },
-                    error: function(data){
-                        console.log(data);
-                    }
-                });
-            });
-        </script>
     </body>
 </html>
