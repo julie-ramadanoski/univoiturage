@@ -65,6 +65,7 @@ Route::any('/autocompleteUniv', function(){
 
 	return Response::json($jsonArr);
 });
+
 Route::any('/autocompleteSite', function(){
 
 	$term = Str::lower(Input::get('term'));
@@ -77,6 +78,7 @@ Route::any('/autocompleteSite', function(){
 
 	return Response::json($jsonArr);
 });
+
 
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
