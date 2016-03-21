@@ -16,8 +16,8 @@ class AddForeignKeysToInscritTable extends Migration {
 		{
 			$table->foreign('idEtapeDepartInscrit', 'fk_inscrit_etape1')->references('idEtape')->on('etape')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('idEtapeArriveeInscrit', 'fk_inscrit_etape2')->references('idEtape')->on('etape')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('idMemb', 'fk_membre_has_trajet_membre1')->references('idMemb')->on('membre')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('idTraj', 'fk_membre_has_trajet_trajet1')->references('idTraj')->on('trajet')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('idMemb', 'fk_users_has_trajet_users1')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('idTraj', 'fk_users_has_trajet_trajet1')->references('idTraj')->on('trajet')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -33,8 +33,8 @@ class AddForeignKeysToInscritTable extends Migration {
 		{
 			$table->dropForeign('fk_inscrit_etape1');
 			$table->dropForeign('fk_inscrit_etape2');
-			$table->dropForeign('fk_membre_has_trajet_membre1');
-			$table->dropForeign('fk_membre_has_trajet_trajet1');
+			$table->dropForeign('fk_users_has_trajet_users1');
+			$table->dropForeign('fk_users_has_trajet_trajet1');
 		});
 	}
 

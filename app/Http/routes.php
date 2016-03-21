@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,8 +24,58 @@ Route::get('/', function () {
 |
 */
 
+Route::group(['middleware' => 'auth'], function () {
+
+});
 Route::group(['middleware' => ['web']], function () {
-    //
+	Route::get('/', ['as'=>'home', function () {   
+		
+		$columnSizes = [
+	              'sm' => [4, 8],
+	              'lg' => [2, 10]
+	            ];
+
+		return view('recherche.form', compact('columnSizes')); 
+	}]);
+	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+});
+
+Route::any('/autocompleteVille', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("site")->distinct('nomSite')->where('nomsite', 'like', $term.'%')->groupBy('nomSite')->take(10)->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( 'value' => $value->nomSite );
+	}
+
+	return Response::json($jsonArr);
+});
+
+Route::any('/autocompleteUniv', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("universite")->distinct('nomUniv', 'idUniv')->where('nomUniv', 'like', $term.'%')->groupBy('nomUniv')->take(10)->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( 'value' => $value->nomUniv );
+	}
+
+	return Response::json($jsonArr);
+});
+Route::any('/autocompleteSite', function(){
+
+	$term = Str::lower(Input::get('term'));
+	$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
+	$jsonArr = array();
+	
+	foreach ($data as $value) {
+		$jsonArr[]= array( $value->idSite => $value->nomSite );
+	}
+
+	return Response::json($jsonArr);
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
@@ -36,3 +84,22 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
     Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
     Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
 });
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@logout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+// Password reset link request routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+	
+Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');

@@ -16,7 +16,7 @@ class AddForeignKeysToAlerteTable extends Migration {
 		{
 			$table->foreign('idEtapeDepartAlerte', 'fk_alerte_etape1')->references('idEtape')->on('etape')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('idEtapeArriveeAlerte', 'fk_alerte_etape2')->references('idEtape')->on('etape')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('idMemb', 'fk_alerte_membre1')->references('idMemb')->on('membre')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('idMemb', 'fk_alerte_users1')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -32,7 +32,7 @@ class AddForeignKeysToAlerteTable extends Migration {
 		{
 			$table->dropForeign('fk_alerte_etape1');
 			$table->dropForeign('fk_alerte_etape2');
-			$table->dropForeign('fk_alerte_membre1');
+			$table->dropForeign('fk_alerte_users1');
 		});
 	}
 
