@@ -19,7 +19,7 @@ class VehiculeTableSeeder extends Seeder
 		Vehicule::create( [
 		'idVeh'=>1,
 		'photoVeh'=>NULL,
-		'confVeh'=>NULL,
+		'confVeh'=>2,
 		'nbPlaceVeh'=>4,
 		'couleurVeh'=>'blanche',
 		'defautVeh'=>1,
@@ -33,7 +33,7 @@ class VehiculeTableSeeder extends Seeder
 		Vehicule::create( [
 		'idVeh'=>2,
 		'photoVeh'=>NULL,
-		'confVeh'=>NULL,
+		'confVeh'=>3,
 		'nbPlaceVeh'=>1,
 		'couleurVeh'=>'bleu nuit',
 		'defautVeh'=>1,

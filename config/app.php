@@ -157,6 +157,13 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        
+        /*
+         * Twitter Bootstrap Formulaires
+         */
+        AdamWathan\BootForms\BootFormsServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -204,7 +211,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'=> Tymon\JWTAuth\Facades\JWTFactory::class,
-
+        'BootForm'  => AdamWathan\BootForms\Facades\BootForm::class,  
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
     ],
 
 ];
