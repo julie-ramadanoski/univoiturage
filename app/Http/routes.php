@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
+Route::group(['middleware' => 'auth'], function () {
+
+});
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', function () {   
 		
@@ -63,12 +66,6 @@ Route::any('/autocompleteUniv', function(){
 	return Response::json($jsonArr);
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
-{
-    Route::post('authenticate', 'AuthenticateController@authenticate');
-    Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
-    Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
-});
 Route::any('/autocompleteSite', function(){
 
 	$term = Str::lower(Input::get('term'));
@@ -83,11 +80,12 @@ Route::any('/autocompleteSite', function(){
 });
 
 
-
-Route::group(['middleware' => 'auth'], function () {
-
+Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
+{
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
+    Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
 });
-
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
