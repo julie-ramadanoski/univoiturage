@@ -19,7 +19,7 @@ class CreateAlerteTable extends Migration {
 			$table->string('heureAlerte', 5);
 			$table->integer('idEtapeDepartAlerte')->index('fk_alerte_etape1_idx');
 			$table->integer('idEtapeArriveeAlerte')->index('fk_alerte_etape2_idx');
-			$table->integer('idMemb')->index('fk_alerte_membre1_idx');
+			$table->integer('idMemb')->index('fk_alerte_users1_idx')->unsigned();
 		});
 	}
 

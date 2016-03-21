@@ -26,7 +26,7 @@ class CreateTrajetTable extends Migration {
 			$table->text('infoTraj')->nullable();
 			$table->integer('distTraj')->nullable();
 			$table->string('dureeTraj', 5)->nullable();
-			$table->integer('idMemb')->index('fk_trajet_membre1_idx');
+			$table->integer('idMemb')->index('fk_trajet_users1_idx')->unsigned();
 			$table->integer('idVeh')->index('fk_trajet_vehicule1_idx');
 			$table->string('listeInseeEtapeTrajet')->nullable();
 			$table->string('listeDistEtapeTrajet', 45)->nullable();
