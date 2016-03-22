@@ -47,7 +47,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		return view('profil.form', compact('columnSizes')); 
 	}]);
-	Route::post('/profil', ['uses'=>'ProfilController@show']);
+	Route::post('/profil', ['uses'=>'ProfilController@update']);
 });
 
 Route::any('/autocompleteVille', function(){
