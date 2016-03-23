@@ -9,7 +9,7 @@ class Alerte extends Model {
      */
 
     protected $table = 'alerte';
-    protected $fillable = ['idAlerte', 'dateAlerte', 'heureAlerte', 'idEtapeDepartAlerte', 'idEtapeArriveeAlerte', 'idMemb'];
+    protected $fillable = ['id', 'dateAlerte', 'heureAlerte', 'idEtapeDepartAlerte', 'idEtapeArriveeAlerte', 'idMemb'];
 
     public $timestamps = false;
     
