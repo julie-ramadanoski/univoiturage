@@ -54,7 +54,12 @@ class ProfilController extends Controller
         $user->prefMemb = $request->input('prefMemb');
         $user->save();
         // dd($user);
+        
+        $columnSizes = [
+                  'sm' => [4, 8],
+                  'lg' => [2, 10]
+                ];
 
-        return view('/');
+        return view('profil.form', compact('columnSizes')); 
     }
 }
