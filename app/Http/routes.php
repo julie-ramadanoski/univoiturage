@@ -37,16 +37,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 });
 
-Route::group(['middleware' => ['web']], function () {
-	Route::get('/profil', ['as'=>'home', function () {   
-		
-		$columnSizes = [
-	              'sm' => [4, 8],
-	              'lg' => [2, 10]
-	            ];
-
-		return view('profil.form', compact('columnSizes')); 
-	}]);
+Route::group(['middleware' => ['web', 'auth']], function () {
+	Route::get('/profil', ['uses'=>'ProfilController@show']); 
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
 });
 

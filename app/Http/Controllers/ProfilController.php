@@ -17,31 +17,12 @@ class ProfilController extends Controller
 {
     public function show(Request $request)
     {
-        // Double validation du formulaire
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'prenomMemb' => 'required|max:255',
-            'password' => 'required|confirmed|min:4',
-            'email' => 'required|email|max:255|unique:users',
-            'telMobMemb'=>'required|numeric|min:8',
-            'anNaisMemb'=> 'requited|numeric',
-            'sexeMemb'=>'required'
-        ]);
-        dd($validator->fails());
+        $columnSizes = [
+                  'sm' => [4, 8],
+                  'lg' => [2, 10]
+                ];
 
-        if ($validator->fails()) {
-
-            // get the error messages from the validator
-            $messages = $validator->messages();
-            
-            return redirect()->route('home')
-               ->withErrors($validator)
-               ->withInput();
-        }
-        else{
-            $this->update($request);
-        }
-
+        return view('profil.form', compact('columnSizes')); 
     }
 
     public function update(Request $request){
