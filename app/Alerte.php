@@ -9,6 +9,7 @@ class Alerte extends Model {
      */
 
     protected $table = 'alerte';
+
     protected $fillable = ['id', 'dateAlerte', 'heureAlerte', 'idEtapeDepartAlerte', 'idEtapeArriveeAlerte', 'idMemb'];
 
     public $timestamps = false;
@@ -22,7 +23,7 @@ class Alerte extends Model {
     }
 
     public function membre() {
-        return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');
+        return $this->belongsTo(\App\User::class, 'idMemb', 'id');
     }
 
 

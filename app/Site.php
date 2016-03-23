@@ -9,6 +9,9 @@ class Site extends Model {
      */
 
     protected $table = 'site';
+    
+    protected $primaryKey = 'idSite';
+
     protected $fillable = ['idSite', 'nomSite', 'adr1Site', 'adr2Site', 'idUniv', 'inseeVille'];
 
     public $timestamps = false;

@@ -17,4 +17,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function site() {
+        return $this->belongsTo(\App\Site::class, 'site_idSite', 'idSite');
+    }
+
+    public function alertes() {
+        return $this->hasMany(\App\Alerte::class, 'idMemb', 'idMemb');
+    }
+
+    public function inscrits() {
+        return $this->hasMany(\App\Inscrit::class, 'idMemb', 'idMemb');
+    }
+
+    public function trajets() {
+        return $this->hasMany(\App\Trajet::class, 'idMemb', 'idMemb');
+    }
+
+    public function vehicules() {
+        return $this->hasMany(\App\Vehicule::class, 'idMemb', 'idMemb');
+    }
+
 }

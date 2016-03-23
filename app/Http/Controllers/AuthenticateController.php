@@ -21,6 +21,12 @@ class AuthenticateController extends Controller
     }
 
     
+    public function setAlertes(Request $request){
+
+
+        dd($request);
+
+    }
     public function getAlertes(Request $request, $depart = null )
     {
         

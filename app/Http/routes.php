@@ -85,6 +85,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
     Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
+    Route::post('authenticate/alertes', 'AuthenticateController@setAlertes');
 });
 
 // Authentication routes...

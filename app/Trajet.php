@@ -10,6 +10,9 @@ class Trajet extends Model {
      */
 
     protected $table = 'trajet';
+
+    protected $primaryKey = 'idTraj';
+    
     protected $fillable = ['idTraj', 'dateTraj', 'heureTraj', 'nbPlacesTraj', 'tarifTraj', 'autoRoutTraj', 'detoursTraj', 'depaDecTraj', 'bagageTraj', 'infoTraj', 'distTraj', 'dureeTraj', 'idMemb', 'idVeh', 'listeInseeEtapeTrajet', 'listeDistEtapeTrajet'];
 
     public $timestamps = false;
