@@ -13,7 +13,7 @@ class AlerteTableSeeder extends Seeder
     {
 
     	 Alerte::create( [
-		'idAlerte'=>1,
+		'id'=>1,
 		'dateAlerte'=>'2016/03/14',
 		'heureAlerte'=>'20h',
 		'idEtapeDepartAlerte'=>1,
@@ -22,7 +22,7 @@ class AlerteTableSeeder extends Seeder
 		] );
 
     	 Alerte::create( [
-		'idAlerte'=>2,
+		'id'=>2,
 		'dateAlerte'=>'2016/03/14',
 		'heureAlerte'=>'08h',
 		'idEtapeDepartAlerte'=>4,

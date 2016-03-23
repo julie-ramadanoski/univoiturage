@@ -13,8 +13,8 @@ class Vehicule extends Model {
 
     public $timestamps = false;
 
-    public function membre() {
-        return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');
+    public function user() {
+        return $this->belongsTo(\App\User::class, 'id', 'idMemb');
     }
 
     public function modele() {
