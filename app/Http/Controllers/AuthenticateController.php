@@ -26,15 +26,9 @@ class AuthenticateController extends Controller
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
             
             //dd($request);
+
             $alerte = new Alerte;
-            return response()->json($alerte
-                                    ->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
-                                    ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
-                                    ->join('users', 'alerte.idMemb', '=', 'users.id')
-                                    ->with('etapeArrivee.ville')
-                                    ->with('etapeDepart.ville')
-                                    ->get()
-                                    ); 
+            return response()->json($alerte->get() );
         }
 
 
@@ -112,7 +106,7 @@ class AuthenticateController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        $user->load('alertes');
+        $user->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
     }
