@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\EtapeTrajet;
+use App\Etapetrajet;
 
 class EtapeTrajetTableSeeder extends Seeder
 {

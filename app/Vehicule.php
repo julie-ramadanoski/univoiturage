@@ -9,12 +9,15 @@ class Vehicule extends Model {
      */
 
     protected $table = 'vehicule';
+
+    protected $primaryKey = 'idVeh';
+    
     protected $fillable = ['idVeh', 'photoVeh', 'confVeh', 'nbPlaceVeh', 'couleurVeh', 'defautVeh', 'idMemb', 'idMod', 'idType'];
 
     public $timestamps = false;
 
-    public function membre() {
-        return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');
+    public function user() {
+        return $this->belongsTo(\App\User::class, 'id', 'idMemb');
     }
 
     public function modele() {

@@ -9,6 +9,9 @@ class Ville extends Model {
      */
 
     protected $table = 'ville';
+    
+    protected $primaryKey = 'inseeVille';
+
     protected $fillable = ['inseeVille', 'codePostalVille', 'nomVille', 'latitudeVille', 'longitudeVille'];
 
     public $timestamps = false;

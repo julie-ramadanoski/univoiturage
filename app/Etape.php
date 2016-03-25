@@ -8,7 +8,11 @@ class Etape extends Model {
      * Generated
      */
 
+
     protected $table = 'etape';
+
+    protected $primaryKey = 'idEtape';
+    
     protected $fillable = ['idEtape', 'adresseEtape', 'inseeVille'];
 
     public $timestamps = false;
