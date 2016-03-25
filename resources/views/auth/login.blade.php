@@ -51,7 +51,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Se connecter</button>
 								<a class="btn btn-link" href="{{ url('/password/email') }}">Mot de passe oublié?</a>
-								<button type="button" class="btn btn-secondary" onclick="self.location.href='http://localhost:8000/auth/register'" id="dejamembre">Pas encore membre? Enregistrez vous !</button>
+								<button type="button" class="btn btn-secondary" onclick="self.location.href='{{ url('/auth/register') }}'" id="dejamembre">Pas encore membre? Enregistrez vous !</button>
 							</div>
 						</div>
 					</form>

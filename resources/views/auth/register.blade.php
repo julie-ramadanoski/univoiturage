@@ -93,7 +93,7 @@
 							</div>
 							<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="button" class="btn btn-secondary" onclick="self.location.href='http://localhost:8000/auth/login'" id="dejamembre">
+								<button type="button" class="btn btn-secondary" onclick="self.location.href='{{ url('/auth/login') }}'" id="dejamembre">
 									Déja membre? Connectez vous.
 								</button>
 							</div>
