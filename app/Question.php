@@ -9,6 +9,9 @@ class Question extends Model {
      */
 
     protected $table = 'question';
+
+    protected $primaryKey = 'idQuest';
+    
     protected $fillable = ['idQuest', 'libQuest', 'repQuest', 'idTraj'];
 
     public $timestamps = false;

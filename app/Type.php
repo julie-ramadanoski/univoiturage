@@ -9,6 +9,9 @@ class Type extends Model {
      */
 
     protected $table = 'type';
+
+    protected $primaryKey = 'idType';
+    
     protected $fillable = ['idType', 'libType'];
 
     public $timestamps = false;

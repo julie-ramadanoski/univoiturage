@@ -9,6 +9,7 @@ class Etapetrajet extends Model {
      */
 
     protected $table = 'etapetrajet';
+
     protected $fillable = ['idEtape', 'idTraj', 'numOrdreEtapeTrajet', 'distEtapeTrajet', 'prixEtapeTrajet', 'dureeEtapeTrajet', 'placePrisesEtapeTrajet'];
 
     public $timestamps = false;

@@ -9,6 +9,9 @@ class Marque extends Model {
      */
 
     protected $table = 'marque';
+
+    protected $primaryKey = 'idMarq';
+    
     protected $fillable = ['idMarq', 'nomMarq'];
 
     public $timestamps = false;

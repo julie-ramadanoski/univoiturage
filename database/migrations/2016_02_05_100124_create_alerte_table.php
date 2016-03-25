@@ -14,7 +14,7 @@ class CreateAlerteTable extends Migration {
 	{
 		Schema::create('alerte', function(Blueprint $table)
 		{
-			$table->integer('idAlerte', true);
+			$table->increments('id');
 			$table->date('dateAlerte');
 			$table->string('heureAlerte', 5);
 			$table->integer('idEtapeDepartAlerte')->index('fk_alerte_etape1_idx');
