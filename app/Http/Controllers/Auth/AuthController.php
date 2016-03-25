@@ -72,6 +72,7 @@ class AuthController extends Controller
             'anNaisMemb'=>$data['anNaisMemb'],
             'idSite'=>$data['site'],
             'sexeMemb'=>$data['sexeMemb'],
+            'prefMemb'=>"12223242"
         ]);
     }
 
