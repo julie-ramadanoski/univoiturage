@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use JWTAuth;
 use App\User;
+use DateTime;
 use App\Alerte;
+use App\Etape;
+use App\Ville;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -21,14 +24,68 @@ class AuthenticateController extends Controller
     }
 
     
+    public function delAlertes(Request $request){
+        if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $alerte = Alerte::findOrFail($request->input('idAlerte'));
+
+            // Si l'alerte appartient à l'utilisateur, supprimer avec etapes
+            if($user->alertes()->first() == $alerte){
+
+                $etapeDep = $alerte->etapeDepart();
+                $etapeArr = $alerte->etapeArrivee();
+                $alerte   ->delete();
+                $etapeDep ->delete(); 
+                $etapeArr ->delete(); 
+
+
+                return response()->json(['Suppression de l\'alerte '. $request->input('idAlerte')], 200);
+
+            }
+
+            return response()->json(['ville_not_found'], 404);
+
+        }
+
+    }
     public function setAlertes(Request $request){
 
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
             
-            //dd($request);
+            $user = JWTAuth::parseToken()->authenticate();
+            $alerte = $user->alertes()->get();
+            $alerte->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
+            
+            // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer
+            if(count($alerte) == 0){
 
-            $alerte = new Alerte;
-            return response()->json($alerte->get() );
+                $alerte   = new Alerte;
+                $villeDep = new Etape;
+                $villeArr = new Etape;
+                $date     = new DateTime(date('Y-m-d'));
+
+                $villeDep->ville()->associate(Ville::where('nomVille', $request->input('villeDepartAlerte'))->first() );
+                $villeArr->ville()->associate(Ville::where('nomVille', $request->input('villeArriveeAlerte'))->first() );
+                
+                // Si une ville n'est pas reconnue envoyer message erreur
+                if($villeDep->inseeVille == null || $villeArr->inseeVille == null){
+                    return response()->json(['ville_not_found'], 404);          
+                }
+
+                $villeDep->save();
+                $villeArr->save();
+
+                $alerte->dateAlerte = $date;
+                $alerte->heureAlerte = $request->input('heureAlerte');
+                $alerte->etapeDepart()->associate($villeDep->idEtape);
+                $alerte->etapeArrivee()->associate($villeArr->idEtape);
+                $alerte->membre()->associate( $user->id ); // retourne un utilisateur identifié par token
+
+                $alerte->save();
+            }
+            // Dans tout les cas retourner l'alerte
+            return response()->json($alerte);
         }
 
 
