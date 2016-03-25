@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -11,8 +13,7 @@
 |
 */
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -24,9 +25,7 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
 
-});
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', function () {   
 		
@@ -93,6 +92,12 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
     Route::post('authenticate/alertes', 'AuthenticateController@setAlertes');
     Route::post('authenticate/alertes/delete', 'AuthenticateController@delAlertes');
 });
+
+/* Florian G. */
+/* Routes en rapport avec les ajouts de trajets */
+Route::get('trajet/add', 'TrajetController@getView'); //On apelle la vue qui correspond à l'ajout d'un trajet
+Route::post('trajet/add', 'TrajetController@add'); //Cette page est apellée en AJAX avec en paramètre l'objet trajet (Json)
+
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
