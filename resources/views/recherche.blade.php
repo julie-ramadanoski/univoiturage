@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Carafond</title>        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8"> 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -20,13 +22,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Laravel</a>
+                    <a class="navbar-brand" href="#">Carafond</a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Welcome</a></li>
+                        <li><a href="{{ url('/') }}">Recherche</a></li>
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         @if(auth()->guest())
                             @if(!Request::is('auth/login'))
