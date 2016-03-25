@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Input;
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
+
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', function () {   
 		
@@ -35,6 +37,11 @@ Route::group(['middleware' => ['web']], function () {
 		return view('recherche.form', compact('columnSizes')); 
 	}]);
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+});
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+	Route::get('/profil', ['uses'=>'ProfilController@show']); 
+	Route::post('/profil', ['uses'=>'ProfilController@update']);
 });
 
 Route::any('/autocompleteVille', function(){
@@ -77,9 +84,13 @@ Route::any('/autocompleteSite', function(){
 });
 
 
-
-Route::group(['middleware' => 'auth'], function () {
-
+Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
+{
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
+    Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
+    Route::post('authenticate/alertes', 'AuthenticateController@setAlertes');
+    Route::post('authenticate/alertes/delete', 'AuthenticateController@delAlertes');
 });
 
 /* Florian G. */
@@ -87,7 +98,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::any('trajet/add', 'TrajetController@getView');
 Route::any('trajet/addDetails', 'TrajetController@getView2'); 
 Route::any('trajet/addTrajet', 'TrajetController@addTrajet');
-
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -106,8 +116,10 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 	
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
 Route::any('back/marque','MarqueController@getList');
 Route::any('back/marque/edit/id','MarqueController@edit');
 Route::any('back/marque/del/id','MarqueController@del');
+

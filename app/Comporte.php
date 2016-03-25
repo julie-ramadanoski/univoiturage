@@ -9,6 +9,9 @@ class Comporte extends Model {
      */
 
     protected $table = 'comporte';
+        
+    protected $primaryKey = 'idSite';
+
     protected $fillable = ['idSite', 'idForm'];
 
     public $timestamps = false;

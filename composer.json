@@ -7,6 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
+        "tymon/jwt-auth": "0.5.*",
+        "barryvdh/laravel-cors": "^0.8.0",
         "adamwathan/bootforms": "^0.8.0",
         "laravel/socialite": "^2.0"
     },

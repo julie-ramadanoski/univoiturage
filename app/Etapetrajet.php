@@ -2,13 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class EtapeTrajet extends Model {
+class Etapetrajet extends Model {
 
     /**
      * Generated
      */
 
     protected $table = 'etapetrajet';
+
     protected $fillable = ['idEtape', 'idTraj', 'numOrdreEtapeTrajet', 'distEtapeTrajet', 'prixEtapeTrajet', 'dureeEtapeTrajet', 'placePrisesEtapeTrajet'];
 
     public $timestamps = false;
