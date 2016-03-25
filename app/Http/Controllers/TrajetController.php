@@ -87,12 +87,10 @@ class TrajetController extends Controller
         ]);
         $etape->save();
 
-        dd($etape);
-
         $etapeTrajet = EtapeTrajet::create([
             'idEtape'=> $etape->idEtape,
             'idTraj'=> $trajet->idTraj,
-            'numOrdreEtapeTrajet' => 0,
+            'numOrdreEtapeTrajet' => 1,
             'distEtapeTrajet' => 0,
             'prixEtapeTrajet' => 0,
             'dureeEtapeTrajet' => 0,
@@ -102,7 +100,7 @@ class TrajetController extends Controller
         $etapeTrajet->save();
 
         //Création des étapes & etapeTrajet associées
-        for($i; $i < count($ligneSteps); $i++){
+        for($i=0; $i < count($ligneSteps); $i++){
             $etape = Etape::create([
                 'adresseEtape'=>$ligneSteps[$i]["to"],
                 'inseeVille'=>Ville::where("nomVille",$ligneSteps[$i]["to"])->first()->inseeVille
@@ -113,7 +111,7 @@ class TrajetController extends Controller
             $etapeTrajet = EtapeTrajet::create([
                 'idEtape'=> $etape->idEtape,
                 'idTraj'=> $trajet->idTraj,
-                'numOrdreEtapeTrajet' => $i+1,
+                'numOrdreEtapeTrajet' => $i+2,
                 'distEtapeTrajet' => $ligneSteps[$i]['distance'],
                 'prixEtapeTrajet' => $ligneSteps[$i]['price'],
                 'dureeEtapeTrajet' => 0, //TODO
