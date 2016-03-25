@@ -40,6 +40,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 });
 
+Route::group(['middleware' => ['web', 'auth']], function () {
+	Route::get('/profil', ['uses'=>'ProfilController@show']); 
+	Route::post('/profil', ['uses'=>'ProfilController@update']);
+});
+
 Route::any('/autocompleteVille', function(){
 
 	$term = Str::lower(Input::get('term'));
