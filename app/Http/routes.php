@@ -84,9 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 /* Florian G. */
 /* Routes en rapport avec les ajouts de trajets */
-Route::get('trajet/add', 'TrajetController@getView'); //On apelle la vue qui correspond à l'ajout d'un trajet
-Route::post('trajet/add', 'TrajetController@add'); //Cette page est apellée en AJAX avec en paramètre l'objet trajet (Json)
-
+Route::any('trajet/add', 'TrajetController@getView');
+Route::any('trajet/addDetails', 'TrajetController@getView2'); 
+Route::any('trajet/addTrajet', 'TrajetController@addTrajet');
 
 
 // Authentication routes...
@@ -107,3 +107,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 	
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+
+Route::any('back/marque','MarqueController@getList');
+Route::any('back/marque/edit/id','MarqueController@edit');
+Route::any('back/marque/del/id','MarqueController@del');

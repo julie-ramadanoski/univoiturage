@@ -8,17 +8,10 @@ googleObjects = { //Objets google
 };
 
 trajet = {
-	test : false,
 	start : "",
 	end : "",
-	fromUniversity : true, 	//Booleen représentant si oui ou non le trajet commence d'un site universitaire
-	car : true, 			//Booleen représentant si oui ou non une voiture est utilisée
-	highway : true, 		//Booleen représentant si oui ou non le trajet passe par une autoroute
-	places : 3, 			//Nombre de place proposées
-	description : "", 		//Description du voyage
-	cgu : false, 			//Accept CGU
-	steps : [],				//Etapes
-	lastDistance : new Step("")//Distance dernière étape - arrivée
+	roundTrip : false,
+	highway : false 		//Booleen représentant si oui ou non le trajet passe par une autoroute
 };
 
 /* fonction d'initialisation, lancée au chargement de la page */
@@ -35,20 +28,19 @@ init = function(event){
 	});
 
 	/* Création des écouteurs */
-	linkVarToInput(trajet,"start",			_id("startInput"),		updateSteps		);
-	linkVarToInput(trajet,"end",			_id("endInput"),		updateSteps		);
-	linkVarToInput(trajet,"fromUniversity",	_id("fromUniversity"),	switchFromAndTo	);
-	linkVarToInput(trajet,"car",			_id("car"),				function(car){if(!car){_id("places").value = 1;}}	);
-	linkVarToInput(trajet,"highway",		_id("highways"),		updateSteps	);
-	linkVarToInput(trajet,"places",			_id("places"),			function(){/* nothing */}	);
-	linkVarToInput(trajet,"description",	_id("description"),		function(){ /* nothing */}	);
-	linkVarToInput(trajet,"cgu",			_id("cgu"),				function(){ /* nothing */}	);
+	linkVarToInput(trajet,	"start",	_id("from"),		updateTrajet	);
+	linkVarToInput(trajet,	"end",		_id("to"),			updateTrajet	);
+	linkVarToInput(trajet,	"highway",	_id("highway"),	updateTrajet	);
+	linkVarToInput(trajet,	"roundTrip",	_id("round-trip"),	toggleBackDate	);
+
+	$("#goDate").datepicker();
+	$("#backDate").datepicker();
 
 	_id("addStep").addEventListener("click",addStepInput);
-	_id("confirmation").addEventListener("click",save);
 
 	/* Ajout d'une étape vide */
 	addStepInput();
+	updateTrajet();
 
 };
 
@@ -87,8 +79,8 @@ linkVarToInput = function(object,property,input,callback){
 
 /* Trace le trajet suivant les informations de l'objet trajet */
 updateTrajet = function(){
-	var from = trajet.start;
-	var to = trajet.end;
+	var from = _id("from").value;
+	var to = _id("to").value;
 	if(from != "" && to != ""){
 		var options = { //Création des options de recherche de trajet
 			origin: from,
@@ -98,11 +90,12 @@ updateTrajet = function(){
 			region : 'FR',
 			avoidHighways : !trajet.highway //péage
 		};
-		if(trajet.steps.length > 0){
+		var steps = document.getElementsByName("steps[]");
+		if(steps.length > 0){
 			options.waypoints = [];
-			for(var i = 0; i<trajet.steps.length; i++){
-				if(trajet.steps[i].point != ""){
-					options.waypoints.push({location:trajet.steps[i].point});
+			for(var i = 0; i<steps.length; i++){
+				if(steps[i].value != ""){
+					options.waypoints.push({location:steps[i].value});
 				}
 			}
 		}
@@ -123,101 +116,111 @@ switchFromAndTo = function(){
 
 /* Fonction d'ajout d'un input d'étape */
 addStepInput = function(){
-	/* Création d'un li, avec un input*/
-	var ul = _id("stepList");
-	var li = _ce("li",ul);
-	var input = _ce("input",li);
-	input.type="text";
-	input.type="steps[]";
-	input.className = "stepInput";
+	var inputGroup = _ce("div");
+	inputGroup.className = "input-group";
 
-	/* création des etapes dans l'objet steps */
-	var step = new Step("");
-	var indice = trajet.steps.push(step) - 1;
-	linkVarToInput(trajet.steps[indice], "point", input, updateSteps);
+	var inputGroupAddon = _ce("span",inputGroup);
+	inputGroupAddon.className="input-group-addon";
+	inputGroupAddon.id="sizing-addon2";
 
-	/* création du bouton de suppression */
-	var button = _ce("button",li);
-	button.type="button";
-	var text = _ct("x",button);
-	Events.addEvent(button,"click",function(event){
-		//Suppression du li et des events
-		ul.removeChild(li); 
-		input = null;
-		button = null;
-		//suppression des etapes
-		trajet.steps.splice(indice,1);
-		//Update de la map
-		updateSteps();
+	var glyphicon = _ce("span",inputGroupAddon);
+	glyphicon.className="glyphicon glyphicon-flag";
+	glyphicon['aria-hidden'] = "true";
+
+	var stepInput = _ce("input",inputGroup);
+	stepInput.type="text";
+	stepInput.className="form-control";
+	stepInput['aria-describedby']="sizing-addon2";
+	stepInput.name = "steps[]";
+
+	var buttonGroup = _ce("div",inputGroup);
+	buttonGroup.className = "input-group-btn";
+
+	var btnDelete = _ce("button", buttonGroup);
+	btnDelete.type="button";
+	btnDelete.className="btn btn-default";
+
+	var spanDelete = _ce("span", btnDelete);
+	spanDelete.className="glyphicon glyphicon-remove";
+	spanDelete['aria-hidden'] = "true";
+
+	var btnTop = _ce("button", buttonGroup);
+	btnTop.type="button";
+	btnTop.className="btn btn-default";
+
+	var spanTop = _ce("span", btnTop);
+	spanTop.className="glyphicon glyphicon-arrow-up";
+	spanTop['aria-hidden'] = "true";
+
+	var btnBot = _ce("button", buttonGroup);
+	btnBot.type="button";
+	btnBot.className="btn btn-default";
+
+	var spanBot = _ce("span", btnBot);
+	spanBot.className="glyphicon glyphicon-arrow-down";
+	spanBot['aria-hidden'] = "true";
+
+	var distanceInput = _ce("input",inputGroup);
+	distanceInput.type="hidden";
+	distanceInput.name="distance[]";
+
+	Events.addEvent(btnDelete,"click",function(event){
+		var inputGroup = this.parentElement.parentElement;
+		var inputZone = inputGroup.parentElement;
+		inputZone.removeChild(inputGroup);
+		updateTrajet();
 	});
+
+	Events.addEvent(btnTop,"click",function(event){
+		var inputGroup = this.parentElement.parentElement;
+		var siblingTop = inputGroup.previousSibling;
+		if(!siblingTop){return false;}
+		var inputZone = inputGroup.parentElement;
+		inputZone.insertBefore(inputGroup,siblingTop);
+		updateTrajet();
+	});
+
+	Events.addEvent(btnBot,"click",function(event){
+		var inputGroup = this.parentElement.parentElement;
+		var siblingBot = inputGroup.nextSibling;
+		if(!siblingBot){return false;}
+		var inputZone = inputGroup.parentElement;
+		inputZone.insertBefore(siblingBot,inputGroup);
+		updateTrajet();
+	});
+
+	Events.addEvent(stepInput,"keyup",updateTrajet);
+
+	_id("stepZone").appendChild(inputGroup);
 };
-
-updateSteps = function(){
-	updateTrajet(); 																		//On recharge la carte
-	var ul = _id("priceList");//On récupère la liste
-	var lis = document.getElementsByClassName("priceInput");
-	
-	ul.innerHTML = ""; 																		//On la vide
-	var i = 0; 																				//Début du compteur
-	var totalPrice = 0; 																	//Compteur de prix
-	if(trajet.steps.length > 0 && !isNull(trajet.steps[0].point)){ 														//Si la première étape est remplie
-		for(; i<trajet.steps.length; i++){ 													//Pour chaque étape
-			if(i == 0){newStepLine(trajet.start,trajet.steps[0].point,trajet.steps[0].price);}
-			else{newStepLine(trajet.steps[i-1].point,trajet.steps[i].point,trajet.steps[i].price);}
-			totalPrice += trajet.steps[i].price; 
-		}
-		newStepLine(trajet.steps[i-1].point,trajet.end,trajet.lastDistance.price);
-		var li = _ce("li",ul);
-		var text = _ct("----------------------------------",li);
-	}
-	if(!isNull(trajet.start) && !isNull(trajet.end)){
-		totalPrice += trajet.lastDistance.price;
-		newStepLine(trajet.start,trajet.end,totalPrice);
-	}
-}
-
-newStepLine = function(from,to,price,object){	
-	var ul = _id("priceList");
-	var li = _ce("li",ul);
-	var span1 = _ce("span",li);
-	var text1 = _ct(from,span1);
-	var text = _ct("-->",li)
-	var span2 = _ce("span",li);
-	var text2 = _ct(to,span2);
-	var input = _ce("input",li);
-	input.type="number";
-	input.className="priceInput";
-	input.name="prices[]";
-	input.value = price;
-	linkVarToInput(object,"price",input,updatePrice);
-}
-
-updatePrice = function(){
-	
-}	
 
 /* Fonction de maj des distances */
 updateDistances = function(legs){
-	a  = legs;
-	var i = 0;
-	if(trajet.steps.length > 0 && !isNull(trajet.steps[0].point)){
-		for (; i < legs.length-1; i++) { 
-			trajet.steps[i].setDistance(legs[i].distance.value/1000); //A convertir en km ou faire une division
-			trajet.steps[i].duree = legs[i].duration.value;  //en seconde
-		}
+	var distanceInput = document.getElementsByName("distance[]"); //Tous les inputs distances, dans l'ordre du trajet
+	var distances = legs; //Toutes les distances, dans l'ordre du trajet
+
+	//récupération de la plus petite distance (normalement égales)
+	var length = distanceInput.length;
+	if(length > distances.length){
+		length = distances.length
+	};
+
+	//Pour chaque donnée
+	for(var i = 0; i<length; i++){
+		distanceInput[i].value = parseInt((distances[i].distance.value)/1000);
 	}
-	trajet.lastDistance.setDistance(legs[i].distance.value/1000); //A convertir en km ou faire une division*
-	trajet.lastDistance.duree = legs[i].duration.value;  //en seconde
-	updateSteps();
 };
 
 isNull = function(value){
 	return (!value || value.trim() == "" || value ==  null);
 }
 
-save = function(){
-	console.log(trajet);
+toggleBackDate = function(value){
+	if(value){
+		_id("backDiv").style.display = "block";
+	}else{
+		_id("backDiv").style.display = "none";
+	}
 }
-
 
 window.addEventListener("load",init);
