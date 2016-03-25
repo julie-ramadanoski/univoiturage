@@ -5,4 +5,4 @@ Homestead.json
 /storage/debugbar
 composer.lock
 .env
-.idea
+.idea/
