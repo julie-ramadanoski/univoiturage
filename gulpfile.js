@@ -18,4 +18,6 @@ elixir(function(mix) {
     mix.copy('resources/assets/js/jquery.min.js', 'public/js/jquery.min.js' );
     mix.copy('resources/assets/js/moment.min.js', 'public/js/moment.min.js' );
     mix.copy('resources/assets/js/bootstrap-datetimepicker.js', 'public/js/bootstrap-datepicker.js');
+    mix.copy('resources/assets/js/script.js', 'public/js/script.js' );
+    mix.copy('resources/assets/js/step.class.js', 'public/js/step.class.js' );
 });

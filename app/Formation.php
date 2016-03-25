@@ -9,6 +9,9 @@ class Formation extends Model {
      */
 
     protected $table = 'formation';
+    
+    protected $primaryKey = 'idForm';
+
     protected $fillable = ['idForm', 'nomForm'];
 
     public $timestamps = false;

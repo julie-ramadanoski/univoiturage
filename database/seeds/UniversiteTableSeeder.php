@@ -26,5 +26,19 @@ class UniversiteTableSeeder extends Seeder
 		'longUniv'=>NULL,
 		'inseeVille'=>13001
 		] );
+
+		Universite::create( [
+		'idUniv'=>2,
+		'nomUniv'=>'reims champagne ardenne',
+		'adr1Univ'=>'adresse',
+		'adr2Univ'=>NULL,
+		'telUniv'=>'0411223344',
+		'mailUniv'=>'uni-aix@yopmail.com',
+		'photoUniv'=>NULL,
+		'logoUniv'=>NULL,
+		'latUniv'=>NULL,
+		'longUniv'=>NULL,
+		'inseeVille'=>13001
+		] );
     }
 }

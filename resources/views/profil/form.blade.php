@@ -1,4 +1,4 @@
-@extends('profil')
+@extends('recherche')
 
 @section('content')
 

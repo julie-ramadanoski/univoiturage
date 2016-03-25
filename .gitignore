@@ -2,6 +2,7 @@
 /node_modules
 Homestead.yaml
 Homestead.json
+/storage/debugbar
 composer.lock
 .env
-composer.lock
+.idea/
