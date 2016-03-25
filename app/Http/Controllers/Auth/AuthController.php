@@ -50,8 +50,9 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:4',
             'telMobMemb'=>'required|numeric|min:8',
-            'anNaisMemb'=> 'numeric',
-            'site'=>'required'
+            'anNaisMemb'=> 'required|numeric',
+            'site'=>'required',
+            'sexeMemb'=>'required'
         ]);
     }
     /**
@@ -69,7 +70,8 @@ class AuthController extends Controller
             'prenomMemb'=>$data['prenomMemb'],
             'telMobMemb'=>$data['telMobMemb'],
             'anNaisMemb'=>$data['anNaisMemb'],
-            'idSite'=>$data['site']
+            'idSite'=>$data['site'],
+            'sexeMemb'=>$data['sexeMemb'],
         ]);
     }
 

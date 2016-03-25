@@ -76,6 +76,14 @@
 						</div>
 
 						<div class="form-group">
+							<label class="col-md-4 control-label">Sexe :</label>
+							<div class="col-md-6">
+								<input type="radio" name="sexeMemb" value=0 checked> Homme<br>
+  								<input type="radio" name="sexeMemb" value=1> Femme<br>
+							</div>
+						</div>
+
+						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
 									Register

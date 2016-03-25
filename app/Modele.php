@@ -9,6 +9,9 @@ class Modele extends Model {
      */
 
     protected $table = 'modele';
+
+    protected $primaryKey = 'idMod';
+
     protected $fillable = ['idMod', 'nomMod', 'idMarq'];
 
     public $timestamps = false;

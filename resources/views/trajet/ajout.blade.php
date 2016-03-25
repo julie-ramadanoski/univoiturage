@@ -1,4 +1,4 @@
-@extends('index')
+@extends('recherche')
 
 @section('content')
 	<script src="/js/step.class.js"></script>
