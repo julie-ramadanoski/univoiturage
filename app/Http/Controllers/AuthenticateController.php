@@ -55,9 +55,8 @@ class AuthenticateController extends Controller
             
             $user = JWTAuth::parseToken()->authenticate();
             $alerte = $user->alertes()->get();
-            $alerte->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
-            
-            // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer
+
+            // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer            
             if(count($alerte) == 0){
 
                 $alerte   = new Alerte;
