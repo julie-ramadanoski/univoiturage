@@ -84,7 +84,9 @@ class AuthenticateController extends Controller
                 $alerte->membre()->associate( $user->id ); // retourne un utilisateur identifié par token
 
                 $alerte->save();
+                $alerte->load('etapeDepart.ville','etapeArrivee.ville');
             } 
+
             // Dans tout les cas retourner l'alerte
             return response()->json($alerte);
         }
