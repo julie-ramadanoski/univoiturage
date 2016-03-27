@@ -121,6 +121,7 @@ class AuthController extends Controller
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'facebook_id' => $facebookUser->id,
+            'idSite'=> 1
         ]);
     }
 }
