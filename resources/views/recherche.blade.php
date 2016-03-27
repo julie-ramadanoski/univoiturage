@@ -17,8 +17,6 @@
         <script src="{{ URL::asset('assets/js/script.js') }}"></script>
                 
                 <!-- Chargement des css globaux -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         
 
         <!-- Chargement des JS globaux -->
@@ -29,7 +27,6 @@
 
         <script src="/js/moment.min.js" ></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
         
     </head>
     </head>
