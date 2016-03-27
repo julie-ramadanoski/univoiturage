@@ -29,23 +29,26 @@ class AuthenticateController extends Controller
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
 
             $user = JWTAuth::parseToken()->authenticate();
-            $alerte = Alerte::findOrFail($request->input('idAlerte'));
+            $alerte = Alerte::find($request->input('idAlerte'));
 
-            // Si l'alerte appartient à l'utilisateur, supprimer avec etapes
-            if($user->alertes()->first() == $alerte){
+            if (count($alerte) != 0){
+                // Si l'alerte appartient à l'utilisateur, supprimer avec etapes
+                if($user->alertes()->first() == $alerte){
 
-                $etapeDep = $alerte->etapeDepart();
-                $etapeArr = $alerte->etapeArrivee();
-                $alerte   ->delete();
-                $etapeDep ->delete(); 
-                $etapeArr ->delete(); 
+                    $etapeDep = $alerte->etapeDepart();
+                    $etapeArr = $alerte->etapeArrivee();
+                    $alerte   ->delete();
+                    $etapeDep ->delete(); 
+                    $etapeArr ->delete(); 
 
+                    return response()->json(['Suppression de l\'alerte '. $request->input('idAlerte')], 200);
 
-                return response()->json(['Suppression de l\'alerte '. $request->input('idAlerte')], 200);
+                }
 
-            }
+                return response()->json(['Droit de suppression refusé'], 401);
+            }           
 
-            return response()->json(['ville_not_found'], 404);
+            return response()->json(['Alerte inexistante'], 404);
 
         }
 
@@ -58,7 +61,6 @@ class AuthenticateController extends Controller
             $user->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
             $alerte = $user->alertes;
            
-            //dd($alerte);
             // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer            
             if(count($alerte) == 0){
 
@@ -72,7 +74,7 @@ class AuthenticateController extends Controller
                 
                 // Si une ville n'est pas reconnue envoyer message erreur
                 if($villeDep->inseeVille == null || $villeArr->inseeVille == null){
-                    return response()->json(['ville_not_found'], 404);          
+                    return response()->json(['error'=> 'ville non trouvée'], 404);          
                 }
 
                 $villeDep->save();
@@ -104,35 +106,34 @@ class AuthenticateController extends Controller
 
             $alerte = new Alerte;
             // Retrouner la liste des alertes
-            if($depart == null){                
+            if($depart == null){ 
+
                 return response()->json($alerte
-                                    ->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
-                                    ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
-                                    ->join('users', 'alerte.idMemb', '=', 'users.id')
-                                    ->with('etapeArrivee.ville')
-                                    ->with('etapeDepart.ville')
-                                    ->get()
-                                    ); 
-            // Sinon retourner la ville choisie
+                                        ->with('etapeArrivee.ville')
+                                        ->with('etapeDepart.ville')
+                                        ->with('membre')
+                                        ->get()
+                                        ); 
+
             } else {
 
-                // Si la ville n'existe pas retourner erreur 404 pour en informer l'utilisateur
                 $ville = DB::table('ville')->where('nomVille', $depart)->get();
 
+                // Si la ville n'existe pas
                 if(count($ville)  == 0 ){
-                    return response()->json(['error' => 'Ville non trouvée'], 401);
-                   dd(count($ville));
-
+                    return response()->json(['error' => 'Ville non trouvée'], 404);                   
                 }
-
-                return response()->json($alerte->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
-                                    ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
-                                    ->join('users', 'alerte.idMemb', '=', 'users.id')
-                                    ->where('nomVille', $depart)
-                                    ->with('etapeArrivee.ville')
-                                    ->with('etapeDepart.ville')
-                                    ->get()
-                                    );
+                // Récupérer l'étape de depart selon la ville choise 
+                // Et peupler l'objet avec ses relations pour affichage
+                return response()->json($alerte
+                                        ->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
+                                        ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')                                    
+                                        ->where('nomVille', $depart)
+                                        ->with('etapeArrivee.ville')
+                                        ->with('etapeDepart.ville')
+                                        ->with('membre')
+                                        ->get()
+                                        );
             }
         }
     }
