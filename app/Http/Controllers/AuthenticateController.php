@@ -8,6 +8,7 @@ use DateTime;
 use App\Alerte;
 use App\Etape;
 use App\Ville;
+use DB;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -112,7 +113,18 @@ class AuthenticateController extends Controller
                                     ->with('etapeDepart.ville')
                                     ->get()
                                     ); 
+            // Sinon retourner la ville choisie
             } else {
+
+                // Si la ville n'existe pas retourner erreur 404 pour en informer l'utilisateur
+                $ville = DB::table('ville')->where('nomVille', $depart)->get();
+
+                if(count($ville)  == 0 ){
+                    return response()->json(['error' => 'Ville non trouvée'], 401);
+                   dd(count($ville));
+
+                }
+
                 return response()->json($alerte->join('etape', 'alerte.idEtapeDepartAlerte', '=', 'etape.idEtape')
                                     ->join('ville', 'etape.inseeVille', '=', 'ville.inseeVille')
                                     ->join('users', 'alerte.idMemb', '=', 'users.id')
