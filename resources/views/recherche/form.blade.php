@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="content">
-        <div class="title">Univoiturage</div>
+        <div class="title">Car à fond</div>
 			
 			
 			@if ( $errors->has() )
@@ -15,12 +15,13 @@
 			
 	        {!! BootForm::openHorizontal($columnSizes)->post()->action('/recherche') !!}
 
-				{!! BootForm::text('Université', 'universite')->placeholder('aix marseille')->required('required'); !!}
+				{!! BootForm::text('Université', 'universite')->placeholder('Aix Marseille')->required('required'); !!}
 				{!! BootForm::text('Ville de départ', 'villedepart')->placeholder('Gap')->required('required'); !!}
 				{!! BootForm::text('Ville d\'arrivée', 'villearrivee')->placeholder('Marseille')->required('required'); !!}
 
 				<div class="form-group">
-					{!! BootForm::label('Choisir le jour')->forId('datetimepicker1'); !!}
+					<label class="col-md-4 control-label">{!! BootForm::label('Choisir le jour')->forId('datetimepicker1'); !!}</label>
+					<div class="col-md-6">
 	                <div class='input-group date' id='datetimepicker1'>
 	                    <input type='text' class="form-control" name="datedepart" id="datedepart" required/>
 	                    <span class="input-group-addon">
@@ -28,13 +29,16 @@
 	                    </span>
 	                </div>
                 </div>
+                </div>
 
                 {!! BootForm::radio('Voiture', 'vehicule')->defaultToChecked(); !!}
                 {!! BootForm::radio('Moto', 'vehicule'); !!}
 				
-				{!! BootForm::submit('Submit') !!}
+				{!! BootForm::submit('Rechercher') !!}
 			{!! BootForm::close() !!}
 			
     </div>
 </div>
 @endsection
+
+	

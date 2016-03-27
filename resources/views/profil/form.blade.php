@@ -13,6 +13,7 @@
 			<!-- onsubmit="return submitForm(this) -->
 			<!-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/profil') }}" onsubmit="return submitForm()"> -->
 	        <div id="preferences">
+	        	<p> Infos personnelles </p>
 	        	<div class="form-group">
 		        	 <label for="name" class="control-label col-md-2">Genre</label>
 	        		<div class="col-md-10">
@@ -41,6 +42,12 @@
 				        <input type="text" name="email" value="{!!auth()->user()->email!!}" class="form-control" required>
 				    </div>
 				</div>
+				<!-- <div class="form-group">
+				    <label for="email" class="control-label col-md-2">Nouveau mot de passe</label>
+				    <div class="col-md-10">
+				        <input type="text" name="password" value="" class="form-control" required>
+				    </div>
+				</div> -->
 				<div class="form-group">
 				    <label for="telMobMemb" class="control-label col-md-2">Téléphone</label>
 				    <div class="col-md-10">
@@ -58,6 +65,7 @@
 				
 			</div>
 			<div id="preferences">
+				<p> Préférences </p>
 				<div class="form-group">
 				    <label for="pref0" class="control-label col-md-2">Tu parles</label>
 				    <div class="col-md-10">
@@ -92,10 +100,10 @@
 				</div>
 				<input type='hidden' name='prefMemb'>
 			</div>
-			{!! BootForm::submit('Submit') !!}
-			{!! BootForm::close() !!}
-			<!-- <button type="submit" class="btn btn-primary">Submit</button>
-			</form> -->
+			<!--{!! BootForm::submit('Submit') !!}
+			{!! BootForm::close() !!}-->
+			 <button type="submit" class="btn btn-success">Envoyez</button>
+			</form> 
 			<script type="text/javascript">
             function submitForm(){
             	var res = "";
