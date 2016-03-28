@@ -61,8 +61,15 @@
 				    </div>
 				</div>		
 			</div>
-			<div id="photo">
-				
+			<div id="preferences">
+				<p> Photo </p>
+				<img src="{!!auth()->user()->photoMemb!!}">
+				<div class="form-group">
+				    	<label for="urlphoto" class="control-label col-md-2">Url d'une photo</label>
+				    <div class="col-md-10">
+				        <input type="text" name="urlphoto" value="{!!auth()->user()->photoMemb!!}" class="form-control">
+				    </div>
+				</div>	
 			</div>
 			<div id="preferences">
 				<p> Préférences </p>
