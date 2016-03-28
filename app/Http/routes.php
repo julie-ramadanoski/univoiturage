@@ -44,44 +44,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
 });
 
-Route::any('/autocompleteVille', function(){
-
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("site")->distinct('nomSite')->where('nomsite', 'like', $term.'%')->groupBy('nomSite')->take(10)->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( 'value' => $value->nomSite );
-	}
-
-	return Response::json($jsonArr);
-});
-
-Route::any('/autocompleteUniv', function(){
-
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("universite")->distinct('nomUniv', 'idUniv')->where('nomUniv', 'like', $term.'%')->groupBy('nomUniv')->take(10)->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( 'value' => $value->nomUniv );
-	}
-
-	return Response::json($jsonArr);
-});
-
-Route::any('/autocompleteSite', function(){
-
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( $value->idSite => $value->nomSite );
-	}
-
-	return Response::json($jsonArr);
-});
+Route::get('/autocomplete/ville', ['uses'=>'AutocompleteController@ville']);
+Route::get('/autocomplete/univ',  ['uses'=>'AutocompleteController@univ']);
+Route::get('/autocomplete/site',  ['uses'=>'AutocompleteController@site']);
 
 
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
