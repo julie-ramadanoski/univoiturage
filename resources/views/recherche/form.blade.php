@@ -6,7 +6,7 @@
     <div class="content">
         <div class="title">Car à fond</div>
 			
-			
+			 
 			@if ( $errors->has() )
 			    <div class="alert alert-danger">			        
 			        <p>Veuillez remplir les champs</p>			           			        
@@ -36,9 +36,9 @@
 				
 				{!! BootForm::submit('Rechercher') !!}
 			{!! BootForm::close() !!}
-			
     </div>
 </div>
+@include('recherche.informations.informations')
 @endsection
 
 	

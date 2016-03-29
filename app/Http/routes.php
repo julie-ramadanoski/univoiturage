@@ -117,3 +117,5 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 	
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+
+Route::get('/commentcamarche', 'RechercheController@commentcamarche');
