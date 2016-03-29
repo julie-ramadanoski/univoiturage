@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/profil', ['uses'=>'ProfilController@show']); 
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
+	
 });
 
 Route::get('/autocomplete/ville', ['uses'=>'AutocompleteController@ville']);
