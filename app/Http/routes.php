@@ -123,3 +123,19 @@ Route::get('back/marque', ['as' => 'backMarq', 'uses' => 'MarqueController@getLi
 Route::any('back/marque/edit','MarqueController@edit');
 Route::any('back/marque/del/{id}','MarqueController@del');
 Route::any('back/marque/add','MarqueController@add');
+
+//modèles
+Route::get('back/modele', [
+    'as' => 'backModel', 'uses' => 'ModeleController@getList'
+]);
+Route::any('back/modele/edit','ModeleController@edit');
+Route::any('back/modele/del/{id}','ModeleController@del');
+Route::any('back/modele/add','ModeleController@add');
+
+//véhicule
+Route::get('back/vehicule', [
+    'as' => 'backvehicule', 'uses' => 'VehiculeController@getList'
+]);
+Route::any('back/vehicule/edit','VehiculeController@edit');
+Route::any('back/vehicule/del/{id}','VehiculeController@del');
+Route::any('back/vehicule/add','VehiculeController@add');
