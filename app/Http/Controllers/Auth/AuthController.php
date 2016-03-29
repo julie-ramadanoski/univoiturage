@@ -111,9 +111,8 @@ class AuthController extends Controller
      */
     private function findOrCreateUser($facebookUser)
     {
-    $email = $facebookUser->email;
+	$email = $facebookUser->email;
         $authUser = User::where('email', $email)->first();
-
         if ($authUser){
             return $authUser;
         }
@@ -127,6 +126,6 @@ class AuthController extends Controller
             'prefMemb'=>"12223242",
             'sexeMemb' => $facebookUser->user["gender"]
         ]);
-    }
+	   }
     }
 }
