@@ -1,23 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    	<!-- Titre de la page -->
-        <title>Laravel</title>
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script src="../js/biblio.js"></script>
-        <script>
-        	save = function(id){
-        		var value = this.parentElement.previousSibling.firstChild.value;
-        		Ajax._({
-        			
-        		}) 	
-        	}
-        </script>
-        <style>
-        	
-        </style>
-    </head>
+	<head>
+		<!-- Titre de la page -->
+		<title>Laravel</title>
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
 	<body>
 		<ul id="liste">		
 			@foreach($marques as $marque)

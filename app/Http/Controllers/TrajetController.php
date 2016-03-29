@@ -11,6 +11,7 @@ use App\Ville;
 use App\EtapeTrajet;
 use Auth;
 use App\Http\Controllers\Controller;
+use DateTime;
 
 class TrajetController extends Controller
 {
@@ -58,23 +59,25 @@ class TrajetController extends Controller
         $details = $request->all();
         $ligneSteps = $request->session()->get('ligneSteps');
         $listeInsee = ""; //TODO
-        $listeDist = ""; //TODO
+        $listeDist = "";  //TODO
+
+        $date = DateTime::createFromFormat('m/d/Y', $itineraire['goDate']);
 
         //Création du trajet
         $trajet =  Trajet::create([
-            'dateTraj' => $itineraire['goDate'], //Creer une date
+            'dateTraj' => $date, //Creer une date
             'heureTraj' => $itineraire['goHour'].":".$itineraire['goMinute'],
             'nbPlacesTraj' => $details['availablePlaces'],
             'tarifTraj'=>$details['totalPrice'],
             'autoRoutTraj'=>isset($itineraire["highway"])?$itineraire["highway"]:false,
-            'detoursTraj'=>0, //TODO
-            'depaDecTraj'=>0, //TODO
-            'bagageTraj'=>"petits", //TODO
+            'detoursTraj'=>$details['detours'],
+            'depaDecTraj'=>$details['retard'],
+            'bagageTraj'=>$details["bagages"],
             'infoTraj'=>$details["description"],
             'distTraj'=>$request->session()->get('totalDistance'),
-            'dureeTraj'=>0, //TODO
-            'idMemb'=>Auth::check()?Auth::user()->id:1,
-            'idVeh'=>1,
+            'dureeTraj'=>$details['duree'],
+            'idMemb'=>Auth::check()?Auth::user()->id:1, //TODO
+            'idVeh'=>1, //TODO
             'listeInseeEtapeTrajet'=>$listeInsee,
             'listeDistEtapeTrajet'=>$listeDist
         ]);
