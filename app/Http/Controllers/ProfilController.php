@@ -33,6 +33,7 @@ class ProfilController extends Controller
         $user->telMobMemb = $request->input('telMobMemb');
         $user->anNaisMemb = $request->input('anNaisMemb');
         $user->prefMemb = $request->input('prefMemb');
+	$user->photoMemb = $request->input('urlphoto');
         // $user->password = bcrypt(bcrypt($request->input['password']));
         $user->save();
         // dd($user);
