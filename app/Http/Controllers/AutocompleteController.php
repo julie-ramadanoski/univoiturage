@@ -14,7 +14,7 @@ class AutocompleteController extends Controller
 {
 
 	/**
-	 * Retourne une liste des 10 premiers site universitaire 
+	 * Retourne une liste des 10 premiers sites universitaires
 	 * completant les premiers caractères d'une recherche 
 	 */
 	public function ville(){
@@ -30,11 +30,11 @@ class AutocompleteController extends Controller
 		return Response::json($jsonArr);
 	}
 	/**
-	 * Retourne une liste d'universitées
+	 * Retourne une liste d'universitées avec identifiants
 	 * completant les premiers caractères d'une recherche 
 	 */
 	public function site(){
-		
+
 		$term = Str::lower(Input::get('term'));
 		$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
 		$jsonArr = array();

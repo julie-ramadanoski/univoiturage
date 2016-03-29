@@ -27,15 +27,7 @@ use Illuminate\Support\Facades\Input;
 
 
 Route::group(['middleware' => ['web']], function () {
-	Route::get('/', ['as'=>'home', function () {   
-		
-		$columnSizes = [
-	              'sm' => [4, 8],
-	              'lg' => [2, 10]
-	            ];
-
-		return view('recherche.form', compact('columnSizes')); 
-	}]);
+	Route::get('/', ['as'=>'home', 'uses'=>'RechercheController@home']);
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 });
 
@@ -48,7 +40,9 @@ Route::get('/autocomplete/ville', ['uses'=>'AutocompleteController@ville']);
 Route::get('/autocomplete/univ',  ['uses'=>'AutocompleteController@univ']);
 Route::get('/autocomplete/site',  ['uses'=>'AutocompleteController@site']);
 
-
+/**
+ * API pour application mobile
+ */
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
     Route::post('authenticate', 'AuthenticateController@authenticate');

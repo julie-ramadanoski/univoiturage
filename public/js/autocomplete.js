@@ -7,7 +7,9 @@ $(function () {
     $('input:text').bind({
 
     });
-
+    /*
+    * Rempli la liste des sites universitaires pour l'inscription.
+    */
     $.ajax({
         url: '/autocomplete/site',
         type: 'GET',

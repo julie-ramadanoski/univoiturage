@@ -13,7 +13,21 @@ use DateTime;
 
 class RechercheController extends Controller
 {
-    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    {
+        $columnSizes = [
+                  'sm' => [4, 8],
+                  'lg' => [2, 10]
+                ];
+
+        return view('recherche.form', compact('columnSizes')); 
+    }
     /**
      * Display the specified resource.
      *
