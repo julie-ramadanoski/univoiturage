@@ -8,8 +8,8 @@ $(function () {
 
     });
     /*
-    * Rempli la liste des sites universitaires pour l'inscription.
-    */
+     * Rempli la liste des sites universitaires pour l'inscription.
+     */
     $.ajax({
         url: '/autocomplete/site',
         type: 'GET',
@@ -31,16 +31,28 @@ $(function () {
             console.log(data);
         }
     });
+
+    /*
+     * Rempli la liste des universitées disponibles
+     */
     $("#universite").autocomplete({
         minLength: 1,
         autoFocus: true,
-        source: '/autocomplete/univ'
+        source: '/autocomplete/univ',
+        select: function(event, ui) { 
+            event.preventDefault();
+            $("#universite").val(ui.item.value);
+        }
      });
-
+    /*
+     * Affiche la liste de sites en fonction de l'université choisie avec des villes disponibles
+     */
     $("#villedepart, #villearrivee").autocomplete({
         minLength: 1,
         autoFocus: true,
-        source: '/autocomplete/ville'
-     });
+        source: '/autocomplete/ville/' +  $("#universite").val() +'toto' 
+        
+            
+    });
 
 });

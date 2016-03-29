@@ -37,9 +37,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	
 });
 
-Route::get('/autocomplete/ville', ['uses'=>'AutocompleteController@ville']);
-Route::get('/autocomplete/univ',  ['uses'=>'AutocompleteController@univ']);
-Route::get('/autocomplete/site',  ['uses'=>'AutocompleteController@site']);
+Route::get('/autocomplete/ville/{univ?}', ['uses'=>'AutocompleteController@ville']);
+Route::get('/autocomplete/univ',  		 ['uses'=>'AutocompleteController@univ']);
+Route::get('/autocomplete/site',  		 ['uses'=>'AutocompleteController@site']);
 
 /**
  * API pour application mobile

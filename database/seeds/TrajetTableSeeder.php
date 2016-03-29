@@ -16,7 +16,7 @@ class TrajetTableSeeder extends Seeder
     {
         Trajet::create( [
 		'idTraj'=>1,
-		'dateTraj'=>'2016-01-17',
+		'dateTraj'=>'2016-03-29',
 		'heureTraj'=>'20h',
 		'nbPlacesTraj'=>3,
 		'tarifTraj'=>'4',
@@ -37,7 +37,7 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>2,
-		'dateTraj'=>'2016-01-17',
+		'dateTraj'=>'2016-03-29',
 		'heureTraj'=>'22h',
 		'nbPlacesTraj'=>1,
 		'tarifTraj'=>'0',
@@ -58,7 +58,7 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>3,
-		'dateTraj'=>'2016-01-18',
+		'dateTraj'=>'2016-03-29',
 		'heureTraj'=>'08h',
 		'nbPlacesTraj'=>4,
 		'tarifTraj'=>'0',
@@ -79,7 +79,7 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>4,
-		'dateTraj'=>'2016-01-18',
+		'dateTraj'=>'2016-03-30',
 		'heureTraj'=>'10',
 		'nbPlacesTraj'=>1,
 		'tarifTraj'=>'60',

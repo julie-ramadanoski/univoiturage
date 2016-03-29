@@ -16,7 +16,7 @@ class SiteTableSeeder extends Seeder
     {
        Site::create( [
         'idSite'=>1,
-        'nomSite'=>'Gap',
+        'nomSite'=>'Gap (site de)',
         'adr1Site'=>'adresse 1',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -25,7 +25,7 @@ class SiteTableSeeder extends Seeder
 
        Site::create( [
         'idSite'=>2,
-        'nomSite'=>'Schuman',
+        'nomSite'=>'Schuman (site de)',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -33,7 +33,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>3,
-        'nomSite'=>'Jas de Boufan',
+        'nomSite'=>'Jas de Boufan (site de)',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -41,7 +41,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>4,
-        'nomSite'=>'MontPerrin',
+        'nomSite'=>'MontPerrin (site de)',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -49,7 +49,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>5,
-        'nomSite'=>'Gaston Berger',
+        'nomSite'=>'Gaston Berger (site de)',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -57,7 +57,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>6,
-        'nomSite'=>'IRT',
+        'nomSite'=>'IRT (site d\'   )',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -65,7 +65,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>7,
-        'nomSite'=>'L\'Arbois',
+        'nomSite'=>'L\'Arbois (site de)',
         'adr1Site'=>'adresse 2',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -73,7 +73,7 @@ class SiteTableSeeder extends Seeder
         ] );
        Site::create( [
         'idSite'=>8,
-        'nomSite'=>'Arles',
+        'nomSite'=>'Arles (site de)',
         'adr1Site'=>'adresse 3',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -81,7 +81,7 @@ class SiteTableSeeder extends Seeder
         ] );
         Site::create( [
         'idSite'=>9,
-        'nomSite'=>'Avignon',
+        'nomSite'=>'Avignon (site d\')',
         'adr1Site'=>'adresse 3',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -89,7 +89,7 @@ class SiteTableSeeder extends Seeder
         ] );
 Site::create( [
         'idSite'=>10,
-        'nomSite'=>'Aubagne',
+        'nomSite'=>'Aubagne (site d\')',
         'adr1Site'=>'adresse 4',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -97,7 +97,7 @@ Site::create( [
         ] );
         Site::create( [
         'idSite'=>11,
-        'nomSite'=>'Digne-les-bains',
+        'nomSite'=>'Digne-les-bains (site de)',
         'adr1Site'=>'adresse 5',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -105,7 +105,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>12,
-        'nomSite'=>'La ciota',
+        'nomSite'=>'La ciota (site de)',
         'adr1Site'=>'adresse 6',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -113,7 +113,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>13,
-        'nomSite'=>'Puyricard',
+        'nomSite'=>'Puyricard (site de)',
         'adr1Site'=>'adresse 7',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -121,7 +121,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>14,
-        'nomSite'=>'Chateau Gombert',
+        'nomSite'=>'Chateau Gombert (site de)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -129,7 +129,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>15,
-        'nomSite'=>'Virgile Marron',
+        'nomSite'=>'Virgile Marron (site de)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -137,7 +137,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>16,
-        'nomSite'=>'Luminy',
+        'nomSite'=>'Luminy (site de)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -145,7 +145,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>17,
-        'nomSite'=>'Nord',
+        'nomSite'=>'Nord (site)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -153,7 +153,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>18,
-        'nomSite'=>'Pharo',
+        'nomSite'=>'Pharo (site du)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -161,7 +161,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>19,
-        'nomSite'=>'Saint Charles',
+        'nomSite'=>'Saint Charles (site de)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -169,7 +169,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>20,
-        'nomSite'=>'Saint Jérôme',
+        'nomSite'=>'Saint Jérôme (site de)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -177,7 +177,7 @@ Site::create( [
         ] );
 Site::create( [
         'idSite'=>21,
-        'nomSite'=>'Timone',
+        'nomSite'=>'Timone (site de la)',
         'adr1Site'=>'adresse 8',
         'adr2Site'=>NULL,
         'idUniv'=>1,
@@ -185,7 +185,7 @@ Site::create( [
         ] );
 Site::create( [
 		'idSite'=>22,
-		'nomSite'=>'Salon de Provence',
+		'nomSite'=>'Salon de Provence (site de)',
 		'adr1Site'=>'adresse 8',
 		'adr2Site'=>NULL,
 		'idUniv'=>1,

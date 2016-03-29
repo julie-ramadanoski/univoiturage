@@ -29,7 +29,6 @@
         <script type="text/javascript" src="{{ URL::asset('/js/autocomplete.js') }}" ></script> 
       
     </head>
-    </head>
     <body>  
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
