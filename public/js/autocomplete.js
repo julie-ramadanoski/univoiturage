@@ -39,20 +39,49 @@ $(function () {
         minLength: 1,
         autoFocus: true,
         source: '/autocomplete/univ',
+        
+        // Au changement d'université précharger l'autocompletion   
         select: function(event, ui) { 
+            // Annuler le comportement par défault 
             event.preventDefault();
+
+            // Donner la valeur au champ
             $("#universite").val(ui.item.value);
+           
+            function uniVal(){
+                var val = '/autocomplete/ville/' + $("#universite").val();
+                return val; 
+            }
+
+            $("#villedepart, #villearrivee").autocomplete({
+                minLength: 1,
+                autoFocus: true,
+                source: uniVal(),
+                messages: {
+                    noResults: '',
+                    results: ''
+                }                  
+            });            
+        },
+        messages: {
+            noResults: '',
+            results: ''
         }
      });
     /*
-     * Affiche la liste de sites en fonction de l'université choisie avec des villes disponibles
+     * Préchargement de la recherche si la page a été rechargée
      */
+    function uniVal(){
+        var val = '/autocomplete/ville/' + $("#universite").val();
+        return val; 
+    }
+
     $("#villedepart, #villearrivee").autocomplete({
         minLength: 1,
         autoFocus: true,
-        source: '/autocomplete/ville/' +  $("#universite").val() +'toto' 
-        
-            
+        source: uniVal(),
+        response: function(event, ui) {
+           
+        }  
     });
-
 });

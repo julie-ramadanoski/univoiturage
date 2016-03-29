@@ -17,7 +17,7 @@ class AutocompleteController extends Controller
 
 	/**
 	 * Retourne une liste des 10 premiers sites universitaires
-	 * completant les premiers caractères d'une recherche 
+	 * et les 10 premières villes complétant les premiers caractères d'une recherche 
 	 */
 	public function ville(Request $request, $univ = null ){
 
@@ -26,23 +26,23 @@ class AutocompleteController extends Controller
 		// Récupérer l'identifiant de l'université		
 		$univ2 = Universite::where('nomUniv', $univ)->get();	
 		
-		$data = DB::table("site")->distinct('nomSite')
+		$sites = DB::table("site")->distinct('nomSite')
 								 ->where('nomsite', 'like', $term.'%')
 								 ->where('idUniv', $univ2[0]->idUniv)
 								 ->groupBy('nomSite')
 								 ->take(10)
 								 ->get();
-		$data2 = DB::table("ville")->distinct('nomVille')
+		$villes = DB::table("ville")->distinct('nomVille')
 								 ->where('nomVille', 'like', $term.'%')
 								 ->take(10)
 								 ->get();
 		
 		$jsonArr = array();
 		
-		foreach ($data as $value) {
+		foreach ($sites as $value) {
 			$jsonArr[]= array( 'value' => $value->nomSite );
 		}
-		foreach ($data2 as $value) {
+		foreach ($villes as $value) {
 			$jsonArr[]= array( 'value' => $value->nomVille );
 		}
 		
@@ -55,7 +55,11 @@ class AutocompleteController extends Controller
 	public function site(){
 
 		$term = Str::lower(Input::get('term'));
-		$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
+		$data = DB::table("site")->distinct('nomSite', 'idSite')
+								 ->where('nomSite', 'like', $term.'%')
+								 ->groupBy('nomSite')
+								 ->get();
+
 		$jsonArr = array();
 		
 		foreach ($data as $value) {
@@ -71,7 +75,10 @@ class AutocompleteController extends Controller
 	public function univ(){
 
 		$term = Str::lower(Input::get('term'));
-		$data = DB::table("universite")->distinct('nomUniv', 'idUniv')->where('nomUniv', 'like', $term.'%')->take(10)->get();
+		$data = DB::table("universite")->distinct('nomUniv', 'idUniv')
+									   ->where('nomUniv', 'like', $term.'%')
+									   ->take(10)
+									   ->get();
 		$jsonArr = array();
 		
 		foreach ($data as $value) {
