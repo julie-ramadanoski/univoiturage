@@ -69,12 +69,6 @@
 					</button>
 					<h3>Date et horraire</h3>
 					<div class="form-group">
-						<label class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
-							<input type="checkbox" value="on" name="round-trip" id="round-trip" checked="checked">
-							Trajet Aller-Retour
-						</label>
-					</div>
-					<div class="form-group">
 						<label class="col-md-2" for="goDate">
 							Date de départ
 						</label>
@@ -85,20 +79,6 @@
 						</select>
 						<div class="col-md-1">h</div>
 						<select class="col-md-1" name="goMinute" id="goMinute">
-							<option value="0">00</option>
-						</select>
-					</div>
-					<div class="form-group" id="backDiv">
-						<label class="col-md-2" for="backDate">
-							Date d'arrivée
-						</label>
-						<input type="date" name="backDate" id="backDate" class="col-md-4">
-						<div class="col-md-2"></div>
-						<select class="col-md-1" name="backHour" id="backHour">
-							<option value="1">01</option>
-						</select>
-						<div class="col-md-1">h</div>
-						<select class="col-md-1" name="backMinute" id="backMinute">
 							<option value="0">00</option>
 						</select>
 					</div>

@@ -10,8 +10,7 @@ use DB;
 use App\Marque;
 
 class MarqueController extends Controller
-{
-    
+{    
     public function del($id){
     	DB::table('modele')->where('idMarq', "=", $id)->delete();
         DB::table('marque')->where('idMarq', '=', $id)->delete();
@@ -37,5 +36,4 @@ class MarqueController extends Controller
         $marque->save();
         return redirect()->route('backMarq');
     }
-
 }
