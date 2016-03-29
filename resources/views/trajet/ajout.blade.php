@@ -1,10 +1,8 @@
 @extends('recherche')
 
 @section('content')	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
-	<script src="../js/script.js"></script>
-	<script>
-		
-	</script>
+	<script src="{{ URL::asset('/js/script.js') }}"></script>
+	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
 	<div class="container-fluid">
 		<h2>Publier votre annonce</h2>
 		<div class="row" id="r_timeline">
