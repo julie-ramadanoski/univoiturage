@@ -16,9 +16,7 @@
         <script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
         <script src="{{ URL::asset('assets/js/script.js') }}"></script>
                 
-                <!-- Chargement des css globaux -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Chargement des css globaux -->
         
 
         <!-- Chargement des JS globaux -->
@@ -29,7 +27,6 @@
 
         <script src="/js/moment.min.js" ></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
         
     </head>
     </head>

@@ -19,6 +19,4 @@ class Marque extends Model {
     public function modeles() {
         return $this->hasMany(\App\Modele::class, 'idMarq', 'idMarq');
     }
-
-
 }

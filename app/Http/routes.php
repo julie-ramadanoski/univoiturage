@@ -119,7 +119,9 @@ Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
-Route::any('back/marque','MarqueController@getList');
-Route::any('back/marque/edit/id','MarqueController@edit');
-Route::any('back/marque/del/id','MarqueController@del');
-
+Route::get('back/marque', [
+    'as' => 'backMarq', 'uses' => 'MarqueController@getList'
+]);
+Route::any('back/marque/edit','MarqueController@edit');
+Route::any('back/marque/del/{id}','MarqueController@del');
+Route::any('back/marque/add','MarqueController@add');

@@ -5,7 +5,7 @@
         <title>Laravel</title>
         <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script src="../js/biblio.js"
+        <script src="../js/biblio.js"></script>
         <script>
         	save = function(id){
         		var value = this.parentElement.previousSibling.firstChild.value;
@@ -13,37 +13,35 @@
         			
         		}) 	
         	}
-
-        	erase = function(id){
-
-        	}
         </script>
+        <style>
+        	
+        </style>
     </head>
 	<body>
-		<table>
-			<tr>
-				<td>ID</td>
-				<td>Nom de la marque</td>
-				<td>Enregistrer la ligne</td>
-				<td>Supprimer la ligne</td>
-			</tr>
+		<ul id="liste">		
 			@foreach($marques as $marque)
-				<tr>
-					<td>{{$marque->idMarq}}</td>
-					<td><input type="text" value="{{$marque->nomMarq}}"></td>
-					<td><button type="button" onClick="save({{$marque->idMarq}})">SAUVEGARDER</button></td>
-					<td><button type="button" onClick="erase({{$marque->idMarq}})">EFFACER</button></td>
-				</tr>
+			<li>
+				<form action="{{url('back/marque/edit')}}" method="post">
+					<span class="id">
+						{{$marque->idMarq}}
+						<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">
+					</span>
+					<span class="marque">
+						<input type="text" value="{{$marque->nomMarq}}" name="nomMarq">
+					</span>
+					<span class="save">
+						<input type="submit" value="sauvegarder">
+					</span>
+					<span class="erase"><a href="marque/del/{{$marque->idMarq}}">EFFACER</a></span>
+				</form>
+			</li>
 			@endforeach
-			<tr>
-				<td colspan="4">rajouter une ligne</td>
-			</tr>
-			<tr>
-				<td>{{$marque->idMarq +1}}</td>
-				<td><input type="text" value=""></td>
-				<td><button type="button" onClick="save({{$marque->idMarq}})">SAUVEGARDER</button></td>
-				<td><button type="button" onClick="erase({{$marque->idMarq}})">EFFACER</button></td>
-			</tr>
-		</table>
+		</ul>
+		<p>Ajouter une entrée :</p>
+		<form action="{{url('back/marque/add')}}" method="post">
+			<input type="text" name="nomMarq">
+			<input type="submit" value="ajouter">
+		</form>
 	</body>
 </html>

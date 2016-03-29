@@ -21,7 +21,7 @@ class CreateVehiculeTable extends Migration {
 			$table->string('couleurVeh', 45)->nullable();
 			$table->boolean('defautVeh');
 			$table->integer('idMemb')->index('fk_vehicule_users1_idx')->unsigned();
-			$table->integer('idMod')->index('fk_vehicule_modele1_idx');
+			$table->integer('idMod')->index('fk_vehicule_modele1_idx')->nullable();
 			$table->integer('idType')->index('fk_vehicule_type1_idx');
 		});
 	}
