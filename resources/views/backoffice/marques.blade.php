@@ -7,6 +7,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	</head>
 	<body>
+		<p>Ajouter une entrée :</p>
+		<form action="{{url('back/marque/add')}}" method="post">
+			<input type="text" name="nomMarq">
+			<input type="submit" value="ajouter">
+		</form>
 		<ul id="liste">		
 			@foreach($marques as $marque)
 			<li>
@@ -26,10 +31,5 @@
 			</li>
 			@endforeach
 		</ul>
-		<p>Ajouter une entrée :</p>
-		<form action="{{url('back/marque/add')}}" method="post">
-			<input type="text" name="nomMarq">
-			<input type="submit" value="ajouter">
-		</form>
 	</body>
 </html>

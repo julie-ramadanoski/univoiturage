@@ -19,6 +19,46 @@
         </style>
     </head>
 	<body>
+		<p>Ajouter une entrée :</p>
+		<form action="{{url('back/vehicule/add')}}" method="post">
+			<span class="id">
+						<input type="hidden" placeholder="" name="idVeh">
+					</span>
+					<span class="vehicule">
+						<input type="text" placeholder="photo" name="photoVeh">
+					</span>
+					<span class="vehicule">
+						<input type="text" placeholder="confort (1 à 5)" name="confVeh">
+					</span>
+					<span class="vehicule">
+						<input type="text" placeholder="nombre de place" name="nbPlaceVeh">
+					</span>
+					<span class="vehicule">
+						<input type="text" placeholder="couleur" name="couleurVeh">
+					</span>
+					<span class="vehicule">
+						<select name="defautVeh">
+							<option value="1">Par defaut</option>
+							<option value="0">Pas par defaut</option>
+						</select>
+					</span>
+					<span class="vehicule">
+						<input type="text" placeholder="id du membre" name="idMemb">
+					</span>
+					<span class="vehicule">
+						<select name="idMod">
+							@foreach($modeles as $modele)
+								<option value="{{$modele->idMod}}">{{$modele->nomMod}}</option>
+							@endforeach
+						</select>
+					</span>
+						<select name="idType">
+							@foreach($types as $type)
+								<option value="{{$type->idType}}">{{$type->libType}}</option>
+							@endforeach
+						</select>
+			<input type="submit" value="ajouter">
+		</form>
 		<ul id="liste">		
 			@foreach($vehicules as $vehicule)
 
@@ -85,45 +125,5 @@
 			</li>
 			@endforeach
 		</ul>
-		<p>Ajouter une entrée :</p>
-		<form action="{{url('back/vehicule/add')}}" method="post">
-			<span class="id">
-						<input type="hidden" placeholder="" name="idVeh">
-					</span>
-					<span class="vehicule">
-						<input type="text" placeholder="photo" name="photoVeh">
-					</span>
-					<span class="vehicule">
-						<input type="text" placeholder="confort (1 à 5)" name="confVeh">
-					</span>
-					<span class="vehicule">
-						<input type="text" placeholder="nombre de place" name="nbPlaceVeh">
-					</span>
-					<span class="vehicule">
-						<input type="text" placeholder="couleur" name="couleurVeh">
-					</span>
-					<span class="vehicule">
-						<select name="defautVeh">
-							<option value="1">Par defaut</option>
-							<option value="0">Pas par defaut</option>
-						</select>
-					</span>
-					<span class="vehicule">
-						<input type="text" placeholder="id du membre" name="idMemb">
-					</span>
-					<span class="vehicule">
-						<select name="idMod">
-							@foreach($modeles as $modele)
-								<option value="{{$modele->idMod}}">{{$modele->nomMod}}</option>
-							@endforeach
-						</select>
-					</span>
-						<select name="idType">
-							@foreach($types as $type)
-								<option value="{{$type->idType}}">{{$type->libType}}</option>
-							@endforeach
-						</select>
-			<input type="submit" value="ajouter">
-		</form>
 	</body>
 </html>

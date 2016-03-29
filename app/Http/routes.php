@@ -139,3 +139,27 @@ Route::get('back/vehicule', [
 Route::any('back/vehicule/edit','VehiculeController@edit');
 Route::any('back/vehicule/del/{id}','VehiculeController@del');
 Route::any('back/vehicule/add','VehiculeController@add');
+
+//université
+Route::get('back/universite', [
+    'as' => 'backuniv', 'uses' => 'UniversiteController@getList'
+]);
+Route::any('back/universite/edit','UniversiteController@edit');
+Route::any('back/universite/del/{id}','UniversiteController@del');
+Route::any('back/universite/add','UniversiteController@add');
+
+//ville
+Route::get('back/ville', [
+    'as' => 'backville', 'uses' => 'VilleController@getList'
+]);
+Route::any('back/ville/edit','VilleController@edit');
+Route::any('back/ville/del/{id}','VilleController@del');
+Route::any('back/ville/add','VilleController@add');
+
+//site
+Route::get('back/site', [
+    'as' => 'backsite', 'uses' => 'SiteController@getList'
+]);
+Route::any('back/site/edit','SiteController@edit');
+Route::any('back/site/del/{id}','SiteController@del');
+Route::any('back/site/add','SiteController@add');

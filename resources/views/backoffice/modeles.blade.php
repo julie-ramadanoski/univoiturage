@@ -19,6 +19,18 @@
         </style>
     </head>
 	<body>
+		<p>Ajouter une entrée :</p>
+		<form action="{{url('back/modele/add')}}" method="post">
+			<label class="col-md-4 control-label" for="nomMod">Nom du modèle</label>
+			<input type="text" name="nomMod">
+			<label class="col-md-4 control-label" for="idMarq">Marque associée</label>
+			<select name="idMarq">
+			@foreach($marques as $marque)
+				<option value="{{$marque->idMarq}}">{{$marque->nomMarq}}</option>
+			@endforeach
+			</select>
+			<input type="submit" value="ajouter">
+		</form>
 		<ul id="liste">		
 			@foreach($modeles as $modele)
 
@@ -48,17 +60,5 @@
 			</li>
 			@endforeach
 		</ul>
-		<p>Ajouter une entrée :</p>
-		<form action="{{url('back/modele/add')}}" method="post">
-			<label class="col-md-4 control-label" for="nomMod">Nom du modèle</label>
-			<input type="text" name="nomMod">
-			<label class="col-md-4 control-label" for="idMarq">Marque associée</label>
-			<select name="idMarq">
-			@foreach($marques as $marque)
-				<option value="{{$marque->idMarq}}">{{$marque->nomMarq}}</option>
-			@endforeach
-			</select>
-			<input type="submit" value="ajouter">
-		</form>
 	</body>
 </html>
