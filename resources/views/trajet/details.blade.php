@@ -1,4 +1,4 @@
-@extends('index')
+@extends('recherche')
 
 @section('content')
 	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>

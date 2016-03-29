@@ -54,10 +54,11 @@ class AuthenticateController extends Controller
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
             
             $user = JWTAuth::parseToken()->authenticate();
-            $alerte = $user->alertes()->get();
-            $alerte->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
-            
-            // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer
+            $user->load('alertes.etapeDepart.ville','alertes.etapeArrivee.ville');
+            $alerte = $user->alertes;
+           
+            //dd($alerte);
+            // Si l'utilisateur n'a pas encore d'alerte, l'enregistrer            
             if(count($alerte) == 0){
 
                 $alerte   = new Alerte;
@@ -83,13 +84,16 @@ class AuthenticateController extends Controller
                 $alerte->membre()->associate( $user->id ); // retourne un utilisateur identifié par token
 
                 $alerte->save();
-            }
+                $alerte->load('etapeDepart.ville','etapeArrivee.ville');
+            } 
+
             // Dans tout les cas retourner l'alerte
             return response()->json($alerte);
         }
 
 
     }
+
     public function getAlertes(Request $request, $depart = null )
     {
         

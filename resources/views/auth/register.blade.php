@@ -5,11 +5,11 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Register</div>
+				<div class="panel-heading">S'enregistrer</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<strong>Oops!</strong> Vos informations ci-dessous sont inexactes. Veuillez les vérifier.<br><br>
 							<ul>
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
@@ -22,9 +22,11 @@
 						{!! csrf_field() !!}
 						
 						<div class="form-group">
-							<label for="site">Site Universitaire</label>
+							<label class="col-md-4 control-label">Site universitaire</label>
+							<div class="col-md-6">
 							<select class="form-control" id="site" name="site">
 							</select>
+							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Email</label>
@@ -85,10 +87,17 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Register
+								<button type="submit" class="btn btn-primary btn-lg">
+									S'enregistrer
 								</button>
 							</div>
+							<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="button" class="btn btn-secondary" onclick="self.location.href='{{ url('/auth/login') }}'" id="dejamembre">
+									Déja membre? Connectez vous.
+								</button>
+							</div>
+						</div>
 						</div>
 					</form>
 				</div>
@@ -97,3 +106,4 @@
 	</div>
 </div>
 @endsection
+
