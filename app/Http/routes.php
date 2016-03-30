@@ -123,6 +123,7 @@ Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback
 
 Route::group(['middleware' => ['web', 'auth', 'admin']], function () {
 	Route::any('/admin', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
+	Route::any('/back', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
 
 	//marque
 	Route::get('back/marque', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
