@@ -7,3 +7,5 @@ composer.lock
 .env
 .idea/
 _ide_helper.php
+/public/css/*
+/public/js/*
