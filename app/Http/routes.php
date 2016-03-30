@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/profil', ['uses'=>'ProfilController@show']); 
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
+	
 });
 
 Route::any('/autocompleteVille', function(){
@@ -95,9 +96,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 
 /* Florian G. */
 /* Routes en rapport avec les ajouts de trajets */
-Route::get('trajet/add', 'TrajetController@getView'); //On apelle la vue qui correspond à l'ajout d'un trajet
-Route::post('trajet/add', 'TrajetController@add'); //Cette page est apellée en AJAX avec en paramètre l'objet trajet (Json)
-
+Route::any('trajet/add', 'TrajetController@getView');
+Route::any('trajet/addDetails', 'TrajetController@getView2'); 
+Route::any('trajet/addTrajet', 'TrajetController@addTrajet');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -116,4 +117,59 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 	
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+
+
+
+Route::group(['middleware' => ['web', 'auth', 'admin']], function () {
+	Route::any('/admin', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
+	Route::any('/back', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
+
+	//marque
+	Route::get('back/marque', ['as' => 'backMarq', 'uses' => 'MarqueController@getList']);
+	Route::any('back/marque/edit','MarqueController@edit');
+	Route::any('back/marque/del/{id}','MarqueController@del');
+	Route::any('back/marque/add','MarqueController@add');
+
+	//modèles
+	Route::get('back/modele', [
+	    'as' => 'backModel', 'uses' => 'ModeleController@getList'
+	]);
+	Route::any('back/modele/edit','ModeleController@edit');
+	Route::any('back/modele/del/{id}','ModeleController@del');
+	Route::any('back/modele/add','ModeleController@add');
+
+	//véhicule
+	Route::get('back/vehicule', [
+	    'as' => 'backvehicule', 'uses' => 'VehiculeController@getList'
+	]);
+	Route::any('back/vehicule/edit','VehiculeController@edit');
+	Route::any('back/vehicule/del/{id}','VehiculeController@del');
+	Route::any('back/vehicule/add','VehiculeController@add');
+
+	//université
+	Route::get('back/universite', [
+	    'as' => 'backuniv', 'uses' => 'UniversiteController@getList'
+	]);
+	Route::any('back/universite/edit','UniversiteController@edit');
+	Route::any('back/universite/del/{id}','UniversiteController@del');
+	Route::any('back/universite/add','UniversiteController@add');
+
+	//ville
+	Route::get('back/ville', [
+	    'as' => 'backville', 'uses' => 'VilleController@getList'
+	]);
+	Route::any('back/ville/edit','VilleController@edit');
+	Route::any('back/ville/del/{id}','VilleController@del');
+	Route::any('back/ville/add','VilleController@add');
+
+	//site
+	Route::get('back/site', [
+	    'as' => 'backsite', 'uses' => 'SiteController@getList'
+	]);
+	Route::any('back/site/edit','SiteController@edit');
+	Route::any('back/site/del/{id}','SiteController@del');
+	Route::any('back/site/add','SiteController@add');
+});
+
