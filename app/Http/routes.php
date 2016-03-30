@@ -171,3 +171,4 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function () {
 	Route::any('back/site/del/{id}','SiteController@del');
 	Route::any('back/site/add','SiteController@add');
 });
+
