@@ -31,12 +31,14 @@ elixir(function(mix) {
     // Filtrer les listes
      mix.copy('resources/assets/css/jplist.core.min.css',                      'public/css/jplist.core.min.css' );
      mix.copy('resources/assets/css/jplist.bootstrap.min.css',                 'public/css/jplist.bootstrap.min.css' );
+     mix.copy('resources/assets/css/jplist.jquery-ui-bundle.min.css',          'public/css/jplist.jquery-ui-bundle.min.css' );
      
      mix.copy('resources/assets/js/jplist.core.min.js',                        'public/js/jplist.core.min.js' );
      mix.copy('resources/assets/js/jplist.bootstrap-pagination-bundle.min.js', 'public/js/jplist.bootstrap-pagination-bundle.min.js' );
      mix.copy('resources/assets/js/activerJpList.js',                          'public/js/activerJpList.js' );
      mix.copy('resources/assets/js/jplist.filter-toggle-bundle.min.js',        'public/js/jplist.filter-toggle-bundle.min.js' );
      mix.copy('resources/assets/js/jplist.jquery-ui-bundle.min.js',            'public/js/jplist.jquery-ui-bundle.min.js' );
+     mix.copy('resources/assets/js/jplist.sort-bundle.min.js',                 'public/js/jplist.sort-bundle.min.js' );
 
 });
 

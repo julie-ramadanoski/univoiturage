@@ -14,7 +14,7 @@ $('document').ready(function(){
 				min: 0,
 				max: 23,
 				range: true,
-				values: [7, 19],
+				values: [0, 23],
 				slide: function (event, ui){
 					$prev.text(ui.values[0] + ' h');
 					$next.text(ui.values[1] + ' h');

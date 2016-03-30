@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Input;
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', 'uses'=>'RechercheController@home']);
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+	Route::get('/recherche/{id}', ['as'=>'detailRecherche', 'uses'=>'RechercheController@detail']);
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

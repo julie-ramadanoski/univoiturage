@@ -29,9 +29,6 @@
         <script type="text/javascript" src="{{ URL::asset('/js/bootstrap-datepicker.js') }}" ></script>
         <script type="text/javascript" src="{{ URL::asset('/js/autocomplete.js') }}" ></script>       
 
-        <script src="/js/moment.min.js" ></script>
-        <script src="/js/bootstrap-datepicker.js" ></script>
-
     </head>
     <body>  
         <nav class="navbar navbar-inverse">
