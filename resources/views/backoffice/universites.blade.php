@@ -68,6 +68,7 @@
 				<tr>
 				<p>Ajouter une entrée :</p>
 				<form action="{{url('back/universite/add')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td class="id">
 						<input type="hidden" placeholder="" name="idUniv">
 					</td>
@@ -109,6 +110,7 @@
 			@foreach($universites as $universite)
 			<tr>
 				<form action="{{url('back/universite/edit')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td class="id">
 						{{$universite->idUniv}}
 						<input type="hidden" value="{{$universite->idUniv}}" name="idUniv">
