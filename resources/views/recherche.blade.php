@@ -35,20 +35,16 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="sr-only">Nav</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="#">Car à fond</a>
+                    <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ URL::asset('images/carafond.png') }}" alt="caràfond" style="width: 42%;"/></a>
 
                 </div>
                 <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="nav navbar-nav">
-
-                        <li><a href="{{ url('/') }}">Université</a></li>
-                    </ul>
                        <ul class="nav navbar-nav" id="rechercher">
                         <li><a href="{{ url('/') }}">Rechercher un trajet</a></li>
                     </ul>
@@ -85,7 +81,6 @@
     <div id="footer">
     <div class="container">
         <div class="row">
-            <h3 class="footertext">Footer:</h3>
             <br>
               <div class="col-md-4">
                 <center>
@@ -99,8 +94,8 @@
                 <center>
                   <img src="http://oi60.tinypic.com/2z7enpc.jpg" class="img-circle" alt="...">
                   <br>
-                  <h4 class="footertext">Raccourci</h4>
-                  <p class="footertext">Connexion<br>
+                  <h4><a class="footertexta" href="{{ url('/auth/register') }}">S'enregistrer</a></h4>
+                    <h4><a class="footertexta" href="{{ url('/auth/login') }}">Se connecter</a><br></h4>
                 </center>
               </div>
               <div class="col-md-4">
@@ -113,7 +108,7 @@
               </div>
             </div>
             <div class="row">
-            <p><center><a href="#">Caràfond</a> <p class="footertext">Copyright 2016</p></center></p>
+            <p><center><a href="#" id="carafond">Caràfond</a> <p class="footertext">Copyright 2016</p></center></p>
         </div>
     </div>
 </div>     

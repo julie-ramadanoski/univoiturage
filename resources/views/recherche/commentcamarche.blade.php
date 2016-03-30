@@ -11,8 +11,8 @@
                     <li role="presentation" class="active" id="fen"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><h2>Vous êtes passager?</h2>
               <h4>>Réservez votre place</h4></a></li>
                    
-                    <li role="presentation" id="fen2"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><h2>Vous êtes passager?</h2>
-              <h4>>Réservez votre place</h4></a></li>
+                    <li role="presentation" id="fen2"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><h2>Vous êtes conducteur?</h2>
+              <h4>>Proposez vos places libres</h4></a></li>
                   </ul>
 
         <div id="txtfix"> <p>Simple et économique: réservez facilement votre place en ligne et voyagez moins cher, en toute confiance. Même à la dernière minute! </p></div>
@@ -43,24 +43,24 @@
           </div>
             <div role="tabpanel" class="tab-pane fade" id="profile">         
             
-            <div id="listeconducteur">
+            <div id="listepassager">
              <ul id="txt">
-                 <li>Recherchez votre trajet</li>
-                 <div>Entrez vos villes de départ et de destination, ainsi que votre date de voyage et choisissez parmi les conducteurs proposant des trajets qui vous conviennent. Si vous voulez des précisions sur un trajet, vous pouvez envoyer un message au conducteur</div>
+                 <li>Publier votre annonce</li>
+                 <div>Indiquez la date et l'horaire de votre trajet. Renseignez également l'itinéraire, le véhicule, l'heure de passage et votre prix par passager.</div>
                  
-                 <li>Réservez et payez directement au chaufeur</li>            
-                 <div>Vous réservez votre place en ligne et recevez un Code de Réservation. Votre conducteur est prévenu immédiatement de votre réservation par mail et SMS. Ensuite, appelez le conducteur pour régler les derniers détails du voyage de vive voix.</div>
+                 <li>Réservation et validation</li>            
+                 <div>Attendez que les passagers se manifestent et valider leurs demandes en fonction de leurs préférences. Répondez à toutes leurs questions via le chat.</div>
                  
                  <li>Voyagez</li>
-                 <div>Rendez-vous au lieu de départ convenu, bien à l'heure. Donnez votre Code de Réservation au conducteur au cours du voyage, cela lui permettra de recevoir votre participation au trajet par la suite. Bonne route !</div>
+                 <div>Rendez-vous au lieu de départ convenu, bien à l'heure et bonne route !</div>
              </ul>   
     
              <ul id="astuce">
-                 <div>Consultez le profil vérifié des conducteurs: photo, bio et avis. </div>  
+                 <div>Nous vous suggérons un prix par personne, trajet et étape. </div>  
                  
                  <div>Bien sûr, si vous avez un empêchement, vous disposez de conditions d'annulation.</div>            
                  
-                 <div>Après le voyage, laissez un avis à votre conducteur, afin d'en recevoir un en retour, et d'augmenter votre niveau d'expérience.                  </div>
+                 <div>N'oubliez pas de mettre une photo de votre véhicule sur votre profil. Ainsi les passagers vous reconnaîtront facilement au point de rendez vous.</div>
              </ul>   
          </div>
                </div>

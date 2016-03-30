@@ -63,6 +63,8 @@ html, body {
 
 #preferences {
 	background-color:rgba(46, 204, 113,0.3);
+    margin-bottom:50px;
+    padding-bottom:40px;
 }
 
 #preferences p {
@@ -70,6 +72,24 @@ html, body {
 	font-size: 1.3em;
 	background:rgba(26, 188, 156,1.0);
 	text-align:center;
+}
+#preferences input {
+    display: inline-block;    
+}
+
+#preferences img {
+    margin:10px;    
+}
+
+.form-group {
+     width:70%; 
+    margin-left:auto !important;
+    margin-right:auto !important;
+    display:block !important;
+}
+
+#envoyerf {
+     margin-bottom:100px;   
 }
 
 #site {
@@ -101,7 +121,18 @@ html, body {
   margin: 20px 0;
 }
 .footertext {
-  color: #ffffff;
+    color: #ffffff;
+    text-decoration:none;
+}
+
+.footertexta {
+    color: #ffffff;
+    text-decoration:none;
+}
+
+.footertexta:hover {
+    color: lightgrey;
+    text-decoration:none !important;
 }
 
 #fen {
@@ -132,6 +163,8 @@ html, body {
 #listepassager {
     float:left;
     background-color:rgba(46, 204, 113,0.3);    
+    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 #listepassager ul {
@@ -141,6 +174,7 @@ html, body {
 #listepassager ul li{
     list-style-type: decimal;
     font-size:1.5em;
+    padding-top: 40px;
 }
 
 #listepassager ul#txt {
@@ -163,7 +197,52 @@ html, body {
     margin-top: 15px;
     padding: 10px;
     width:95%;
+    margin-top: 62px;
 }
+
+#video {
+    float:left;
+    background-color:rgba(46, 204, 113,0.3); 
+    height: 300px;
+    margin-bottom:50px;
+    margin-top:50px;
+    margin-left:15px;
+    width:100%;
+}
+
+#video iframe {
+    margin-left:15px;
+}
+
+#video p#titre {
+    background: #16a085;
+    height:50px;
+    color:white;
+    font-size:1.5em;
+    text-align:center;
+}
+
+#video p#texte {
+   padding:12px;
+    text-align: justify;
+}
+
+.navbar-nav > li a {
+     color:black;   
+}
+
+#carafond {
+     color:white;
+    font-size:1.6em;
+    text-decoration:none;
+}
+
+#carafond:hover {
+     color:lightblue;
+    font-size:1.6em;
+    text-decoration:none;
+}
+
 
 /*#fen {
     color:white;
