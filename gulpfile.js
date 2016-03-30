@@ -30,6 +30,7 @@ elixir(function(mix) {
      
      mix.copy('resources/assets/js/jplist.core.min.js',                        'public/js/jplist.core.min.js' );
      mix.copy('resources/assets/js/jplist.bootstrap-pagination-bundle.min.js', 'public/js/jplist.bootstrap-pagination-bundle.min.js' );
+     mix.copy('resources/assets/js/activerJpList.js',                          'public/js/activerJpList.js' );
 
 });
 
