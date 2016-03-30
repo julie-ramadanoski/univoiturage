@@ -67,31 +67,67 @@
 			<table>
 				<tr>
 				<p>Ajouter une entrée :</p>
-				<form action="{{url('back/marque/add')}}" method="post">
+				<form action="{{url('back/site/add')}}" method="post">
 					<td>0</td>
-					<td>
-					<input type="text" placeholder="Nom" name="nomMarq">
+					<td class="site">
+						<input type="text" placeholder="Nom" name="nomSite">
+					</td>
+					<td class="site">
+						<input type="text" placeholder="Adresse 1" name="adr1Site">
+					</td>
+					<td class="site">
+						<input type="text" placeholder="Adresse 2" name="adr2Site">
+					</td>
+					<td class="site">
+						<select name="idUniv">
+							@foreach($universites as $universite)
+								<option value="{{$universite->idUniv}}">{{$universite->nomUniv}}</option>
+							@endforeach
+						</select>
+					</td>
+					<td class="site">
+						<input type="text" placeholder="Code INSEE Ville" name="inseeVille">
 					</td>
 					<td>
-					<input type="submit" value="ajouter">
+						<input type="submit" value="ajouter">
 					</td>
 				</form>
 				</tr>	
-				@foreach($marques as $marque)
+				@foreach($sites as $site)
 				<tr>
-					<form action="{{url('back/marque/edit')}}" method="post">
-						<td class="id">
-							{{$marque->idMarq}}
-							<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">
-						</td>
-						<td class="marque">
-							<input type="text" value="{{$marque->nomMarq}}" name="nomMarq">
-						</td>
-						<td class="save">
-							<input type="submit" value="sauvegarder">
-						</td>
-						<td class="erase"><a href="marque/del/{{$marque->idMarq}}">EFFACER</a></td>
-					</form>
+				<form action="{{url('back/site/edit')}}" method="post">
+					<td class="id">
+						{{$site->idSite}}
+						<input type="hidden" value="{{$site->idSite}}" name="idSite">
+					</td>
+					<td class="site">
+						<input type="text" value="{{$site->nomSite}}" name="nomSite">
+					</td>
+					<td class="site">
+						<input type="text" value="{{$site->adr1Site}}" name="adr1Site">
+					</td>
+					<td class="site">
+						<input type="text" value="{{$site->adr2Site}}" name="adr2Site">
+					</td>
+					<td class="site">
+						<select name="idUniv">
+							@foreach($universites as $universite)
+								<option value="{{$universite->idUniv}}"
+								@if($universite->idUniv == $site->idUniv)
+									selected
+								@endif
+								>{{$universite->nomUniv}}</option>
+							@endforeach
+						</select>
+					</td>
+					<td class="site">
+						<input type="text" value="{{$site->inseeVille}}" name="inseeVille">
+					</td>
+					<td class="save">
+						<input type="submit" value="sauvegarder">
+					</td>
+					<td class="erase"><a href="site/del/{{$site->idSite}}">EFFACER</a></td>
+				</form>
 				</tr>
 				@endforeach
 			</table>

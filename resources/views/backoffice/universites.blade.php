@@ -67,33 +67,89 @@
 			<table>
 				<tr>
 				<p>Ajouter une entrée :</p>
-				<form action="{{url('back/marque/add')}}" method="post">
-					<td>0</td>
-					<td>
-					<input type="text" placeholder="Nom" name="nomMarq">
+				<form action="{{url('back/universite/add')}}" method="post">
+					<td class="id">
+						<input type="hidden" placeholder="" name="idUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Nom" name="nomUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Adresse n°1" name="adr1Univ">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Adresse n°2" name="adr2Univ">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Telephone" name="telUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Mail" name="mailUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Photo" name="photoUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Logo" name="logoUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Latitude" name="latUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Longitude" name="longUniv">
+					</td>
+					<td class="universite">
+						<input type="text" placeholder="Code INSEE" name="inseeVille">
 					</td>
 					<td>
 					<input type="submit" value="ajouter">
 					</td>
-				</form>
-				</tr>	
-				@foreach($marques as $marque)
-				<tr>
-					<form action="{{url('back/marque/edit')}}" method="post">
-						<td class="id">
-							{{$marque->idMarq}}
-							<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">
-						</td>
-						<td class="marque">
-							<input type="text" value="{{$marque->nomMarq}}" name="nomMarq">
-						</td>
-						<td class="save">
-							<input type="submit" value="sauvegarder">
-						</td>
-						<td class="erase"><a href="marque/del/{{$marque->idMarq}}">EFFACER</a></td>
-					</form>
+				</form>	
 				</tr>
-				@endforeach
+			@foreach($universites as $universite)
+			<tr>
+				<form action="{{url('back/universite/edit')}}" method="post">
+					<td class="id">
+						{{$universite->idUniv}}
+						<input type="hidden" value="{{$universite->idUniv}}" name="idUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->nomUniv}}" name="nomUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->adr1Univ}}" name="adr1Univ">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->adr2Univ}}" name="adr2Univ">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->telUniv}}" name="telUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->mailUniv}}" name="mailUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->photoUniv}}" name="photoUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->logoUniv}}" name="logoUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->latUniv}}" name="latUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->longUniv}}" name="longUniv">
+					</td>
+					<td class="universite">
+						<input type="text" value="{{$universite->inseeVille}}" name="inseeVille">
+					</td>
+					<td class="save">
+						<input type="submit" value="sauvegarder">
+					</td>
+					<td class="erase"><a href="universite/del/{{$universite->idUniv}}">EFFACER</a></td>
+				</form>
+			</tr>
+			@endforeach
 			</table>
 		</div>
 	</body>

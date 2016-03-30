@@ -67,30 +67,49 @@
 			<table>
 				<tr>
 				<p>Ajouter une entrée :</p>
-				<form action="{{url('back/marque/add')}}" method="post">
-					<td>0</td>
-					<td>
-					<input type="text" placeholder="Nom" name="nomMarq">
+				<form action="{{url('back/ville/add')}}" method="post">
+					<td class="ville">
+						<input type="text" placeholder="Code INSEE" name="inseeVille">
+					</td>
+					<td class="ville">
+						<input type="text" placeholder="Code postal" name="codePostalVille">
+					</td>
+					<td class="ville">
+						<input type="text" placeholder="Nom" name="nomVille">
+					</td>
+					<td class="ville">
+						<input type="text" placeholder="Latitude" name="latitudeVille">
+					</td>
+					<td class="ville">
+						<input type="text" placeholder="Longitude" name="longitudeVille">
 					</td>
 					<td>
-					<input type="submit" value="ajouter">
+						<input type="submit" value="ajouter">
 					</td>
 				</form>
-				</tr>	
-				@foreach($marques as $marque)
+				</tr>
+				@foreach($villes as $ville)
 				<tr>
-					<form action="{{url('back/marque/edit')}}" method="post">
-						<td class="id">
-							{{$marque->idMarq}}
-							<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">
+					<form action="{{url('back/ville/edit')}}" method="post">
+						<td class="ville">
+							<input type="text" value="{{$ville->inseeVille}}" name="inseeVille">
 						</td>
-						<td class="marque">
-							<input type="text" value="{{$marque->nomMarq}}" name="nomMarq">
+						<td class="ville">
+							<input type="text" value="{{$ville->codePostalVille}}" name="codePostalVille">
+						</td>
+						<td class="ville">
+							<input type="text" value="{{$ville->nomVille}}" name="nomVille">
+						</td>
+						<td class="ville">
+							<input type="text" value="{{$ville->latitudeVille}}" name="latitudeVille">
+						</td>
+						<td class="ville">
+							<input type="text" value="{{$ville->longitudeVille}}" name="longitudeVille">
 						</td>
 						<td class="save">
 							<input type="submit" value="sauvegarder">
 						</td>
-						<td class="erase"><a href="marque/del/{{$marque->idMarq}}">EFFACER</a></td>
+						<td class="erase"><a href="ville/del/{{$ville->inseeVille}}">EFFACER</a></td>
 					</form>
 				</tr>
 				@endforeach
