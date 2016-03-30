@@ -7,13 +7,16 @@
         <div class="title">Resultats de la recherche</div>
 
         <!-- Filtre de recherche -->
-        <link href="{{ URL::asset('/css/jplist.core.min.css') }}"               rel="stylesheet" type="text/css">
+        <!-- <link href="{{ URL::asset('/css/jplist.core.min.css') }}"               rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('/css/jplist.bootstrap.min.css') }}"          rel="stylesheet" type="text/css">
-        <link href="{{ URL::asset('/css/jplist.checkbox-dropdown.min.css') }}"  rel="stylesheet" type="text/css">
+       <link href="{{ URL::asset('/css/jplist.checkbox-dropdown.min.css') }}"  rel="stylesheet" type="text/css"> -->
+       <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> 
 
         <script src="{{ URL::asset('/js/jplist.core.min.js') }}"                        type="text/javascript"></script>
         <script src="{{ URL::asset('/js/jplist.bootstrap-pagination-bundle.min.js') }}" type="text/javascript"></script>
-        <script src="{{ URL::asset('/js/jplist.checkbox-dropdown.min.js') }}"           type="text/javascript"></script>
+       <!-- <script src="{{ URL::asset('/js/jplist.checkbox-dropdown.min.js') }}"           type="text/javascript"></script> -->
+        <script src="{{ URL::asset('/js/jplist.filter-toggle-bundle.min.js') }}"        type="text/javascript"></script>
+        <script src="{{ URL::asset('/js/jplist.jquery-ui-bundle.min.js') }}"            type="text/javascript"></script>
         <script src="{{ URL::asset('/js/activerJpList.js') }}"                          type="text/javascript"></script>
 
         {{--*/  
@@ -24,22 +27,46 @@
             $moyDist = 0;
 
         /*--}}
+
+        <!-- panel de filtrage -->
+        <div id="jplist" class="jplist">
+
             <div class="row">
-                    <div class="col-sm-4">
-                       <p>Filtres : Affinezvotre recherche</p>
-                        <form>                            
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Check me out
-                                </label>
-                            </div>
-                        </form> 
+
+                <!-- controls -->
+                <div class="col-sm-4 jplist-panel">
+                    <h3>Affinezvotre recherche</h3>
+                    <div class="jplist-group">
+                        <!-- likes range slider -->
+                        <!-- likesSlider and likesValues are user function defined in jQuery.fn.jplist.settings -->
+                        <div 
+                            class="jplist-range-slider"
+                            data-control-type="range-slider" 
+                            data-control-name="range-slider-likes" 
+                            data-control-action="filter"
+                            data-path=".hour"
+                            data-slider-func="hourSlider" 
+                            data-setvalues-func="hourValues">
+                                                
+                            <div class="value" data-type="prev-value"></div>
+                            <div class="ui-slider" data-type="ui-slider"></div>
+                            <div class="value" data-type="next-value"></div>
+                        </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="jplist-panel">
+                </div>
+
+                <!-- liste de résultats-->
+                <div class="col-sm-8">
+                    
+                    <!-- chaque item-->
+                    <div class="list">
+
                         @foreach ($trajets as $trajet)
-                        <div class="panel panel-primary list-item">
-                            <div class="panel-heading"> Trajet N° {{ $trajet->idTraj }} le {{ date('d F Y', strtotime($trajet->dateTraj)) }} à {{ $trajet->heureTraj }}</div>
+                        <div class="list-item">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Trajet N° {{ $trajet->idTraj }} le {{ date('d F Y', strtotime($trajet->dateTraj)) }} à {{ $trajet->heureTraj }}
+                                </div>
                                 <div class="panel-body"> 
 
                                         {{--*/ 
@@ -49,7 +76,7 @@
                                             $nbPlacesMaxi = $trajet->vehicule->nbPlaceVeh;
                                         
                                         /*--}}
-                                 
+                                    <!-- descriotif du trajet -->
                                     <div class="row">
                                       
                                         <div class="col-xs-6 col-sm-4">
@@ -104,21 +131,21 @@
                                             Places restantes : {{ ($nbPlacesMaxi - $nbPlacePrises) }} /{{ $nbPlacesMaxi }}<br>
                                             <button class="btn btn-primary">Reserver</button>
                                             <button class="btn btn-warning">Poser une question</button>
-                                        </div>                            
-                                    
+                                        </div>
                                     </div>
-                    
-
                                 </div> 
                             </div>
-                            @endforeach
-                            <!-- no results found -->
-                            <div class="jplist-no-results">
-                                <p>No results found</p>
-                            </div>
                         </div>
+                        @endforeach
                     </div>
+                    
+                    <!-- no results found -->
+                    <div class="jplist-no-results">
+                        <p>No results found</p>
+                    </div>
+
                 </div>
+            </div>
 
         @if ( count($trajets) > 0)
           {{--*/ $moyTps  = ( $tps  / count($trajets) ) /*--}}

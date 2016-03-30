@@ -31,6 +31,8 @@ elixir(function(mix) {
      mix.copy('resources/assets/js/jplist.core.min.js',                        'public/js/jplist.core.min.js' );
      mix.copy('resources/assets/js/jplist.bootstrap-pagination-bundle.min.js', 'public/js/jplist.bootstrap-pagination-bundle.min.js' );
      mix.copy('resources/assets/js/activerJpList.js',                          'public/js/activerJpList.js' );
+     mix.copy('resources/assets/js/jplist.filter-toggle-bundle.min.js',        'public/js/jplist.filter-toggle-bundle.min.js' );
+     mix.copy('resources/assets/js/jplist.jquery-ui-bundle.min.js',            'public/js/jplist.jquery-ui-bundle.min.js' );
 
 });
 

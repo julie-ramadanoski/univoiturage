@@ -46,30 +46,14 @@ html, body {
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
   background: #16a085; }
 
+#preferences {
+  background-color: rgba(46, 204, 113, 0.3); }
 
-.preferences {
-	background-color:rgba(46, 204, 113,0.3);
-}
-
-a.active {
-	color:#fff;
-	background-color: #337ab7;
-}
-
-.preferences p {
-	color:white;
-	font-size: 1.3em;
-	background:rgba(26, 188, 156,1.0);
-	text-align:center;
-}
-
-.preferences img{
-	display: block;
-	width : 200px;
-	height : 200px;
-	margin : 0 auto;
-	padding : 10px;
-}
+#preferences p {
+  color: white;
+  font-size: 1.3em;
+  background: #1abc9c;
+  text-align: center; }
 
 #site {
   width: 100%; }
