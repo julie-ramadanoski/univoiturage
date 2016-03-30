@@ -12,22 +12,14 @@
         <link href="/css/ui-autocomplete.css" rel="stylesheet" type="text/css">
 
         <script src="{{ URL::asset('assets/js/biblio.js') }}"></script>
-        <script src="{{ URL::asset('assets/js/step.class.js') }}"></script>
-        <script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
-        <script src="{{ URL::asset('assets/js/script.js') }}"></script>
-                
-                <!-- Chargement des css globaux -->
         
-
         <!-- Chargement des JS globaux -->
-        <script src="/js/biblio.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="http://codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
 
         <script src="/js/moment.min.js" ></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
-      
     </head>
     </head>
     <body>  
@@ -41,7 +33,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="#">Car à fond</a>
+                    <a class="navbar-brand" href="/">Car à fond</a>
 
                 </div>
                 <div class="collapse navbar-collapse" id="navbar">

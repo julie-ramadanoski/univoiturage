@@ -4087,4 +4087,6 @@ INSERT INTO `ville` (`inseeVille`, `nomVille`, `codePostalVille`, `latitudeVille
 (13005, 'Aubagne', '13400', '43.2927600', '5.5706700'),
 (13028, 'La Ciotat', '13600', '43.1761', '5.60806'),
 (13921, 'Puyricard', '13540', '43.5833', '5.4167'),
-(13103, 'Salon-de-provence', '13300', '43.6333', '5.1');
+(13103, 'Salon-de-provence', '13300', '43.6333', '5.1'),
+(75056, 'Paris', '75000', '48.866667', '2.333333')
+;
