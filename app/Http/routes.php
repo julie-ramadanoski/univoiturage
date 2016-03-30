@@ -42,7 +42,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/profil', ['uses'=>'ProfilController@show']); 
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
-	
+	Route::post('/reservation', ['uses'=>'ReservationController@show']);
 });
 
 Route::any('/autocompleteVille', function(){
