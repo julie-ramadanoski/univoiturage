@@ -4,9 +4,8 @@
 
 <div class="container">
     <div class="content">
-        <div class="title">Car à fond</div>
-			
-			
+			<img src="..\public\images\logo.png" alt="caràfond" style="width:35%; margin-left:auto; margin-right:auto; display:block;"/>
+			 
 			@if ( $errors->has() )
 			    <div class="alert alert-danger">			        
 			        <p>Veuillez remplir les champs</p>			           			        
@@ -36,9 +35,9 @@
 				
 				{!! BootForm::submit('Rechercher') !!}
 			{!! BootForm::close() !!}
-			
     </div>
 </div>
+@include('recherche.informations.informations')
 @endsection
 
 	

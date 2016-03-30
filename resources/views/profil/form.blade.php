@@ -4,6 +4,11 @@
 
 <div class="container">
     <div class="content">
+    		<ul class="nav nav-pills">
+			  <li role="presentation"><a id="info_perso" href="#" onclick="nav(this);return false;" class="active">Informations Personnelles</a></li>
+			  <li role="presentation"><a id="photo_perso" href="#" onclick="nav(this);return false;">Photo</a></li>
+			  <li role="presentation"><a id="pref_perso" href="#" onclick="nav(this);return false;">Préférences</a></li>
+			</ul>
 			@if ( $errors->has() )
 			    <div class="alert alert-danger">			        
 			        <p>Veuillez remplir les champs</p>			           			        
@@ -12,7 +17,7 @@
 	       	{!! BootForm::openHorizontal($columnSizes)->attribute('onsubmit','return submitForm(this)')->post()->action('/profil') !!}
 			<!-- onsubmit="return submitForm(this) -->
 			<!-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/profil') }}" onsubmit="return submitForm()"> -->
-	        <div id="preferences">
+	        <div class="preferences" id="info">
 	        	<p> Infos personnelles </p>
 	        	<div class="form-group">
 		        	 <label for="name" class="control-label col-md-2">Genre</label>
@@ -61,50 +66,71 @@
 				    </div>
 				</div>		
 			</div>
-			<div id="photo">
-				
+			<div class="preferences" id="photo" style='display:none'>
+				<p> Photo </p>
+				<img src="{!!auth()->user()->photoMemb!!}" alt="URL non valide">
+				<div class="form-group">
+				    	<label for="urlphoto" class="control-label col-md-2">Url d'une photo</label>
+				    <div class="col-md-10">
+				        <input type="text" name="urlphoto" value="{!!auth()->user()->photoMemb!!}" class="form-control">
+				    </div>
+				</div>	
 			</div>
-			<div id="preferences">
+			<div class="preferences" id="pref" style='display:none'>
 				<p> Préférences </p>
 				<div class="form-group">
-				    <label for="pref0" class="control-label col-md-2">Tu parles</label>
+				    <label for="pref0" class="control-label col-md-2">Aimez vous discuter?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref0" value="11" required @if (preg_match("/11[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> Beaucoup<br>
-				    	<input type="radio" name="pref0" value="12" @if (preg_match("/12[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> Un peu<br>
-				    	<input type="radio" name="pref0" value="13" @if (preg_match("/13[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> Pas du tout
+				    	<input type="radio" name="pref0" value="11" required @if (preg_match("/11[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-1.png') }}"/>
+				    	<input type="radio" name="pref0" value="12" @if (preg_match("/12[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-2.png') }}"/>
+				    	<input type="radio" name="pref0" value="13" @if (preg_match("/13[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-3.png') }}"/>
 				    </div>
 				</div>	
 				<div class="form-group">
-				    <label for="pref1" class="control-label col-md-2">Tu Fumes</label>
+				    <label for="pref1" class="control-label col-md-2">Acceptez vous de fumer en voiture?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref1" value="21" required @if (preg_match("/[0-9]{2}21[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> Beaucoup<br>
-				    	<input type="radio" name="pref1" value="22" @if (preg_match("/[0-9]{2}22[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> Un peu<br>
-				    	<input type="radio" name="pref1" value="23" @if (preg_match("/[0-9]{2}23[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> Pas du tout
+				    	<input type="radio" name="pref1" value="21" required @if (preg_match("/[0-9]{2}21[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-4.png') }}"/>
+				    	<input type="radio" name="pref1" value="22" @if (preg_match("/[0-9]{2}22[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-5.png') }}"/>
+				    	<input type="radio" name="pref1" value="23" @if (preg_match("/[0-9]{2}23[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-6.png') }}"/>
 				    </div>
 				</div>
 				<div class="form-group">
-				    <label for="pref2" class="control-label col-md-2">Tu écoutes de la musique</label>
+				    <label for="pref2" class="control-label col-md-2">Aimez vous la musique?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref2" value="31" required @if (preg_match("/[0-9]{4}31[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> Beaucoup<br>
-				    	<input type="radio" name="pref2" value="32" @if (preg_match("/[0-9]{4}32[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> Ca dépend quoi<br>
-				    	<input type="radio" name="pref2" value="33" @if (preg_match("/[0-9]{4}33[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> Pas du tout
+				    	<input type="radio" name="pref2" value="31" required @if (preg_match("/[0-9]{4}31[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-7.png') }}"/>
+				    	<input type="radio" name="pref2" value="32" @if (preg_match("/[0-9]{4}32[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-8.png') }}"/>
+				    	<input type="radio" name="pref2" value="33" @if (preg_match("/[0-9]{4}33[0-9]{2}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-9.png') }}"/>
 				    </div>
 				</div>
 				<div class="form-group">
-				    <label for="pref3" class="control-label col-md-2">Tolères tu les animaux ?</label>
+				    <label for="pref3" class="control-label col-md-2">Acceptez vous les animaux?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref3" value="41" required @if (preg_match("/[0-9]{6}41/", auth()->user()->prefMemb) == 1) checked @endif> Oui<br>
-				    	<input type="radio" name="pref3" value="42" @if (preg_match("/[0-9]{6}42/", auth()->user()->prefMemb) == 1) checked @endif> Ca dépend lesquels<br>
-				    	<input type="radio" name="pref3" value="43" @if (preg_match("/[0-9]{6}43/", auth()->user()->prefMemb) == 1) checked @endif> Non
+				    	<input type="radio" name="pref3" value="41" required @if (preg_match("/[0-9]{6}41/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-10.png') }}"/>
+				    	<input type="radio" name="pref3" value="42" @if (preg_match("/[0-9]{6}42/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-11.png') }}"/>
+				    	<input type="radio" name="pref3" value="43" @if (preg_match("/[0-9]{6}43/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-12.png') }}"/>
 				    </div>
 				</div>
 				<input type='hidden' name='prefMemb'>
 			</div>
 			<!--{!! BootForm::submit('Submit') !!}
 			{!! BootForm::close() !!}-->
-			 <button type="submit" class="btn btn-success">Envoyez</button>
+			 <button type="submit" class="btn btn-success" id="envoyerf">Envoyez</button>
 			</form> 
 			<script type="text/javascript">
+			function nav(a){
+				var id1 = a.id;
+				document.getElementById('info_perso').className = "";
+				document.getElementById('photo_perso').className = "";
+				document.getElementById('pref_perso').className = "";
+				document.getElementById(id1).className = "active";
+
+				var id2 = id1.split("_")[0];
+				document.getElementById('info').style.display = "none";
+				document.getElementById('photo').style.display = "none";
+				document.getElementById('pref').style.display = "none";
+				document.getElementById(id2).style.display = "block";
+			}
+
             function submitForm(){
             	var res = "";
             	var pref0 = document.getElementsByName("pref0");
