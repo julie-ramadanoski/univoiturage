@@ -21,5 +21,25 @@ class MarqueTableSeeder extends Seeder
 			'idMarq'=>2,
 			'nomMarq'=>'Honda'
 		] );
+
+        Marque::create( [
+            'idMarq'=>3,
+            'nomMarq'=>'Peugeot'
+        ] );
+
+        Marque::create( [
+            'idMarq'=>4,
+            'nomMarq'=>'Citroën'
+        ] );
+
+        Marque::create( [
+            'idMarq'=>5,
+            'nomMarq'=>'Audi'
+        ] );
+
+        Marque::create( [
+            'idMarq'=>6,
+            'nomMarq'=>'BMW'
+        ] );
     }
 }
