@@ -60,4 +60,15 @@ class RechercheController extends Controller
         return view('recherche.resultats', compact('trajets','recherche'));
         
     }
+     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function commentcamarche(Request $request)
+    {
+        return view('recherche.commentcamarche');
+        
+    }
+    
 }

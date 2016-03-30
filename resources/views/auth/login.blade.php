@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-8 col-md-offset-2"  style="margin-bottom:200px">
 			<div class="panel panel-default">
 				<div class="panel-heading">Connexion</div>
-				<div class="panel-body">
+				<div class="panel-body" >
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Oops!</strong> Vos informations ci-dessous sont inexactes. Veuillez les vérifier.<br><br>
@@ -17,7 +17,7 @@
 							</ul>
 						</div>
 					@endif
-					<a class="btn btn-info" href="facebook" role="button">Connexion par Facebook</a>
+					<a class="btn btn-info" href="facebook" role="button" style="float: right;">Connexion par Facebook</a>
 
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">

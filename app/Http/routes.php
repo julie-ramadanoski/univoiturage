@@ -173,3 +173,6 @@ Route::group(['middleware' => ['web', 'auth', 'admin']], function () {
 	Route::any('back/site/add','SiteController@add');
 });
 
+
+Route::get('/commentcamarche', 'RechercheController@commentcamarche');
+
