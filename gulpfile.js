@@ -20,4 +20,6 @@ elixir(function(mix) {
     mix.copy('resources/assets/js/bootstrap-datetimepicker.js', 'public/js/bootstrap-datepicker.js');
     mix.copy('resources/assets/js/script.js', 'public/js/script.js' );
     mix.copy('resources/assets/js/script2.js', 'public/js/script2.js' );
+    mix.copy('resources/assets/js/autocompleteVille.class.js', 'public/js/autocompleteVille.class.js' );
+    mix.copy('resources/assets/js/biblio.js', 'public/js/biblio.js' );
 });

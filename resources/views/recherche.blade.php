@@ -11,7 +11,7 @@
         <link href="/css/datepicker.css" rel="stylesheet" type="text/css">
         <link href="/css/ui-autocomplete.css" rel="stylesheet" type="text/css">
 
-        <script src="{{ URL::asset('assets/js/biblio.js') }}"></script>
+        <script src="{{ URL::asset('/js/biblio.js') }}"></script>
         
         <!-- Chargement des JS globaux -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -20,6 +20,11 @@
 
         <script src="/js/moment.min.js" ></script>
         <script src="/js/bootstrap-datepicker.js" ></script>
+        <style>
+            li.active{
+                background-color : red;
+            }
+        </style>
     </head>
     </head>
     <body>  

@@ -32,6 +32,9 @@ init = function(event){
 	linkVarToInput(trajet,	"end",		_id("to"),			updateTrajet	);
 	linkVarToInput(trajet,	"highway",	_id("highway"),	updateTrajet	);
 
+	/* test */
+	autocomplete = new AutocompleteVille(_id("from"));
+
 	$("#goDate").datepicker();
 	$("#backDate").datepicker();
 

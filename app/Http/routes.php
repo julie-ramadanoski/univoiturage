@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/profil', ['uses'=>'ProfilController@show']); 
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
+	Route::any('trajet/addTrajet', ['as'=>'creationTrajet','uses'=>'TrajetController@creationTrajet']);
 });
 
 Route::any('/autocompleteVille', function(){
@@ -95,12 +96,21 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 
 /* Florian G. */
 /* Routes en rapport avec les ajouts de trajets */
+Route::group(['prefix' => 'trajet'],function(){
+	Route::get('itineraire', ['as'=>'itineraireG','uses'=>'TrajetController@getItineraire']);
+	Route::post('itineraire', ['as'=>'itineraireP','uses'=>'TrajetController@postItineraire']);
+
+	Route::get('details', ['as'=>'detailsG','uses'=>'TrajetController@getDetails']);
+	Route::post('details', ['as'=>'detailsP','uses'=>'TrajetController@postDetails']);
+});
+
+
 Route::any('trajet/add', 'TrajetController@getView');
 Route::any('trajet/addDetails', 'TrajetController@getView2'); 
-Route::any('trajet/addTrajet', 'TrajetController@addTrajet');
+Route::any('trajet/show/{id}', ['as'=>'showTrajet','uses' => 'TrajetController@show']);
 
 // Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@getLogin']);
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@logout');
 
