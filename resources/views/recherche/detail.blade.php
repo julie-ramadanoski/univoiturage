@@ -118,13 +118,23 @@
 	        	<div class="col-md-7">
 					<div id="video">
 	        			<p id="titre">Questions pour le conducteur</p>
+	        			@foreach($trajet->questions as $question)
+	        				<p>demande :<em>{{ $question->libQuest }}</em></p>
+	        				@if($question->repQuest == null)
+	        					Pas encore de reponse
+	        				@else
+								<p>réponse : <em>{{ $question->repQuest }}</em></p>
+	        				@endif
+	        			@endforeach
 					
 						<p id="texte">
-							<div class = "form-group">
-						      <textarea class = "form-control" placeholder="Poser une question à {{ $trajet->user->pseudoMemb }}" rows="5"></textarea>
-							  <input type="button" class="btn btn-primary" value="Poser ma question"/>
-						   </div>
-							
+							<form  method="post" action="/recherche/{{$trajet->idTraj}}/question">
+								<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+								<div class = "form-group">
+							      <textarea class="form-control" name="question" placeholder="Poser une question à {{ $trajet->user->pseudoMemb }}" rows="5"></textarea>
+								  <button type="submit" class="btn btn-primary" >Poser ma question</button>
+							    </div>
+							</form>
 						   Vous aurez le numéro du conducteur après avoir réservé en ligne
 						</p>
 		    		</div>
