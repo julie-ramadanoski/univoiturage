@@ -189,7 +189,10 @@ class EtapeTrajetTableSeeder extends Seeder
 		Etapetrajet::create( ['idEtape'=>28, 'idTraj'=>8, 'numOrdreEtapeTrajet'=>2,	'distEtapeTrajet'=>120, 'prixEtapeTrajet'=>'25', 'dureeEtapeTrajet'=>'200', 'placePrisesEtapeTrajet'=>0] );
 		Etapetrajet::create( ['idEtape'=>29, 'idTraj'=>8, 'numOrdreEtapeTrajet'=>3,	'distEtapeTrajet'=>30, 'prixEtapeTrajet'=>'7', 'dureeEtapeTrajet'=>'30', 'placePrisesEtapeTrajet'=>1] );
 
-			
+		Etapetrajet::create( ['idEtape'=>24, 'idTraj'=>9, 'numOrdreEtapeTrajet'=>1,	'distEtapeTrajet'=>0, 'prixEtapeTrajet'=>'0', 'dureeEtapeTrajet'=>'0', 'placePrisesEtapeTrajet'=>1] );
+		Etapetrajet::create( ['idEtape'=>25, 'idTraj'=>9, 'numOrdreEtapeTrajet'=>2,	'distEtapeTrajet'=>80, 'prixEtapeTrajet'=>'15', 'dureeEtapeTrajet'=>'80', 'placePrisesEtapeTrajet'=>1] );
+		Etapetrajet::create( ['idEtape'=>26, 'idTraj'=>9, 'numOrdreEtapeTrajet'=>3,	'distEtapeTrajet'=>40, 'prixEtapeTrajet'=>'5', 'dureeEtapeTrajet'=>'35', 'placePrisesEtapeTrajet'=>0] );
+	
 
 
     }

@@ -122,5 +122,27 @@ class UserTableSeeder extends Seeder
             'password'=>bcrypt('secret'),
             'idSite'=>2
         ] );
+        User::create( [
+            'id'=>6,
+            'name'=>'rama',
+            'prenomMemb'=>'julie',
+            'email'=>'crossfiteuse@gmail.com',
+            'telMobMemb'=>'0600800040',
+            'sexeMemb'=>1,
+            'anNaisMemb'=>1945,
+            'pseudoMemb'=>'jenelius',
+            'presentMemb'=>'Une vieille dame',
+            'prefMemb'=>12223242,
+            'casqueMemb'=>1,
+            'photoMemb'=>'https://yt3.ggpht.com/-vKmyKWf40Qc/AAAAAAAAAAI/AAAAAAAAAAA/2tdHP15kUG8/s48-c-k-no/photo.jpg',
+            'photoValidMemb'=>0,
+            'nbAvisC'=>0,
+            'nbAvisV'=>16,
+            'totAvisC'=>0,
+            'totAvisM'=>16,
+            'nbInscrit'=>0,
+            'password'=>bcrypt('secret'),
+            'idSite'=>5
+        ] );
     }
 }

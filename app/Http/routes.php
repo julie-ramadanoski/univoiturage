@@ -30,6 +30,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as'=>'home', 'uses'=>'RechercheController@home']);
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
 	Route::get('/recherche/{id}', ['as'=>'detailRecherche', 'uses'=>'RechercheController@detail']);
+
+	Route::post('/recherche/{idTraj}/question', ['as'=>'storeQuestion', 'uses'=>'QuestionController@store']);
+	Route::delete('/question/{id}', ['as'=>'deleteQuestion', 'uses'=>'QuestionController@destroy']);
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
