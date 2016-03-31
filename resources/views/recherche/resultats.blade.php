@@ -8,9 +8,9 @@
 
         <!-- Filtre de recherche -->
         <link href="{{ URL::asset('/css/jplist.core.min.css') }}"               rel="stylesheet" type="text/css">
-       <link href="{{ URL::asset('/css/jplist.bootstrap.min.css') }}"          rel="stylesheet" type="text/css">
-       <!--  <link href="{{ URL::asset('/css/jplist.checkbox-dropdown.min.css') }}"  rel="stylesheet" type="text/css"> -->
-       <link rel="stylesheet" href="{{ URL::asset('/css/jplist-jquery-ui-bundle.min.css') }}" />
+       <!--<link href="{{ URL::asset('/css/jplist.bootstrap.min.css') }}"          rel="stylesheet" type="text/css">
+         <link href="{{ URL::asset('/css/jplist.checkbox-dropdown.min.css') }}"  rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="{{ URL::asset('/css/jplist-jquery-ui-bundle.min.css') }}" />-->
        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> 
 
         <script src="{{ URL::asset('/js/jplist.core.min.js') }}"                        type="text/javascript"></script>
@@ -41,7 +41,12 @@
                         <div class="input-group">
                             <!-- likes range slider -->
                             <!-- likesSlider and likesValues are user function defined in jQuery.fn.jplist.settings -->
-                            
+                            <!-- ios button: show/hide panel -->
+                            <div class="jplist-ios-button">
+                                <i class="fa fa-sort"></i>
+                                jPList Actions
+                            </div>
+                        
                             <div 
                                 class="jplist-range-slider"
                                 data-control-type="range-slider" 
@@ -63,7 +68,7 @@
                                      data-control-type="button-filter"
                                      data-control-action="filter"
                                      data-control-name="femme-btn" 
-                                     data-path=".sexe[genre='1']"
+                                     data-path=".sexe[genre='0']"
                                      data-selected="true">
                                      <i class="fa fa-venus"></i>
                                      Femme
@@ -74,7 +79,7 @@
                                      data-control-type="button-filter"
                                      data-control-action="filter"
                                      data-control-name="homme-btn" 
-                                     data-path=".sexe[genre='0']"
+                                     data-path=".sexe[genre='1']"
                                         <i class="fa fa-mars "></i>
                                     Homme
                                 </button>  
@@ -203,8 +208,8 @@
                                         <p class="sexe" genre="{{ $trajet->user->sexeMemb }}">age {{{ $trajet->user->ageMemb or 'inconnu' }}} </p>
                                         <p>level {{ $trajet->user->totAvisM or 'innonnu' }}</p>
                                         
-                                        @for ($i = 0; $i < 3 ; $i++)                                
-                                            <img src="images/pref_{{ substr($trajet->user->prefMemb,$i, 1 ) }}.png" alt="préférence conducteur,">
+                                         @for ($i = 0; $i < 8 ; $i=$i+2)                                
+                                            <img src="{{ URL::asset('images/pref-'.substr($trajet->user->prefMemb,$i, 2)) }}.png" alt="préférence conducteur,">
                                         @endfor 
 
                                     </div>
