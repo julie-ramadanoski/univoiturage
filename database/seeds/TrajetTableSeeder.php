@@ -171,7 +171,24 @@ class TrajetTableSeeder extends Seeder
 		'listeInseeEtapeTrajet'=>NULL,
 		'listeDistEtapeTrajet'=>NULL
 		] );
-
+		Trajet::create( [
+		'idTraj'=>9,
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'5',
+		'nbPlacesTraj'=>3,
+		'tarifTraj'=>'10',
+		'autoRoutTraj'=>1,
+		'detoursTraj'=>5,
+		'depaDecTraj'=>NULL,
+		'bagageTraj'=>NULL,
+		'infoTraj'=>'Mon super voyage',
+		'distTraj'=>NULL,
+		'dureeTraj'=>NULL,
+		'idMemb'=>6,
+		'idVeh'=>3,
+		'listeInseeEtapeTrajet'=>NULL,
+		'listeDistEtapeTrajet'=>NULL
+		] );
 
     }
 }
