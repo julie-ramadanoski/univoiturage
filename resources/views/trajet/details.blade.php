@@ -1,24 +1,6 @@
 @extends('recherche')
 
 @section('content')
-	<script>
-		trajet = {
-			from : "{{$data['from']}}",
-			to : "{{$data['to']}}",
-			steps : [],
-			highway : 
-			@if(isset($data['highway'])) 
-				true
-			@else
-				false
-			@endif
-
-		}
-
-		@foreach($data['steps'] as $step)
-			trajet.steps.push("{{$step}}");
-		@endforeach
-	</script>
 	<script src="{{ URL::asset('/js/script2.js') }}"></script>
 	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
 	<script>
@@ -32,7 +14,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-6">
-				<form class="form-horizontal" name="formulaire" id="form" action="addTrajet" method="post">
+				<form class="form-horizontal" name="formulaire" id="form" action="{{ url('/trajet/details') }}" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					
 					<h3> Participation </h3>
@@ -48,20 +30,12 @@
 						<hr>
 						<div class="ligneStep">
 							{{$ligneSteps[0]["from"]}} -> {{$ligneSteps[count($ligneSteps)-1]["to"]}}
-							<input type="number" value="{{$tmp[0]}}" name="totalPrice" min="0" max="{{$tmp[0]}}">
+							<input type="number" value="0" name="totalPrice" min="0" max="0">
 						</div>
 					</div>
-					{{--*/
-						$nbPlaces = 1;
-						$max = 1;
-						if($data["car"]=="on"){
-							$nbPlaces = 3;
-							$max = 8;
-						}
-					/*--}}
 					<h3>
 						Nombre de places proposées : 
-						<input type="number" name="availablePlaces" min="1" value="{{$nbPlaces}}" max="{{$max}}">
+						<input type="number" name="availablePlaces" min="1" value="3" max="{{$datas['maxPlaces']}}">
 					</h3>
 					<h3>Détails du voyage</h3>
 					<textarea name="description"></textarea><br>
@@ -109,17 +83,17 @@
 			<div class="col-xs-12 col-sm-12 col-md-6">
 				<div id="map" style="width:400px;height:400px"></div>
 				<p>
-					{{$data['from']}}
+					{{$ligneSteps[0]['from']}}
 					->
-					{{$data['to']}}
-					@if(isset($data['highway'])) 
+					{{$ligneSteps[count($ligneSteps) - 1]['to']}}
+					@if($datas['highway'] != null)
 						<img src="highway.png">
 					@endif
 				</p>
-				<p>Aller : <span id="date"></span></p>
-				<p>Distance : <span id="distance"></span></p>
-				<p>Durée estimée :<span id="duree"></span></p>
-				<p>Emission CO2 : <span id="co"></span></p>
+				<p>Aller : <span id="date">{{$datas['date']->format('Y-m-d')}}</span></p>
+				<p>Distance : <span id="distance">{{$datas['distance']/1000}} km</span></p>
+				<p>Durée estimée :<span id="duree">{{$datas['duree']}} s</span></p>
+				<p>Emission CO2 : <span id="co">{{8 * 2.662 * $datas['distance']}} kg</span></p>
 			</div>
 		</div>
 	</div>
