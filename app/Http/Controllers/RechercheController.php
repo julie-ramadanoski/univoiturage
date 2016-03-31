@@ -13,7 +13,21 @@ use DateTime;
 
 class RechercheController extends Controller
 {
-    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    {
+        $columnSizes = [
+                  'sm' => [4, 8],
+                  'lg' => [2, 10]
+                ];
+
+        return view('recherche.form', compact('columnSizes')); 
+    }
     /**
      * Display the specified resource.
      *
@@ -69,6 +83,20 @@ class RechercheController extends Controller
     {
         return view('recherche.commentcamarche');
         
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $trajet = new Trajet;
+        $trajet = $trajet->with('user', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
+                         ->where('idTraj', $id)
+                         ->first();
+
+        return view('recherche.detail',compact('trajet'));
     }
     
 }

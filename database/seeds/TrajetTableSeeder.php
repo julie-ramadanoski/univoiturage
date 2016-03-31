@@ -16,7 +16,7 @@ class TrajetTableSeeder extends Seeder
     {
         Trajet::create( [
 		'idTraj'=>1,
-		'dateTraj'=>'2016-01-17',
+		'dateTraj'=>'2016-03-31',
 		'heureTraj'=>'20h',
 		'nbPlacesTraj'=>3,
 		'tarifTraj'=>'4',
@@ -37,8 +37,8 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>2,
-		'dateTraj'=>'2016-01-17',
-		'heureTraj'=>'22h',
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'22',
 		'nbPlacesTraj'=>1,
 		'tarifTraj'=>'0',
 		'autoRoutTraj'=>0,
@@ -58,8 +58,8 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>3,
-		'dateTraj'=>'2016-01-18',
-		'heureTraj'=>'08h',
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'08',
 		'nbPlacesTraj'=>4,
 		'tarifTraj'=>'0',
 		'autoRoutTraj'=>1,
@@ -79,7 +79,7 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>4,
-		'dateTraj'=>'2016-01-18',
+		'dateTraj'=>'2016-03-31',
 		'heureTraj'=>'10',
 		'nbPlacesTraj'=>1,
 		'tarifTraj'=>'60',
@@ -95,5 +95,83 @@ class TrajetTableSeeder extends Seeder
 		'listeInseeEtapeTrajet'=>NULL,
 		'listeDistEtapeTrajet'=>NULL
 		] );
+
+		Trajet::create( [
+		'idTraj'=>5,
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'8',
+		'nbPlacesTraj'=>1,
+		'tarifTraj'=>'15',
+		'autoRoutTraj'=>0,
+		'detoursTraj'=>5,
+		'depaDecTraj'=>NULL,
+		'bagageTraj'=>NULL,
+		'infoTraj'=>'Par le col de Cabre',
+		'distTraj'=>NULL,
+		'dureeTraj'=>NULL,
+		'idMemb'=>1,
+		'idVeh'=>1,
+		'listeInseeEtapeTrajet'=>NULL,
+		'listeDistEtapeTrajet'=>NULL
+		] );
+
+		Trajet::create( [
+		'idTraj'=>6,
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'18',
+		'nbPlacesTraj'=>1,
+		'tarifTraj'=>'70',
+		'autoRoutTraj'=>1,
+		'detoursTraj'=>5,
+		'depaDecTraj'=>NULL,
+		'bagageTraj'=>NULL,
+		'infoTraj'=>'Road trip',
+		'distTraj'=>NULL,
+		'dureeTraj'=>NULL,
+		'idMemb'=>2,
+		'idVeh'=>2,
+		'listeInseeEtapeTrajet'=>NULL,
+		'listeDistEtapeTrajet'=>NULL
+		] );
+
+		Trajet::create( [
+		'idTraj'=>7,
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'15',
+		'nbPlacesTraj'=>4,
+		'tarifTraj'=>'10',
+		'autoRoutTraj'=>1,
+		'detoursTraj'=>10,
+		'depaDecTraj'=>NULL,
+		'bagageTraj'=>NULL,
+		'infoTraj'=>'Road trip',
+		'distTraj'=>NULL,
+		'dureeTraj'=>NULL,
+		'idMemb'=>3,
+		'idVeh'=>3,
+		'listeInseeEtapeTrajet'=>NULL,
+		'listeDistEtapeTrajet'=>NULL
+		] );
+		
+		Trajet::create( [
+		'idTraj'=>8,
+		'dateTraj'=>'2016-03-31',
+		'heureTraj'=>'9',
+		'nbPlacesTraj'=>1,
+		'tarifTraj'=>'20',
+		'autoRoutTraj'=>1,
+		'detoursTraj'=>10,
+		'depaDecTraj'=>NULL,
+		'bagageTraj'=>NULL,
+		'infoTraj'=>'Road trip',
+		'distTraj'=>NULL,
+		'dureeTraj'=>NULL,
+		'idMemb'=>4,
+		'idVeh'=>4,
+		'listeInseeEtapeTrajet'=>NULL,
+		'listeDistEtapeTrajet'=>NULL
+		] );
+
+
     }
 }

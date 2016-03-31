@@ -27,16 +27,9 @@ use Illuminate\Support\Facades\Input;
 
 
 Route::group(['middleware' => ['web']], function () {
-	Route::get('/', ['as'=>'home', function () {   
-		
-		$columnSizes = [
-	              'sm' => [4, 8],
-	              'lg' => [2, 10]
-	            ];
-
-		return view('recherche.form', compact('columnSizes')); 
-	}]);
+	Route::get('/', ['as'=>'home', 'uses'=>'RechercheController@home']);
 	Route::post('/recherche', ['as'=>'listRecherche', 'uses'=>'RechercheController@show']);
+	Route::get('/recherche/{id}', ['as'=>'detailRecherche', 'uses'=>'RechercheController@detail']);
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
@@ -45,46 +38,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	
 });
 
-Route::any('/autocompleteVille', function(){
+Route::get('/autocomplete/ville/{univ?}', ['uses'=>'AutocompleteController@ville']);
+Route::get('/autocomplete/univ',  		 ['uses'=>'AutocompleteController@univ']);
+Route::get('/autocomplete/site',  		 ['uses'=>'AutocompleteController@site']);
 
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("site")->distinct('nomSite')->where('nomsite', 'like', $term.'%')->groupBy('nomSite')->take(10)->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( 'value' => $value->nomSite );
-	}
-
-	return Response::json($jsonArr);
-});
-
-Route::any('/autocompleteUniv', function(){
-
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("universite")->distinct('nomUniv', 'idUniv')->where('nomUniv', 'like', $term.'%')->groupBy('nomUniv')->take(10)->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( 'value' => $value->nomUniv );
-	}
-
-	return Response::json($jsonArr);
-});
-
-Route::any('/autocompleteSite', function(){
-
-	$term = Str::lower(Input::get('term'));
-	$data = DB::table("site")->distinct('nomSite', 'idSite')->where('nomSite', 'like', $term.'%')->groupBy('nomSite')->get();
-	$jsonArr = array();
-	
-	foreach ($data as $value) {
-		$jsonArr[]= array( $value->idSite => $value->nomSite );
-	}
-
-	return Response::json($jsonArr);
-});
-
-
+/**
+ * API pour application mobile
+ */
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
     Route::post('authenticate', 'AuthenticateController@authenticate');

@@ -78,5 +78,49 @@ class UserTableSeeder extends Seeder
             'password'=>bcrypt('secret'),
             'idSite'=>1
         ] );
+        User::create( [
+            'id'=>4,
+            'name'=>'zoefhij',
+            'prenomMemb'=>'MOEFZ',
+            'email'=>'zm@trucmail.com',
+            'telMobMemb'=>'0600870454',
+            'sexeMemb'=>1,
+            'anNaisMemb'=>1975,
+            'pseudoMemb'=>'Zoe',
+            'presentMemb'=>'Nana Cool',
+            'prefMemb'=>12223242,
+            'casqueMemb'=>1,
+            'photoMemb'=>'https://yt3.ggpht.com/-vKmyKWf40Qc/AAAAAAAAAAI/AAAAAAAAAAA/2tdHP15kUG8/s48-c-k-no/photo.jpg',
+            'photoValidMemb'=>0,
+            'nbAvisC'=>5,
+            'nbAvisV'=>1,
+            'totAvisC'=>20,
+            'totAvisM'=>4,
+            'nbInscrit'=>10,
+            'password'=>bcrypt('secret'),
+            'idSite'=>2
+        ] );
+        User::create( [
+            'id'=>5,
+            'name'=>'Piou',
+            'prenomMemb'=>'oiseau',
+            'email'=>'po@trucmail.com',
+            'telMobMemb'=>'0600800040',
+            'sexeMemb'=>1,
+            'anNaisMemb'=>1945,
+            'pseudoMemb'=>'Zoe',
+            'presentMemb'=>'Une vieille dame',
+            'prefMemb'=>12223242,
+            'casqueMemb'=>1,
+            'photoMemb'=>'https://yt3.ggpht.com/-vKmyKWf40Qc/AAAAAAAAAAI/AAAAAAAAAAA/2tdHP15kUG8/s48-c-k-no/photo.jpg',
+            'photoValidMemb'=>0,
+            'nbAvisC'=>0,
+            'nbAvisV'=>16,
+            'totAvisC'=>0,
+            'totAvisM'=>16,
+            'nbInscrit'=>0,
+            'password'=>bcrypt('secret'),
+            'idSite'=>2
+        ] );
     }
 }
