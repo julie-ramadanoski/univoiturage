@@ -22,28 +22,34 @@ class AutocompleteController extends Controller
 	public function ville(Request $request, $univ = null ){
 
 		$term = Str::lower(Input::get('term'));
+		$jsonArr = array();
 
-		// Récupérer l'identifiant de l'université		
-		$univ2 = Universite::where('nomUniv', $univ)->get();	
+		// Récupérer l'identifiant de l'université
+		if($univ != null) {
+			$univ2 = Universite::where('nomUniv', $univ)->get();	
+			
 		
-		$sites = DB::table("site")->distinct('nomSite')
+			$sites = DB::table("site")->distinct('nomSite')
 								 ->where('nomsite', 'like', $term.'%')
 								 ->where('idUniv', $univ2[0]->idUniv)
 								 ->groupBy('nomSite')
 								 ->take(10)
 								 ->get();
+
+			foreach ($sites as $value) {
+				$jsonArr[]= array( 'value' => $value->nomSite );
+			}
+		}
+		if($term != null) {
+			
 		$villes = DB::table("ville")->distinct('nomVille')
 								 ->where('nomVille', 'like', $term.'%')
 								 ->take(10)
 								 ->get();
 		
-		$jsonArr = array();
-		
-		foreach ($sites as $value) {
-			$jsonArr[]= array( 'value' => $value->nomSite );
-		}
-		foreach ($villes as $value) {
-			$jsonArr[]= array( 'value' => $value->nomVille );
+			foreach ($villes as $value) {
+				$jsonArr[]= array( 'value' => $value->nomVille );
+			}
 		}
 		
 		return Response::json($jsonArr);

@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="content">
-			<img src="..\public\images\logo.png" alt="caràfond" style="width:35%; margin-left:auto; margin-right:auto; display:block;"/>
+			<img src="{{ URL::asset('images/logo.png') }}" alt="caràfond" style="width:35%; margin-left:auto; margin-right:auto; display:block;"/>
 			 
 			@if ( $errors->has() )
 			    <div class="alert alert-danger">			        

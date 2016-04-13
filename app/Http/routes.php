@@ -51,10 +51,12 @@ Route::get('/autocomplete/site',  		 ['uses'=>'AutocompleteController@site']);
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
     Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/autocomplete/ville', 'AuthenticateController@getVille');
     Route::get('authenticate/user',	'AuthenticateController@getAuthenticatedUser');
     Route::get('authenticate/alertes/{depart?}', 'AuthenticateController@getAlertes');
     Route::post('authenticate/alertes', 'AuthenticateController@setAlertes');
     Route::post('authenticate/alertes/delete', 'AuthenticateController@delAlertes');
+    Route::get('authenticate/coord/{lat}/{lon}/{zoneKm}', 'AuthenticateController@getGeoloc');
 });
 
 /* Florian G. */
