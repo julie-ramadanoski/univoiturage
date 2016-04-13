@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use JWTAuth;
-use Request;
+use Illuminate\Http\Request;
 use DateTime;
 use App\User;
 use App\Ville;

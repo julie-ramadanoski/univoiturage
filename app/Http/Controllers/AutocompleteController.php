@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Response;
-use Request;
+use Illuminate\Http\Request;
 use App\Universite;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Controller;
