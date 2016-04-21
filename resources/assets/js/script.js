@@ -31,7 +31,13 @@ init = function(event){
 	linkVarToInput(trajet,	"start",	_id("from"),		updateTrajet	);
 	linkVarToInput(trajet,	"end",		_id("to"),			updateTrajet	);
 	linkVarToInput(trajet,	"highway",	_id("highway"),	updateTrajet	);
+<<<<<<< HEAD
 	linkVarToInput(trajet,	"roundTrip",	_id("round-trip"),	toggleBackDate	);
+=======
+
+	/* test */
+	//autocomplete = new AutocompleteVille(_id("from"));
+>>>>>>> 68eafa3090e9bf996279992babe876280f729e38
 
 	$("#goDate").datepicker();
 	$("#backDate").datepicker();
@@ -90,7 +96,10 @@ updateTrajet = function(){
 			region : 'FR',
 			avoidHighways : !trajet.highway //péage
 		};
+/*
 		var steps = document.getElementsByName("steps[]");
+*/
+		var steps = document.getElementsByClassName("inputStep");
 		if(steps.length > 0){
 			options.waypoints = [];
 			for(var i = 0; i<steps.length; i++){
@@ -129,9 +138,14 @@ addStepInput = function(){
 
 	var stepInput = _ce("input",inputGroup);
 	stepInput.type="text";
+/*
 	stepInput.className="form-control";
 	stepInput['aria-describedby']="sizing-addon2";
 	stepInput.name = "steps[]";
+*/
+	stepInput.className="form-control inputStep";
+	stepInput['aria-describedby']="sizing-addon2";
+	stepInput.name = "villes[]";
 
 	var buttonGroup = _ce("div",inputGroup);
 	buttonGroup.className = "input-group-btn";
@@ -162,7 +176,18 @@ addStepInput = function(){
 
 	var distanceInput = _ce("input",inputGroup);
 	distanceInput.type="hidden";
+/*
 	distanceInput.name="distance[]";
+*/
+	distanceInput.name="distances[]";
+
+	var dureeInput = _ce("input",inputGroup);
+	dureeInput.type="hidden";
+	dureeInput.name="durees[]";
+
+	var priceInput = _ce("input",inputGroup);
+	priceInput.type="hidden";
+	priceInput.name="prices[]";
 
 	Events.addEvent(btnDelete,"click",function(event){
 		var inputGroup = this.parentElement.parentElement;
@@ -196,6 +221,7 @@ addStepInput = function(){
 
 /* Fonction de maj des distances */
 updateDistances = function(legs){
+/*
 	var distanceInput = document.getElementsByName("distance[]"); //Tous les inputs distances, dans l'ordre du trajet
 	var distances = legs; //Toutes les distances, dans l'ordre du trajet
 
@@ -209,6 +235,31 @@ updateDistances = function(legs){
 	for(var i = 0; i<length; i++){
 		distanceInput[i].value = parseInt((distances[i].distance.value)/1000);
 	}
+*/
+	var distanceInputs = document.getElementsByName("distances[]"); //Tous les inputs distances, dans l'ordre du trajet
+	var dureeInputs = document.getElementsByName("durees[]"); 
+	var priceInputs = document.getElementsByName("prices[]"); 
+
+	var distances = legs; //Toutes les distances, dans l'ordre du trajet
+	console.log(distances);
+	var totalDistance = 0;
+	var totalDuree = 0;
+
+	//Pour chaque donnée
+	for(var i = 0; i<distances.length-1; i++){
+		distanceInputs[i+2].value = parseInt((distances[i].distance.value)/1000);
+		dureeInputs[i+2].value 	= parseInt((distances[i].duration.value));
+		priceInputs[i+2].value 	= parseInt((distances[i].distance.value)/1000*0.04);
+		totalDistance += distances[i].distance.value;
+		totalDuree += distances[i].duration.value;
+	}
+	distanceInputs[1].value = parseInt((distances[distances.length-1].distance.value)/1000);
+	dureeInputs[1].value 	= parseInt((distances[distances.length-1].duration.value));
+	priceInputs[1].value 	= parseInt((distances[distances.length-1].distance.value)/1000*0.04);
+	totalDistance += distances[distances.length-1].distance.value;
+	totalDuree += distances[distances.length-1].duration.value;
+	_n('totalDistance')[0].value = totalDistance;
+	_n('totalDuree')[0].value = totalDuree;
 };
 
 isNull = function(value){

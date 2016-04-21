@@ -5,45 +5,96 @@
         <title>Laravel</title>
         <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script src="../js/biblio.js"
-        <script>
-        	save = function(id){
-        		var value = this.parentElement.previousSibling.firstChild.value;
-        		Ajax._({
-        			
-        		}) 	
-        	}
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/app.css" rel="stylesheet" type="text/css">
+        <!-- Chargement des JS globaux -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="http://codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
 
-        	erase = function(id){
-
-        	}
-        </script>
+        <script src="/js/moment.min.js" ></script>
+        <script src="/js/bootstrap-datepicker.js" ></script>
+        <script src="../js/biblio.js"></script>
     </head>
 	<body>
-		<table>
-			<tr>
-				<td>ID</td>
-				<td>Nom de la marque</td>
-				<td>Enregistrer la ligne</td>
-				<td>Supprimer la ligne</td>
-			</tr>
-			@foreach($marques as $marque)
+		<nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Car à fond</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/marque') }}">Marques</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/modele') }}">Modeles</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/site') }}">Sites</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/universite') }}">Universites</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/vehicule') }}">Vehicules</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" id="proposer">
+                        <li><a href="{{ url('/back/ville') }}">Villes</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        @if(auth()->guest())
+                            @if(!Request::is('auth/login'))
+                                <li><a href="{{ url('/auth/login') }}">Se connecter</a></li>
+                            @endif
+                            @if(!Request::is('auth/register'))
+                                <li><a href="{{ url('/auth/register') }}">S'enregistrer</a></li>
+                            @endif
+                            <li><a href="">Comment ça marche?</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/auth/logout') }}">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="col-md-9">
+			<table>
 				<tr>
-					<td>{{$marque->idMarq}}</td>
-					<td><input type="text" value="{{$marque->nomMarq}}"></td>
-					<td><button type="button" onClick="save({{$marque->idMarq}})">SAUVEGARDER</button></td>
-					<td><button type="button" onClick="erase({{$marque->idMarq}})">EFFACER</button></td>
+				<p>Ajouter une entrée :</p>
+				<form action="{{url('back/marque/add')}}" method="post">
+					<td>0</td>
+					<td>
+					<input type="text" placeholder="Nom" name="nomMarq">
+					</td>
+					<td>
+					<input type="submit" value="ajouter">
+					</td>
+				</form>
+				</tr>	
+				@foreach($marques as $marque)
+				<tr>
+					<form action="{{url('back/marque/edit')}}" method="post">
+						<td class="id">
+							{{$marque->idMarq}}
+							<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">
+						</td>
+						<td class="marque">
+							<input type="text" value="{{$marque->nomMarq}}" name="nomMarq">
+						</td>
+						<td class="save">
+							<input type="submit" value="sauvegarder">
+						</td>
+						<td class="erase"><a href="marque/del/{{$marque->idMarq}}">EFFACER</a></td>
+					</form>
 				</tr>
-			@endforeach
-			<tr>
-				<td colspan="4">rajouter une ligne</td>
-			</tr>
-			<tr>
-				<td>{{$marque->idMarq +1}}</td>
-				<td><input type="text" value=""></td>
-				<td><button type="button" onClick="save({{$marque->idMarq}})">SAUVEGARDER</button></td>
-				<td><button type="button" onClick="erase({{$marque->idMarq}})">EFFACER</button></td>
-			</tr>
-		</table>
+				@endforeach
+			</table>
+		</div>
 	</body>
 </html>

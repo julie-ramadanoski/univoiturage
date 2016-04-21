@@ -40,6 +40,9 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
         ],
+        'admin' => [
+            \App\Http\Middleware\Admin::class,
+        ],
     ];
 
     /**
@@ -57,5 +60,6 @@ class Kernel extends HttpKernel
         'jwt.auth'   => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh'=> \Tymon\JWTAuth\Middleware\RefreshToken::class,
         'cors'       => \Barryvdh\Cors\HandleCors::class,
+        'authTrajet' => \App\Http\Middleware\AuthTrajet::class,
     ];
 }

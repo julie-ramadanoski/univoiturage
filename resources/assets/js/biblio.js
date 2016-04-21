@@ -152,6 +152,7 @@ Events = {
 				if (method=="get" || method=="GET" ) {data=(data=="")?"":"?"+data;req.open(method,url+data,true,username,password); req.send(null);}
 					else  if (method=="post" || method=="POST" ){req.open(method,url,true,username,password);req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");req.send(data);}
 			}
+			return req;
 		}
 	};		
 /******************************************************************************************************/
@@ -235,7 +236,15 @@ Events = {
 /******************************************************************************************************/		
 		_each = function(o,f){                            // f est une fonction Callback c a d une  fonction qui sera définie au moment de l'appel de la fonction _each
 				for (var i in o){f(i,o[i])}
-			};
+			}
+
+		generateKey = function(){
+			var res = "";
+			for(i = 0; i<10; i++){
+				res += String.fromCharCode(Math.random() * (91 - 65) + 65);
+			}
+			return res;
+		}
 		
 /******************************************************************************************************/
 /***********************  Extension de toutes les classes avec la methode extend  *********************/
