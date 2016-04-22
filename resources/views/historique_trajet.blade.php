@@ -44,7 +44,7 @@
                                             <img src="{{ URL::asset('images/pref-'.substr($trajet->user->prefMemb,$i, 2)) }}.png" alt="préférence conducteur,">
                                         @endfor 
                                         <p class="prix">{{ $trajet->tarifTraj or 0}} €</p>
-                                        <p><a href="{{ url('/recherche/'. $trajet->idTraj) }}"><button class="btn btn-primary">Détails</button></a></p>
+                                        <p><a href="{{ url('/recherche/'. $trajet->idTraj) }}"><button class="btn btn-primary">Annuler la Réservation</button></a></p>
                                     </div>
                                         
                                     <div class="col-xs-6 col-sm-4">
