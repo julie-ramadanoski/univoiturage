@@ -117,7 +117,7 @@ class TrajetTableSeeder extends Seeder
 
 		Trajet::create( [
 		'idTraj'=>6,
-		'dateTraj'=>'2016-03-31',
+		'dateTraj'=>'2016-04-30',
 		'heureTraj'=>'18',
 		'nbPlacesTraj'=>1,
 		'tarifTraj'=>'70',
