@@ -144,7 +144,7 @@
 	        		<div id="video">
 	        			<p id="titre">Conducteur</p>
 					
-						<p id="texte">
+						<p class="col-md-3" id="texte">
 							 <img src="{{ $trajet->user->photoMemb }}" alt="photo de profil" />
                                         
                                 <p>{{ $trajet->user->name }} {{ $trajet->user->prenomMemb }}</p>
@@ -155,6 +155,11 @@
                                     <img src="{{ URL::asset('images/pref-'.substr($trajet->user->prefMemb,$i, 2)) }}.png" alt="préférence conducteur,">
                                 @endfor 	
 						</p>
+						<div class="col-md-9">
+							<h4>Dernier avis sur le conducteur :</h4>
+							<b>{{$dernierAvis->avisCInscrit}}/5</b>
+							<em>{{$dernierAvis->commentaireCInscrit}}</em>
+						</div>
 	        		</div>
 		    	</div>
         	</div>

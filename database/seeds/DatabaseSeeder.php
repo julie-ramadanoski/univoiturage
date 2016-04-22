@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 	    $this->call(UserTableSeeder::class); 
 	    $this->call(VehiculeTableSeeder::class);
 	    $this->call(TrajetTableSeeder::class);
+	    $this->call(InscritTableSeeder::class);
 	    $this->call(EtapeTableSeeder::class);
 	    $this->call(AlerteTableSeeder::class);	
 	    $this->call(EtapeTrajetTableSeeder::class);

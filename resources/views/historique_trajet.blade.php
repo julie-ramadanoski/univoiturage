@@ -6,6 +6,14 @@
     <div class="content">
     		<div class="col-sm-12">
                     <div class="list">
+                    @if (count($trajets)==0)
+                         <div class="col-xs-12 col-sm-12">
+                        <h3 style="text-align: center">Auncune reservation.</h3>
+                        </div>
+                    @endif
+                    @if (isset($message))
+                        <h5 style="text-align: center; color:green">{{$message}}</h3>
+                    @endif
                     @foreach ($trajets as $key => $trajet)
                     <div class="list-item">
                         <div class="panel panel-primary">
@@ -48,13 +56,13 @@
                                         <p>Etapes :
                                             @for ($i = 0; $i < count($trajet->etapetrajets) ; $i++) 
                                             	@if (($reservations[$key]->etapeDepart->idEtape == $trajet->etapetrajets[$i]->etape->idEtape || $reservations[$key]->etapeArrivee->idEtape == $trajet->etapetrajets[$i]->etape->idEtape) && $i != count($trajet->etapetrajets)-1)
-                                            	<span> </span><b>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}</b> ->
+                                            	   <span> </span><b>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}</b> ->
                                             	@elseif (($reservations[$key]->etapeDepart->idEtape == $trajet->etapetrajets[$i]->etape->idEtape || $reservations[$key]->etapeArrivee->idEtape == $trajet->etapetrajets[$i]->etape->idEtape) && $i == count($trajet->etapetrajets)-1)
-                                            	<span> </span><b>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}</b>
+                                            	   <span> </span><b>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}</b>
                                                 @elseif ($i == count($trajet->etapetrajets)-1)
-                                                <span> </span>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}
+                                                    <span> </span>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }}
                                                 @else
-                                                <span> </span>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }} ->
+                                                    <span> </span>{{ $trajet->etapetrajets[$i]->etape->ville->nomVille }} ->
                                                 @endif
                                             @endfor
                                         </p>
@@ -71,6 +79,28 @@
                                     
                                     <div class="col-xs-12 col-sm-4">
                                         <h4>Déposer un avis sur le conducteur</h4>
+                                        <div class="input-group">
+                                            {!! BootForm::openHorizontal(['sm' => [4, 8],'lg' => [2, 10]])->attribute('onsubmit','return submitForm(this)')->post()->action('/reservations') !!}
+                                                <label class="radio-inline">
+                                                  <input type="radio" name="avisCInscrit" id="inlineRadio1" value="1"> 1
+                                                </label>
+                                                <label class="radio-inline">
+                                                  <input type="radio" name="avisCInscrit" id="inlineRadio2" value="2"> 2
+                                                </label>
+                                                <label class="radio-inline">
+                                                  <input type="radio" name="avisCInscrit" id="inlineRadio3" value="3"> 3
+                                                </label>
+                                                <label class="radio-inline">
+                                                  <input type="radio" name="avisCInscrit" id="inlineRadio4" value="4"> 4
+                                                </label>
+                                                <label class="radio-inline">
+                                                  <input type="radio" name="avisCInscrit" id="inlineRadio5" value="5"> 5
+                                                </label>
+                                                <input type="hidden" name="idTraj" value="{{$trajet->idTraj}}"></input>
+                                                <input type="text" class="form-control" style="display: block; margin-top: 10px;" name="commentaireCInscrit" placeholder="Laissez un commentaire ! :)">
+                                                <input class="btn btn-default" style="display: block; margin-top: 60px;" type="submit" value="Go!">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div> 
