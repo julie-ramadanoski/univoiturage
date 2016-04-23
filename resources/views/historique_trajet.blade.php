@@ -49,9 +49,13 @@
                                         
                                     <div class="col-xs-6 col-sm-4">
                                             
-                                        <p>Départ :{{ $trajet->etapetrajets[0]->etape->ville->nomVille }}</p>
-                                        <p class="hour">{{ $trajet->heureTraj }} H</p>
-                                        <p>autoroute : {{ $trajet->autoRoutTraj }}</p>
+                                        <p>Départ : {{ $trajet->etapetrajets[0]->etape->ville->nomVille }}</p>
+                                        <p class="hour">{{ $trajet->heureTraj }}</p>
+                                        @if ($trajet->autoRoutTraj == 1)
+                                        <p>autoroute : Oui</p>
+                                        @else
+                                        <p>autoroute : Non</p>
+                                        @endif
                                         <p>Arrivée : {{ $trajet->etapetrajets[count($trajet->etapetrajets)-1]->etape->ville->nomVille }}</p>
                                         <p>Etapes :
                                             @for ($i = 0; $i < count($trajet->etapetrajets) ; $i++) 

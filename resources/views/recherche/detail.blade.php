@@ -156,9 +156,11 @@
                                 @endfor 	
 						</p>
 						<div class="col-md-9">
-							<h4>Dernier avis sur le conducteur :</h4>
-							<b>{{$dernierAvis->avisCInscrit}}/5</b>
-							<em>{{$dernierAvis->commentaireCInscrit}}</em>
+							@if(isset($dernierAvis->avisCInscrit) && isset($dernierAvis->commentaireCInscrit))
+								<h4>Dernier avis sur le conducteur :</h4>
+								<b>{{$dernierAvis->avisCInscrit}}/5</b>
+								<em>{{$dernierAvis->commentaireCInscrit}}</em>
+							@endif
 						</div>
 	        		</div>
 		    	</div>

@@ -40,6 +40,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::post('/profil', ['uses'=>'ProfilController@update']);
 	Route::get('/reservations', ['uses'=>'Historique_ReservationController@show']); 
 	Route::post('/reservations', ['uses' => 'Historique_ReservationController@note']);
+	Route::get('/trajet', ['uses'=>'TrajetController@vosTrajet']); 
+	Route::post('/trajet', ['uses' => 'TrajetController@note']);
 	
 });
 
