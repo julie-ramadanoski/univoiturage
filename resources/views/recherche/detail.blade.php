@@ -4,6 +4,9 @@
 
 <div class="container">
     <div class="content">
+     @if (isset($message))
+                        <h5 style="text-align: center; color:green">{{$message}}</h3>
+                    @endif
         <div class="title">Detail du trajet </div>
 {{--*/ 
 
@@ -105,13 +108,19 @@
 	        			<p id="titre"> {{ $trajet->tarifTraj or 0}} € par place  {{ $nbPlacesMaxi - $nbPlacePrises }}place(s) restantes</p>
 						<!-- Nombre de place à réserver -->
 						<p id="texte">
-							<select>
-								<option value="0">Nombre de places à réserver</option>
-								@for ($i = 1; $i <=( $nbPlacesMaxi - $nbPlacePrises ) ; $i++) 
-									<option value="{{ $i }}">{{ $i }} place(s)</option>
-								@endfor
-							</select>
-							<input type="button" class="btn btn-primary" value="Réserver"/>
+						 	{!! BootForm::openHorizontal(['sm' => [4, 8],'lg' => [2, 10]])->attribute('onsubmit','return submitForm(this)')->post()->action("/recherche/$trajet->idTraj/reserver") !!}
+						 		De : <select name="idDep">
+						 		@foreach($trajet->etapetrajets as $etape)
+						 			<option value="{{$etape->etape->idEtape}}">{{$etape->etape->ville->nomVille}}</option>
+						 		@endForeach
+						 		</select>
+						 		à : <select name="idArr">
+						 		@foreach($trajet->etapetrajets as $etape)
+						 			<option value="{{$etape->etape->idEtape}}">{{$etape->etape->ville->nomVille}}</option>
+						 		@endForeach
+						 		</select>
+								<center><button type="submit" class="btn btn-primary" >Réserver</button></center>
+							</form>
 						</p>
 		    		</div>
 	        	</div>

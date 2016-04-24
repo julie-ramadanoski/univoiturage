@@ -1,22 +1,65 @@
-//valideInscrit
-	1 = incript
-	0 = pas inscrit
+<?php
 
-//reservation passée : $trajet->dateTraj > $now
+namespace App\Http\Controllers;
 
-si on l'accepte : on passe à 1
-si on le refuse : on supprime la candidature
+use DB;
+use App\User;
+use App\Inscrit;
+use App\Trajet;
+use App\Etape;
+
+use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\MessageBag;
+
+use Validator;
+
+use DateTime;
+
+class InscriptionController extends Controller
+{
+    public function reserver(Request $request, $idTraj){
+        $membId = Auth::user()->id;
+        $idDep = $request->idDep;
+        $idArr = $request->idArr;
+        $inseeDep = Etape::find($idDep)->ville->inseeVille;
+        $inseeArr = Etape::find($idArr)->ville->inseeVille;
+        
+        $listeInseeEtapeTrajet = Trajet::find($idTraj)->listeInseeEtapeTrajet;
+        $listsplit = explode("/", $listeInseeEtapeTrajet);
 
 
-dans l'historique des réservations :
-	afficher :
-		- reservations future où l'on a demander
-		- reservations passées où l'on a été acceptés
+        if($idDep == $idArr){
+            $message = "Vous ne pouvez pas partir et arriver au même endroit.";
+        }
+        else if(array_search($inseeDep, $listsplit) > array_search($inseeArr, $listsplit)){
+            $message = "Le trajet va dans l'autre sens.";
+        }
+        else{
+            try {
+                $query = "INSERT INTO Inscrit (idMemb, idTraj, idEtapeDepartInscrit, idEtapeArriveeInscrit) Values (:membId, :idTraj, :idEtapeDepartInscrit, :idEtapeArriveeInscrit)";
+                $results = DB::select( DB::raw($query), array(
+                        "membId" => $membId,
+                        "idTraj" => $idTraj,
+                        "idEtapeDepartInscrit" => $idDep,
+                        "idEtapeArriveeInscrit" => $idArr
+                    ) );
+                $message = "Inscription effectuée";
+            } catch (\Illuminate\Database\QueryException $e) {
+                $message = "Vous êtes déjà inscrit à ce trajet";
+            }
+        }
+        $trajet = new Trajet;
+        $trajet = $trajet->with('user', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
+                         ->where('idTraj', $idTraj)
+                         ->first();
+        $query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
+        $dernierAviss = DB::select( DB::raw($query), array(
+                    'idmemb' => $trajet->user->id
+        ));
+        $dernierAvis = $dernierAviss[0];
+        return view('recherche.detail',compact('trajet', 'dernierAvis', "message"));
 
-dans l'historique des trajets : 
-	afficher :
-		- trajet passée : personnes à 1
-		- trajet futur : laisser comme c'est
-
-lorsque l'on s'inscrit :
-	- créer réservation avec attribut à 0
+    }
+}

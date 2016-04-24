@@ -18,16 +18,18 @@ class Historique_ReservationController extends Controller
 {
     public function show(Request $request)
     {
+        $now = time();
         $reservations = Auth::user()->inscrits;
         $trajets = [];
         foreach ($reservations as $reservation) {
             $trajets[] = $reservation->trajet;
         }
         // dd($trajets);
-        return view('historique_trajet', compact('trajets', 'reservations'));
+        return view('historique_trajet', compact('trajets', 'reservations', 'now'));
     }
 
     public function note(Request $request){
+        $now = time();
         $idMemb = Auth::user()->id;
         $reservations = Auth::user()->inscrits;
         $trajets = [];
@@ -44,6 +46,6 @@ class Historique_ReservationController extends Controller
 
 
         $message = "Avis attribué.";
-         return view('historique_trajet', compact('trajets', 'reservations', 'message'));
+         return view('historique_trajet', compact('trajets', 'reservations', 'message', 'now'));
     }
 }

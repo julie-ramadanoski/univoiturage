@@ -77,8 +77,8 @@
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($trajet->dateTraj > $now)
-                                                        @if ($inscrit->valideInscrit == 1)
+                                                @if ($trajet->dateTraj < $now)
+                                                        @if ($inscrit->valideInscrit == 0)
                                                         <p><a href="#"><button class="btn btn-primary">Accepté</button></a>
                                                         <a href="#"><button class="btn btn-primary">Refuser</button></a></p>
                                                         @endif
