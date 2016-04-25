@@ -21,8 +21,8 @@ class Inscrit extends Model {
         return $this->belongsTo(\App\Etape::class, 'idEtapeArriveeInscrit', 'idEtape');
     }
 
-    public function membre() {
-        return $this->belongsTo(\App\Membre::class, 'idMemb', 'idMemb');
+    public function user() {
+        return $this->belongsTo(\App\User::class, 'idMemb', 'id');
     }
 
     public function trajet() {

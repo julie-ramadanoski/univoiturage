@@ -4,6 +4,9 @@
 
 <div class="container">
     <div class="content">
+     @if (isset($message))
+                        <h5 style="text-align: center; color:green">{{$message}}</h3>
+                    @endif
         <div class="title">Detail du trajet </div>
 {{--*/ 
 
@@ -105,13 +108,19 @@
 	        			<p id="titre"> {{ $trajet->tarifTraj or 0}} € par place  {{ $nbPlacesMaxi - $nbPlacePrises }}place(s) restantes</p>
 						<!-- Nombre de place à réserver -->
 						<p id="texte">
-							<select>
-								<option value="0">Nombre de places à réserver</option>
-								@for ($i = 1; $i <=( $nbPlacesMaxi - $nbPlacePrises ) ; $i++) 
-									<option value="{{ $i }}">{{ $i }} place(s)</option>
-								@endfor
-							</select>
-							<input type="button" class="btn btn-primary" value="Réserver"/>
+						 	{!! BootForm::openHorizontal(['sm' => [4, 8],'lg' => [2, 10]])->attribute('onsubmit','return submitForm(this)')->post()->action("/recherche/$trajet->idTraj/reserver") !!}
+						 		De : <select name="idDep">
+						 		@foreach($trajet->etapetrajets as $etape)
+						 			<option value="{{$etape->etape->idEtape}}">{{$etape->etape->ville->nomVille}}</option>
+						 		@endForeach
+						 		</select>
+						 		à : <select name="idArr">
+						 		@foreach($trajet->etapetrajets as $etape)
+						 			<option value="{{$etape->etape->idEtape}}">{{$etape->etape->ville->nomVille}}</option>
+						 		@endForeach
+						 		</select>
+								<center><button type="submit" class="btn btn-primary" >Réserver</button></center>
+							</form>
 						</p>
 		    		</div>
 	        	</div>
@@ -144,7 +153,7 @@
 	        		<div id="video">
 	        			<p id="titre">Conducteur</p>
 					
-						<p id="texte">
+						<p class="col-md-3" id="texte">
 							 <img src="{{ $trajet->user->photoMemb }}" alt="photo de profil" />
                                         
                                 <p>{{ $trajet->user->name }} {{ $trajet->user->prenomMemb }}</p>
@@ -155,6 +164,13 @@
                                     <img src="{{ URL::asset('images/pref-'.substr($trajet->user->prefMemb,$i, 2)) }}.png" alt="préférence conducteur,">
                                 @endfor 	
 						</p>
+						<div class="col-md-9">
+							@if(isset($dernierAvis->avisCInscrit) && isset($dernierAvis->commentaireCInscrit))
+								<h4>Dernier avis sur le conducteur :</h4>
+								<b>{{$dernierAvis->avisCInscrit}}/5</b>
+								<em>{{$dernierAvis->commentaireCInscrit}}</em>
+							@endif
+						</div>
 	        		</div>
 		    	</div>
         	</div>

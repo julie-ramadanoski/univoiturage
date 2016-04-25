@@ -47,19 +47,6 @@
                                 jPList Actions
                             </div>
                         
-                            <div 
-                                class="jplist-range-slider"
-                                data-control-type="range-slider" 
-                                data-control-name="range-slider-hour" 
-                                data-control-action="filter"
-                                data-path=".hour"
-                                data-slider-func="hourSlider" 
-                                data-setvalues-func="hourValues">
-                                                    
-                                <div class="value" data-type="prev-value"></div>
-                                <div class="ui-slider" data-type="ui-slider"></div>
-                                <div class="value" data-type="next-value"></div>
-                            </div>
 
                             <!-- toggle genre personne -->
                             <div class="btn-group" role="group">
@@ -181,7 +168,6 @@
                 <!-- liste de résultats-->
                 <div class="col-sm-8">
                     <div class="list">
-                   
                     @foreach ($trajets as $trajet)
                     <div class="list-item">
                         <div class="panel panel-primary">
