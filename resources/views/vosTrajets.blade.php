@@ -59,14 +59,15 @@
                                             Aucune
                                         @endif
                                         @foreach ($inscrits as $inscrit)
-                                        <div class="inscrit" style="height: 150px;">
-                                        {{--*/
-                                            $query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
-                                            $dernierAviss = DB::select( DB::raw($query), array(
-                                                            'idmemb' => $inscrit->user->id
-                                                ));
-                                                $dernierAvis = $dernierAviss[0];
-                                        /*--}}
+                                            @if($inscrit->valideInscrit!=2)
+                                            <div class="inscrit" style="height: 150px;">
+                                            {{--*/
+                                                $query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
+                                                $dernierAviss = DB::select( DB::raw($query), array(
+                                                                'idmemb' => $inscrit->user->id
+                                                    ));
+                                                    $dernierAvis = $dernierAviss[0];
+                                            /*--}}
                                             <div class="col-md-6">
                                                 <img src="{{ $inscrit->user->photoMemb }}" alt="photo de profil" /> {{$inscrit->user->prenomMemb}} {{$inscrit->user->name}}
                                                 <p>Age : {{$trajet->user->ageMemb or 'inconnu'}}</p>
@@ -79,8 +80,8 @@
                                             <div class="col-md-6">
                                                 @if ($trajet->dateTraj < $now)
                                                         @if ($inscrit->valideInscrit == 0)
-                                                        <p><a href="#"><button class="btn btn-primary">Accepté</button></a>
-                                                        <a href="#"><button class="btn btn-primary">Refuser</button></a></p>
+                                                        <p><a href="{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/accepter"><button class="btn btn-primary">Accepté</button></a>
+                                                        <a href="{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/refuser"><button class="btn btn-primary">Refuser</button></a></p>
                                                         @endif
                                                     @if(isset($dernierAvis->avisVInscrit) && isset($dernierAvis->commentaireVInscrit))
                                                         <h4>Dernier avis sur le passager :</h4>
@@ -115,6 +116,9 @@
                                                 @endif
                                             </div>
                                             </div>
+                                            @else
+                                                Aucune
+                                            @endif
                                         @endforeach
                                     </div>
                                 <!-- @endif -->

@@ -44,6 +44,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::post('/trajet', ['uses' => 'TrajetController@note']);
 	Route::post('/trajet', ['uses' => 'TrajetController@note']);
 	Route::post('/recherche/{idTraj}/reserver', ['uses'=>'InscriptionController@reserver']);
+	Route::get('/trajet/{idTrajet}/{idMemb}/accepter', ['uses'=>'InscriptionController@accepter']);
+	Route::get('/trajet/{idTrajet}/{idMemb}/refuser', ['uses'=>'InscriptionController@refuser']);
+	Route::get('/reservations/{idTrajet}/{idMemb}/annuler', ['uses'=>'InscriptionController@annuler']);
 });
 
 Route::get('/autocomplete/ville/{univ?}', ['uses'=>'AutocompleteController@ville']);

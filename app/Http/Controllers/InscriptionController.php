@@ -60,6 +60,48 @@ class InscriptionController extends Controller
         ));
         $dernierAvis = $dernierAviss[0];
         return view('recherche.detail',compact('trajet', 'dernierAvis', "message"));
+    }
 
+    public function accepter($idTrajet, $idMemb){
+        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
+        $results = DB::select( DB::raw($query), array(
+                    'valideInscrit' => 1,
+                    'idTraj' => $idTrajet,
+                    'idMemb' => $idMemb
+                ) );
+        $trajets = Auth::user()->trajets; 
+        $now = time();
+        $message = "Proposition acceptée";
+        return view('vosTrajets', compact('trajets', 'now', 'message'));
+    }
+
+    public function refuser($idTrajet, $idMemb){
+        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
+        $results = DB::select( DB::raw($query), array(
+                    'valideInscrit' => 2,
+                    'idTraj' => $idTrajet,
+                    'idMemb' => $idMemb
+                ) );
+        $trajets = Auth::user()->trajets; 
+        $now = time();
+        $message = "Proposition refusée";
+        return view('vosTrajets', compact('trajets', 'now', 'message'));
+    }
+
+    public function annuler($idTrajet, $idMemb){
+        $now = time();
+        $reservations = Auth::user()->inscrits;
+        $trajets = [];
+        foreach ($reservations as $reservation) {
+            $trajets[] = $reservation->trajet;
+        }
+        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
+        $results = DB::select( DB::raw($query), array(
+                    'valideInscrit' => 2,
+                    'idTraj' => $idTrajet,
+                    'idMemb' => $idMemb
+                ) );
+        $message = "Reservation annulée";
+        return view('historique_trajet', compact('trajets', 'reservations', 'message', 'now'));
     }
 }
