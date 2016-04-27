@@ -42,7 +42,7 @@ class InscriptionController extends Controller
                     ->insert(array("idMemb"=>$membId, "idTraj"=>$idTraj, "idEtapeDepartInscrit"=>$idDep, "idEtapeArriveeInscrit"=>$idArr));
                 $message = "Inscription effectuée";
             } catch (\Illuminate\Database\QueryException $e) {
-                $message = $e;
+                $message = "Vous êtes déjà inscrit à ce trajet";
             }
         }
         $trajet = new Trajet;
@@ -58,12 +58,9 @@ class InscriptionController extends Controller
     }
 
     public function accepter($idTrajet, $idMemb){
-        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
-        $results = DB::select( DB::raw($query), array(
-                    'valideInscrit' => 1,
-                    'idTraj' => $idTrajet,
-                    'idMemb' => $idMemb
-                ) );
+        DB::table("inscrit")
+            ->whereRaw("idTraj = $idTrajet and idMemb = $idMemb")
+            ->update(array('valideInscrit'=>1));
         $trajets = Auth::user()->trajets; 
         $now = time();
         $message = "Proposition acceptée";
@@ -71,12 +68,9 @@ class InscriptionController extends Controller
     }
 
     public function refuser($idTrajet, $idMemb){
-        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
-        $results = DB::select( DB::raw($query), array(
-                    'valideInscrit' => 2,
-                    'idTraj' => $idTrajet,
-                    'idMemb' => $idMemb
-                ) );
+         DB::table("inscrit")
+            ->whereRaw("idTraj = $idTrajet and idMemb = $idMemb")
+            ->update(array('valideInscrit'=>2));
         $trajets = Auth::user()->trajets; 
         $now = time();
         $message = "Proposition refusée";
@@ -84,12 +78,9 @@ class InscriptionController extends Controller
     }
 
     public function annuler($idTrajet, $idMemb){
-        $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
-        $results = DB::select( DB::raw($query), array(
-                    'valideInscrit' => 2,
-                    'idTraj' => $idTrajet,
-                    'idMemb' => $idMemb
-                ) );
+         DB::table("inscrit")
+            ->whereRaw("idTraj = $idTrajet and idMemb = $idMemb")
+            ->update(array('valideInscrit'=>2));
         $now = time();
         $reservations = Auth::user()->inscrits;
         $trajets = [];
