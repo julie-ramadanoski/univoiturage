@@ -31,7 +31,7 @@
                                         <p>autoroute : Non</p>
                                     @endif
                                         <p>Arrivée : {{ $trajet->etapetrajets[count($trajet->etapetrajets)-1]->etape->ville->nomVille }}</p>
-                                    @if ($trajet->dateTraj < $now)
+                                    @if (strtotime($trajet->dateTraj) < $now)
                                         <p><a href="#"><button class="btn btn-primary">Annuler le Trajet</button></a></p>
                                     @endif
                                 </div>
@@ -62,11 +62,11 @@
                                             @if($inscrit->valideInscrit!=2)
                                             <div class="inscrit" style="height: 150px;">
                                             {{--*/
-                                                $query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
+                                                $query = "SELECT * FROM inscrit a, trajet b, users c WHERE a.idTraj = :idTraj order by a.dateCommentVInscrit DESC";
                                                 $dernierAviss = DB::select( DB::raw($query), array(
-                                                                'idmemb' => $inscrit->user->id
-                                                    ));
-                                                    $dernierAvis = $dernierAviss[0];
+                                                            'idTraj' => $inscrit->idTraj
+                                                ));
+                                                $dernierAvis = $dernierAviss[0];
                                             /*--}}
                                             <div class="col-md-6">
                                                 <img src="{{ $inscrit->user->photoMemb }}" alt="photo de profil" /> {{$inscrit->user->prenomMemb}} {{$inscrit->user->name}}
@@ -78,7 +78,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($trajet->dateTraj < $now)
+                                                @if (strtotime($trajet->dateTraj) > $now)
                                                         @if ($inscrit->valideInscrit == 0)
                                                         <p><a href="/trajet/{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/accepter"><button class="btn btn-primary">Accepté</button></a>
                                                         <a href="/trajet/{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/refuser"><button class="btn btn-primary">Refuser</button></a></p>

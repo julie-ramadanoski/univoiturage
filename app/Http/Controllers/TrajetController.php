@@ -147,13 +147,10 @@ class TrajetController extends Controller
         $idMemb = $request->idMemb;
         $trajets = Auth::user()->trajets; 
         $now = time();
-        $query = "UPDATE inscrit set avisVInscrit = :avisCInscrit, commentaireVInscrit = :commentaireCInscrit,  dateCommentVInscrit = CAST(NOW() AS DATE) where idTraj = :idTraj and idMemb = :idMemb";
-        $results = DB::select( DB::raw($query), array(
-                    'avisCInscrit'     => $request->input('avisCInscrit'),
-                    'commentaireCInscrit'  => $request->input('commentaireCInscrit'),
-                    'idTraj' => $request->idTraj,
-                    'idMemb'       => $idMemb
-                ) );
+        $date = date("Y-m-d", $now);
+        DB::table("inscrit")
+                    ->whereRaw("idTraj = ".$request->idTraj." and idMemb = $idMemb")
+                    ->update(array('avisVInscrit'=>$request->input('avisCInscrit'), 'commentaireVInscrit'=>$request->input('commentaireCInscrit'), 'dateCommentVInscrit' => $date));
 
 
         $message = "Avis attribué.";

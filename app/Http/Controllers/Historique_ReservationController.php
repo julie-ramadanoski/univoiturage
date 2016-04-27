@@ -36,13 +36,18 @@ class Historique_ReservationController extends Controller
         foreach ($reservations as $reservation) {
             $trajets[] = $reservation->trajet;
         }
-        $query = "UPDATE inscrit set avisCInscrit = :avisCInscrit, commentaireCInscrit = :commentaireCInscrit,  dateCommentCInscrit = CAST(NOW() AS DATE) where idTraj = :idTraj and idMemb = :idMemb";
-        $results = DB::select( DB::raw($query), array(
-                    'avisCInscrit'     => $request->input('avisCInscrit'),
-                    'commentaireCInscrit'  => $request->input('commentaireCInscrit'),
-                    'idTraj' => $request->idTraj,
-                    'idMemb'       => $idMemb
-                ) );
+        $now = time();
+        $date = date("Y-m-d", $now);
+        DB::table("inscrit")
+            ->whereRaw("idTraj = ".$request->idTraj." and idMemb = $idMemb")
+            ->update(array('avisCInscrit'=>$request->input('avisCInscrit'), 'commentaireCInscrit'=>$request->input('commentaireCInscrit'), 'dateCommentCInscrit' => $date));
+
+
+        // $query = "UPDATE inscrit set avisCInscrit = :avisCInscrit, commentaireCInscrit = :commentaireCInscrit,  dateCommentCInscrit = CAST(NOW() AS DATE) "
+        // $results = DB::select( DB::raw($query), array(
+        //             'avisCInscrit'     => $request->input('avisCInscrit'),
+        //             'commentaireCInscrit'  => $request->input('commentaireCInscrit'),
+        //         ) );
 
 
         $message = "Avis attribué.";

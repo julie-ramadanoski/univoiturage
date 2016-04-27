@@ -102,7 +102,7 @@
                                         </div>
                                         
                                         <div class="col-xs-12 col-sm-4">
-                                        @if ($trajet->dateTraj > $now)
+                                        @if (strtotime($trajet->dateTraj) < $now)
                                             <h4>Déposer un avis sur le conducteur</h4>
                                             <div class="input-group">
                                                 {!! BootForm::openHorizontal(['sm' => [4, 8],'lg' => [2, 10]])->attribute('onsubmit','return submitForm(this)')->post()->action('/reservations') !!}
