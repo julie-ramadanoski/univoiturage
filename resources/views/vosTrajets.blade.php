@@ -80,8 +80,8 @@
                                             <div class="col-md-6">
                                                 @if ($trajet->dateTraj < $now)
                                                         @if ($inscrit->valideInscrit == 0)
-                                                        <p><a href="{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/accepter"><button class="btn btn-primary">Accepté</button></a>
-                                                        <a href="{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/refuser"><button class="btn btn-primary">Refuser</button></a></p>
+                                                        <p><a href="/trajet/{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/accepter"><button class="btn btn-primary">Accepté</button></a>
+                                                        <a href="/trajet/{{$inscrit->idTraj}}/{{$inscrit->idMemb}}/refuser"><button class="btn btn-primary">Refuser</button></a></p>
                                                         @endif
                                                     @if(isset($dernierAvis->avisVInscrit) && isset($dernierAvis->commentaireVInscrit))
                                                         <h4>Dernier avis sur le passager :</h4>

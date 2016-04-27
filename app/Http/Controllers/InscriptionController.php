@@ -89,18 +89,18 @@ class InscriptionController extends Controller
     }
 
     public function annuler($idTrajet, $idMemb){
-        $now = time();
-        $reservations = Auth::user()->inscrits;
-        $trajets = [];
-        foreach ($reservations as $reservation) {
-            $trajets[] = $reservation->trajet;
-        }
         $query = "UPDATE inscrit set valideInscrit = :valideInscrit where idTraj = :idTraj and idMemb = :idMemb";
         $results = DB::select( DB::raw($query), array(
                     'valideInscrit' => 2,
                     'idTraj' => $idTrajet,
                     'idMemb' => $idMemb
                 ) );
+        $now = time();
+        $reservations = Auth::user()->inscrits;
+        $trajets = [];
+        foreach ($reservations as $reservation) {
+            $trajets[] = $reservation->trajet;
+        }
         $message = "Reservation annulée";
         return view('historique_trajet', compact('trajets', 'reservations', 'message', 'now'));
     }

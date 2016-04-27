@@ -63,7 +63,7 @@
                                             @endfor 
                                             <p class="prix">{{ $trajet->tarifTraj or 0}} €</p>
                                             @if(strtotime($trajet->dateTraj) > $now && $reservation->valideInscrit != 2)
-                                            <p><a href="reservations/{{$reservation->idTraj}}/{{$reservation->idMemb}}/annuler"><button class="btn btn-primary">Annuler la Réservation</button></a></p>
+                                            <p><a href="/reservations/{{$reservation->idTraj}}/{{$reservation->idMemb}}/annuler"><button class="btn btn-primary">Annuler la Réservation</button></a></p>
                                             @endif
                                         </div>
                                             
