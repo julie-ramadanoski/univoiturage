@@ -47,7 +47,7 @@ class InscriptionController extends Controller
                     ) );
                 $message = "Inscription effectuée";
             } catch (\Illuminate\Database\QueryException $e) {
-                $message = "Vous êtes déjà inscrit à ce trajet";
+                $message = e;
             }
         }
         $trajet = new Trajet;
