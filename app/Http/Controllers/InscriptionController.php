@@ -38,16 +38,11 @@ class InscriptionController extends Controller
         }
         else{
             try {
-                $query = "INSERT INTO Inscrit (idMemb, idTraj, idEtapeDepartInscrit, idEtapeArriveeInscrit) Values (:membId, :idTraj, :idEtapeDepartInscrit, :idEtapeArriveeInscrit)";
-                $results = DB::select( DB::raw($query), array(
-                        "membId" => $membId,
-                        "idTraj" => $idTraj,
-                        "idEtapeDepartInscrit" => $idDep,
-                        "idEtapeArriveeInscrit" => $idArr
-                    ) );
+                DB::table('inscrit')
+                    ->insert(array("idMemb"=>$membId, "idTraj"=>$idTraj, "idEtapeDepartInscrit"=>$idDep, "idEtapeArriveeInscrit"=>$idArr));
                 $message = "Inscription effectuée";
             } catch (\Illuminate\Database\QueryException $e) {
-                $message = $e;
+                $message = "Vous êtes déjà inscrit à ce trajet";
             }
         }
         $trajet = new Trajet;
