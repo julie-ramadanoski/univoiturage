@@ -28,7 +28,7 @@ class TrajetController extends Controller
 
         $highway = is_null($request->input('highway'))?false:true;
         //remplissage du tableau avec les données que l'itinéraire à défini
-        $trajet['dateTraj']     = DateTime::createFromFormat('m/d/Y', $request->input('goDate'));
+        $trajet['dateTraj']     = \DateTime::createFromFormat('m/d/Y', $request->input('goDate'));
         $trajet['heureTraj']    = $request->input('goHour').":".$request->input('goMinute');
         $trajet['autoRoutTraj'] = $highway;
         $trajet['distTraj']     = $request->input('totalDistance');
@@ -44,7 +44,7 @@ class TrajetController extends Controller
 
         $trajet['etapes'] = [];
         for($i=0; $i<count($villes); $i++){
-            if($i != 1){ //le deuxième enregistrement est la ville d'arrivée
+            if(strlen($villes[$i]) > 0){
                 $trajet['etapes'][] = [
                     //'insee'     => $insees[$i],
                     'ville'     => $villes[$i],
@@ -54,16 +54,11 @@ class TrajetController extends Controller
                 ];
             }
         }
-        $trajet['etapes'][] = [
-            //'insee'     => $insees[1],
-            'ville'     => $villes[1],
-            'distance'  => $distances[1],
-            'price'     => $prices[1],
-            'duree'     => $durees[1]
-        ];
 
         //stockage dans la session
         session(['trajet'=>$trajet]);
+
+        //dd($trajet);
 
         //retourne la vue des détails
         return redirect()->route('detailsG');
@@ -94,6 +89,8 @@ class TrajetController extends Controller
             'distance'  => $trajet['distTraj'],
             'duree'     => $trajet['dureeTraj']
         ];
+
+        dd($ligneSteps, $datas);
 
         //rendu de la vue
         return view('trajet.details',compact("datas","ligneSteps"));

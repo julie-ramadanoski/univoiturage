@@ -263,4 +263,13 @@ html, body {
   font-size: 1.6em;
   text-decoration: none; }
 
+.container-form-itineraire{
+  padding : 30px;
+}
+
+.steps-container{
+  padding-left : 100px;
+  margin : 50px 0px;
+}
+
 /*# sourceMappingURL=app.css.map */

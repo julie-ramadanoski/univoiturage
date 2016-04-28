@@ -47,7 +47,7 @@
                         <li><a href="{{ url('/') }}">Rechercher un trajet</a></li>
                     </ul>
                        <ul class="nav navbar-nav" id="proposer">
-                        <li><a href="{{ url('/trajet/add') }}">Proposer un trajet</a></li>
+                        <li><a href="{{ url('/trajet/itineraire') }}">Proposer un trajet</a></li>
 
                     </ul>
 

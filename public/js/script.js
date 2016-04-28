@@ -28,61 +28,41 @@ init = function(event){
 	});
 
 	/* Création des écouteurs */
-	linkVarToInput(trajet,	"start",	_id("from"),		updateTrajet	);
-	linkVarToInput(trajet,	"end",		_id("to"),			updateTrajet	);
-	linkVarToInput(trajet,	"highway",	_id("highway"),	updateTrajet	);
+	callbackWhenInputChange(_id("from"),updateTrajet);
+	callbackWhenInputChange(_id("to"),updateTrajet);
+	callbackWhenInputChange(_id("highway"),updateTrajet);
 
-	/* test */
-	//autocomplete = new AutocompleteVille(_id("from"));
-
+	/* creation des datepicker */
 	$("#goDate").datepicker();
-	$("#backDate").datepicker();
 
-	_id("addStep").addEventListener("click",addStepInput);
+	/* ecouteur sur l'ajout d'un etape */
+	_id("add-step").addEventListener("click",addStepInput);
 
 	/* Ajout d'une étape vide */
 	addStepInput();
 	updateTrajet();
-
 };
 
-/* Lie un input et un propriété d'un objet */
-linkVarToInput = function(object,property,input,callback){
-	if( input.type == "checkbox"){
-		Events.addEvent(input,"change",function(event){
-			console.log(input.checked);
-			object[property] = input.checked;
-			callback(input.checked);
-		});
-	}
+/* fonction qui apelle un callback quand l'input en parametre subit un changement */
+/* le callback reçoit pour parametre l'état de l'input */
+callbackWhenInputChange = function(input, callback){
+	if( input.type == "checkbox"){Events.addEvent(input,"change",function(event){callback(input.checked);});}
 	else if(input.type == "radio"){
 		var radios = _n(input.name);
-		console.log(radios);
 		for(var i = 0; i<radios.length;  i++){
-			Events.addEvent(radios[i],"change",function(event){
-				console.log(this);
-				if(this == input){
-					object[property] = input.checked;
-				}
-				else{
-					object[property] = !input.checked;
-				}
-				callback(input.checked);				
-			});
+			Events.addEvent(radios[i],"change",function(event){callback(input.checked);});
 		}
 	}
-	else{
-		Events.addEvent(input,"keyup",function(event){
-			object[property] = input.value;
-			callback(input.value);
-		});
-	}
+	else{Events.addEvent(input,"keyup",function(event){callback(input.value);});}
 }
 
 /* Trace le trajet suivant les informations de l'objet trajet */
 updateTrajet = function(){
+	// get from and to cities
 	var from = _id("from").value;
 	var to = _id("to").value;
+
+	// if the two fields are not empty
 	if(from != "" && to != ""){
 		var options = { //Création des options de recherche de trajet
 			origin: from,
@@ -92,17 +72,27 @@ updateTrajet = function(){
 			region : 'FR',
 			avoidHighways : !trajet.highway //péage
 		};
+
+		//get all the created steps
 		var steps = document.getElementsByClassName("inputStep");
+
+		//if we have some steps to work with
 		if(steps.length > 0){
+			//create the waypoint array in google option object
 			options.waypoints = [];
+
+			//fill it with steps's value
 			for(var i = 0; i<steps.length; i++){
 				if(steps[i].value != ""){
 					options.waypoints.push({location:steps[i].value});
 				}
 			}
 		}
+
+		//ask google for create the way
 		googleObjects.directionsService.route(options, function(response, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
+				//if he can create a way, set it and display it.
 				googleObjects.directionsDisplay.setDirections(response);
 			} else {
 				console.log("Une erreur s'est produite :" + status);
@@ -201,47 +191,37 @@ addStepInput = function(){
 
 	Events.addEvent(stepInput,"keyup",updateTrajet);
 
-	_id("stepZone").appendChild(inputGroup);
+	_id("steps").appendChild(inputGroup);
 };
 
 /* Fonction de maj des distances */
+/* trggered when google update the map */
 updateDistances = function(legs){
 	var distanceInputs = document.getElementsByName("distances[]"); //Tous les inputs distances, dans l'ordre du trajet
 	var dureeInputs = document.getElementsByName("durees[]"); 
-	var priceInputs = document.getElementsByName("prices[]"); 
+	var priceInputs = document.getElementsByName("prices[]");
+	var textInputs = document.getElementsByName("villes[]");
 
 	var distances = legs; //Toutes les distances, dans l'ordre du trajet
-	console.log(distances);
 	var totalDistance = 0;
 	var totalDuree = 0;
 
 	//Pour chaque donnée
-	for(var i = 0; i<distances.length-1; i++){
-		distanceInputs[i+2].value = parseInt((distances[i].distance.value)/1000);
-		dureeInputs[i+2].value 	= parseInt((distances[i].duration.value));
-		priceInputs[i+2].value 	= parseInt((distances[i].distance.value)/1000*0.04);
+	for(var i = 0; i<distances.length; i++){
+		/* pick the +1 input because the first is for the from input, and doesn't have to have value */
+		if(textInputs[i+1].value.length > 0){
+			distanceInputs[i+1].value = parseInt((distances[i].distance.value)/1000);
+			dureeInputs[i+1].value 	= parseInt((distances[i].duration.value));
+			priceInputs[i+1].value 	= parseInt((distances[i].distance.value)/1000*0.04);
+		}
+
 		totalDistance += distances[i].distance.value;
 		totalDuree += distances[i].duration.value;
 	}
-	distanceInputs[1].value = parseInt((distances[distances.length-1].distance.value)/1000);
-	dureeInputs[1].value 	= parseInt((distances[distances.length-1].duration.value));
-	priceInputs[1].value 	= parseInt((distances[distances.length-1].distance.value)/1000*0.04);
-	totalDistance += distances[distances.length-1].distance.value;
-	totalDuree += distances[distances.length-1].duration.value;
-	_n('totalDistance')[0].value = totalDistance;
+
+	console.log(distances);
+
+	_n('totalDistance')[0].value = totalDistance; //display values in hidden input, for the next page
 	_n('totalDuree')[0].value = totalDuree;
 };
-
-isNull = function(value){
-	return (!value || value.trim() == "" || value ==  null);
-}
-
-toggleBackDate = function(value){
-	if(value){
-		_id("backDiv").style.display = "block";
-	}else{
-		_id("backDiv").style.display = "none";
-	}
-}
-
 window.addEventListener("load",init);
