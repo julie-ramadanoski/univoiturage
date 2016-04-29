@@ -68,6 +68,7 @@
 				<tr>
 				<p>Ajouter une entrée :</p>
 				<form action="{{url('back/modele/add')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td>0</td>
 					<td>
 					<input type="text" placeholder="Nom" name="nomMod">
@@ -87,6 +88,7 @@
 				</tr>
 				<tr>
 					<form action="{{url('back/modele/edit')}}" method="post">
+						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<td class="id">
 							{{$modele->idMod}}
 							<input type="hidden" value="{{$modele->idMod}}" name="idMod">

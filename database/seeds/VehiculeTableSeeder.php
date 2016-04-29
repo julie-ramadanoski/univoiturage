@@ -28,8 +28,6 @@ class VehiculeTableSeeder extends Seeder
 		'idType'=>1
 		] );
 
-					
-
 		Vehicule::create( [
 		'idVeh'=>2,
 		'photoVeh'=>NULL,
@@ -42,7 +40,30 @@ class VehiculeTableSeeder extends Seeder
 		'idType'=>1
 		] );
 
-					
+		Vehicule::create( [
+		'idVeh'=>3,
+		'photoVeh'=>NULL,
+		'confVeh'=>1,
+		'nbPlaceVeh'=>4,
+		'couleurVeh'=>'verte pomme',
+		'defautVeh'=>1,
+		'idMemb'=>3,
+		'idMod'=>1,
+		'idType'=>1
+		] );
+		
+		Vehicule::create( [
+		'idVeh'=>4,
+		'photoVeh'=>NULL,
+		'confVeh'=>2,
+		'nbPlaceVeh'=>1,
+		'couleurVeh'=>'rouge',
+		'defautVeh'=>1,
+		'idMemb'=>4,
+		'idMod'=>2,
+		'idType'=>2 
+		] );
+
 
 
     }

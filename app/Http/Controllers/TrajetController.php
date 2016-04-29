@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\Http\Requests;
 use App\Trajet;
 use App\Etape;
@@ -188,5 +189,25 @@ class TrajetController extends Controller
         $etapeTrajet = EtapeTrajet::where('idTraj',$id)->get();
         $conducteur = User::where('id',$trajet->idMemb)->get()->first();
         dd($trajet, $etapeTrajet, $conducteur);
+    }
+
+    public function vosTrajet(){
+        $trajets = Auth::user()->trajets; 
+        $now = time();
+        return view('vosTrajets', compact('trajets', 'now'));
+    }
+
+    public function note(Request $request){
+        $idMemb = $request->idMemb;
+        $trajets = Auth::user()->trajets; 
+        $now = time();
+        $date = date("Y-m-d", $now);
+        DB::table("inscrit")
+                    ->whereRaw("idTraj = ".$request->idTraj." and idMemb = $idMemb")
+                    ->update(array('avisVInscrit'=>$request->input('avisCInscrit'), 'commentaireVInscrit'=>$request->input('commentaireCInscrit'), 'dateCommentVInscrit' => $date));
+
+
+        $message = "Avis attribué.";
+         return view('vosTrajets', compact('trajets', 'now', 'message'));
     }
 }
