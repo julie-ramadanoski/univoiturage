@@ -13,16 +13,16 @@ class EtapeTableSeeder extends Seeder
      */
     public function run()
     {
-        Etape::create( ['idEtape'=>1, 'adresseEtape'=>'centre ville valence', 	'inseeVille'=>26362] );
-		Etape::create( ['idEtape'=>2, 'adresseEtape'=>'garepierrelatte', 		'inseeVille'=>26235] );
-		Etape::create( ['idEtape'=>3, 'adresseEtape'=>'place bidule aix', 		'inseeVille'=>13001] );	
+        Etape::create( ['idEtape'=>1, 'adresseEtape'=>'Reims', 	'inseeVille'=>51454] );
+		Etape::create( ['idEtape'=>2, 'adresseEtape'=>'Lyon', 		'inseeVille'=>69123 ] );
+		Etape::create( ['idEtape'=>3, 'adresseEtape'=>'marseille', 		'inseeVille'=>13055] );	
 
-		Etape::create( ['idEtape'=>4, 'adresseEtape'=>'cathédrale gap', 		'inseeVille'=>5061] );
-		Etape::create( ['idEtape'=>5, 'adresseEtape'=>'centre aix', 			'inseeVille'=>13001] );
-		Etape::create( ['idEtape'=>6, 'adresseEtape'=>'cocotier marseille', 	'inseeVille'=>13055] );
+		Etape::create( ['idEtape'=>4, 'adresseEtape'=>'gap', 		'inseeVille'=>5061] );
+		Etape::create( ['idEtape'=>5, 'adresseEtape'=>'aix', 			'inseeVille'=>13001] );
+		Etape::create( ['idEtape'=>6, 'adresseEtape'=>'marseille', 	'inseeVille'=>13055] );
 
 		Etape::create( ['idEtape'=>7, 'adresseEtape'=>'marseille', 				'inseeVille'=>13055] );
-		Etape::create( ['idEtape'=>8, 'adresseEtape'=>'aixe n provence', 		'inseeVille'=>13001] );
+		Etape::create( ['idEtape'=>8, 'adresseEtape'=>'aix en provence', 		'inseeVille'=>13001] );
 		Etape::create( ['idEtape'=>9, 'adresseEtape'=>'valence', 				'inseeVille'=>26362] );
 
 		Etape::create( ['idEtape'=>10, 'adresseEtape'=>'gap', 					'inseeVille'=>5061] );
@@ -48,7 +48,7 @@ class EtapeTableSeeder extends Seeder
 
 		Etape::create( ['idEtape'=>27, 'adresseEtape'=>'gap', 		'inseeVille'=>5061] );
 		Etape::create( ['idEtape'=>28, 'adresseEtape'=>'marseille', 'inseeVille'=>13055] );
-		Etape::create( ['idEtape'=>29, 'adresseEtape'=>'la ciotat', 'inseeVille'=>13028] );
+		Etape::create( ['idEtape'=>29, 'adresseEtape'=>'La Ciotat', 'inseeVille'=>13028] );
 
     }
 }
