@@ -13,7 +13,7 @@ class EtapeTableSeeder extends Seeder
      */
     public function run()
     {
-        Etape::create( ['idEtape'=>1, 'adresseEtape'=>'Reims', 	'inseeVille'=>51454] );
+        Etape::create( ['idEtape'=>1, 'adresseEtape'=>'Paris', 	'inseeVille'=>75056] );
 		Etape::create( ['idEtape'=>2, 'adresseEtape'=>'Lyon', 		'inseeVille'=>69123 ] );
 		Etape::create( ['idEtape'=>3, 'adresseEtape'=>'marseille', 		'inseeVille'=>13055] );	
 
