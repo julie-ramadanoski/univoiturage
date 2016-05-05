@@ -91,7 +91,7 @@ class TrajetController extends Controller
             'duree'     => $trajet['dureeTraj']
         ];
 
-        dd($ligneSteps, $datas);
+        //dd($ligneSteps, $datas);
 
         //rendu de la vue
         return view('trajet.details',compact("datas","ligneSteps"));
@@ -101,6 +101,7 @@ class TrajetController extends Controller
     public function postDetails(Request $request){
         //récupération de l'objet trajet
         $trajet = $request->session()->pull('trajet');
+
         //remplissage du trajet avec les données supplémentaires
         $trajet['nbPlacesTraj'] = $request->input('availablePlaces');
         $trajet['tarifTraj']    = $request->input('totalPrice');
@@ -152,13 +153,18 @@ class TrajetController extends Controller
         ]);
 
         $trajetO->save();
-        
-        // !!!!!! Vérifier que la ville avec cet insee n'existe deja pas
       
         //création des étapes et etapes trajet
         for($i = 0; $i<count($trajet['etapes']); $i++){
-            $insee = Ville::where("nomVille",$trajet['etapes'][$i]['ville'])->first()->inseeVille;
-            if(is_null($insee)) $insee = "13001";
+            $insee = 0;
+            try{
+                $insee = Ville::where("nomVille",$trajet['etapes'][$i]['ville'])->first()->inseeVille;
+            }
+            catch(\Exception $e){
+                // la ville n'existe pas dans la bdd
+                // on utilisera la ville avec l'insee 0
+            }
+
             $etape = Etape::create([
                 'adresseEtape'  => $trajet['etapes'][$i]['ville'],
                 'inseeVille'    => $insee
@@ -174,11 +180,11 @@ class TrajetController extends Controller
                 'dureeEtapeTrajet'      => $trajet['etapes'][$i]['duree'],
                 'placePrisesEtapeTrajet' => 0
             ]);
-
             $etapeTrajet->save();
         }
 
-        //redirection vers ce trajet
+        // redirection vers ce trajet
+        // TODO : aller vers l'affichage du trajet
         return redirect()->route('showTrajet', ['id' => $trajetO->idTraj]);
 
     }
