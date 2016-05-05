@@ -15,7 +15,7 @@ class UniversiteTableSeeder extends Seeder
     {
         Universite::create( [
 		'idUniv'=>1,
-		'nomUniv'=>'aix marseille',
+		'nomUniv'=>'Aix Marseille Université',
 		'adr1Univ'=>'adresse',
 		'adr2Univ'=>NULL,
 		'telUniv'=>'0411223344',
@@ -29,16 +29,16 @@ class UniversiteTableSeeder extends Seeder
 
 		Universite::create( [
 		'idUniv'=>2,
-		'nomUniv'=>'reims champagne ardenne',
-		'adr1Univ'=>'adresse',
+		'nomUniv'=>'Avignon Université',
+		'adr1Univ'=>'adresse 2',
 		'adr2Univ'=>NULL,
 		'telUniv'=>'0411223344',
-		'mailUniv'=>'uni-aix@yopmail.com',
+		'mailUniv'=>'uni-avignon@yopmail.com',
 		'photoUniv'=>NULL,
 		'logoUniv'=>NULL,
 		'latUniv'=>NULL,
 		'longUniv'=>NULL,
-		'inseeVille'=>13001
+		'inseeVille'=>84007
 		] );
     }
 }

@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use JWTAuth;
-use App\User;
-use DateTime;
-use App\Alerte;
-use App\Etape;
-use App\Ville;
 use DB;
-use App\Http\Requests;
+use JWTAuth;
 use Illuminate\Http\Request;
+use DateTime;
+use App\User;
+use App\Ville;
+use App\Etape;
+use App\Alerte;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Controllers\AutocompleteController;
+use Illuminate\Routing\Controller as BaseController;
 
-class AuthenticateController extends Controller
+
+class AuthenticateController extends BaseController 
 {
 
     public function __construct()
@@ -24,7 +27,23 @@ class AuthenticateController extends Controller
          $this->middleware('jwt.auth', [ 'except' => ['authenticate'] ]);
     }
 
+    public function getVille(Request $request, $ville = null){
+        if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
+            $ville= new AutocompleteController();
+            return $ville->ville($request);
+        }
+    }
     
+    public function getGeoloc(Request $request, $lat, $lon, $zoneKm){
+        if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
+
+            $query ='select * from ville where get_distance_kms(latitudeVille, longitudeVille, :latitudeVilleDep, :longitudeVilleDep) <= :zoneKm';
+            $villes = DB::select($query, array( 'latitudeVilleDep'  => $lat, 'longitudeVilleDep' => $lon, 'zoneKm' => $zoneKm ), 'and');
+           
+            return response()->json(compact('villes'));
+        }
+    }
+
     public function delAlertes(Request $request){
         if( $this->getAuthenticatedUser()->getStatusCode() == 200 ){
 

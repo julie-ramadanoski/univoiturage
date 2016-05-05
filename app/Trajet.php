@@ -1,6 +1,8 @@
 <?php namespace App;
 
 use DB;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Trajet extends Model {
@@ -46,17 +48,16 @@ class Trajet extends Model {
         
         // Prendre les infos des villes recherchées
         $rowVillesDep = DB::table('ville')
-                    ->join('site', 'ville.inseeVille', '=', 'site.inseeVille')
+                    ->leftJoin('site', 'ville.inseeVille', '=', 'site.inseeVille')
                     ->where('nomVille', $villeDepart)
                     ->orWhere('nomSite', $villeDepart)
                     ->get();
-
         $rowVillesArr = DB::table('ville')
-                    ->join('site', 'ville.inseeVille', '=', 'site.inseeVille')
+                    ->leftJoin('site', 'ville.inseeVille', '=', 'site.inseeVille')
                     ->where('nomVille', $villeArrivee)
                     ->orWhere('nomSite', $villeArrivee)
                     ->get();
-
+       
          if( $rowVillesDep != null && $rowVillesArr != null){
 
             // Requete préparée permettant de trouver les trajets correspondant
@@ -87,9 +88,10 @@ class Trajet extends Model {
                     'longitudeVilleDep' => $rowVillesDep[0]->longitudeVille,
                     'nomVilleArr'       => $rowVillesArr[0]->nomVille
                 ) );
+           //dd($results);
 
         } else {
-
+            
             $results = array();
         }
 

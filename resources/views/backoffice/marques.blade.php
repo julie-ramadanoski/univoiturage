@@ -68,6 +68,7 @@
 				<tr>
 				<p>Ajouter une entrée :</p>
 				<form action="{{url('back/marque/add')}}" method="post">
+				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td>0</td>
 					<td>
 					<input type="text" placeholder="Nom" name="nomMarq">
@@ -80,6 +81,7 @@
 				@foreach($marques as $marque)
 				<tr>
 					<form action="{{url('back/marque/edit')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<td class="id">
 							{{$marque->idMarq}}
 							<input type="hidden" value="{{$marque->idMarq}}" name="idMarq">

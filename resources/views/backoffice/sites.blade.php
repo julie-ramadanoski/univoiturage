@@ -68,6 +68,7 @@
 				<tr>
 				<p>Ajouter une entrée :</p>
 				<form action="{{url('back/site/add')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td>0</td>
 					<td class="site">
 						<input type="text" placeholder="Nom" name="nomSite">
@@ -96,6 +97,7 @@
 				@foreach($sites as $site)
 				<tr>
 				<form action="{{url('back/site/edit')}}" method="post">
+					<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 					<td class="id">
 						{{$site->idSite}}
 						<input type="hidden" value="{{$site->idSite}}" name="idSite">

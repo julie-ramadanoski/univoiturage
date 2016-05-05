@@ -14,9 +14,14 @@ class ModeleTableSeeder extends Seeder
     public function run()
     {
 		Modele::create( [
-		'idMod'=>1,
-		'nomMod'=>'clio',
-		'idMarq'=>1
+        'idMod'=>1,
+        'nomMod'=>'clio',
+        'idMarq'=>1
+        ] );
+        Modele::create( [
+		'idMod'=>2,
+		'nomMod'=>'Fazer',
+		'idMarq'=>2
 		] );
     }
 }
