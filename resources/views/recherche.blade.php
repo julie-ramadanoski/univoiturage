@@ -16,10 +16,6 @@
         <!-- Chargement de la carte -->
         <script src="{{ URL::asset('assets/js/biblio.js') }}"></script>
 
-        <script src="{{ URL::asset('assets/js/step.class.js') }}"></script>
-        <script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
-        <script src="{{ URL::asset('assets/js/script.js') }}"></script>        
-
         <!-- Chargement des JS globaux -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="http://codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>

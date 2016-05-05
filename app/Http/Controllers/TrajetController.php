@@ -30,10 +30,12 @@ class TrajetController extends Controller
         $highway = is_null($request->input('highway'))?false:true;
         //remplissage du tableau avec les données que l'itinéraire à défini
         $trajet['dateTraj']     = \DateTime::createFromFormat('m/d/Y', $request->input('goDate'));
+        //$trajet['dateTraj']     = \DateTime::createFromFormat('Y-m-d', $request->input('goDate'));
         $trajet['heureTraj']    = $request->input('goHour').":".$request->input('goMinute');
         $trajet['autoRoutTraj'] = $highway;
         $trajet['distTraj']     = $request->input('totalDistance');
         $trajet['dureeTraj']    = $request->input('totalDuree');
+        $trajet['prixTraj']     = $request->input('totalPrice');
         $trajet['typeVehicule'] = $request->input('car');
 
         //récupération des données sur les etapes
@@ -88,7 +90,8 @@ class TrajetController extends Controller
             'maxPlaces' => $trajet['typeVehicule']=="on"?8:1,
             'highway'   => $trajet['autoRoutTraj'],
             'distance'  => $trajet['distTraj'],
-            'duree'     => $trajet['dureeTraj']
+            'duree'     => $trajet['dureeTraj'],
+            'prix'      => $trajet['prixTraj']
         ];
 
         //dd($ligneSteps, $datas);
@@ -155,10 +158,12 @@ class TrajetController extends Controller
         $trajetO->save();
       
         //création des étapes et etapes trajet
+        $inseeL = "";
         for($i = 0; $i<count($trajet['etapes']); $i++){
             $insee = 0;
             try{
                 $insee = Ville::where("nomVille",$trajet['etapes'][$i]['ville'])->first()->inseeVille;
+                $inseeL .= $insee."/";
             }
             catch(\Exception $e){
                 // la ville n'existe pas dans la bdd
@@ -183,9 +188,13 @@ class TrajetController extends Controller
             $etapeTrajet->save();
         }
 
+        //enlever le dernier
+        $inseeL = substr($inseeL,0,-1);
+        $trajetO->listeInseeEtapeTrajet = $inseeL;
+        $trajetO->save();
+
         // redirection vers ce trajet
-        // TODO : aller vers l'affichage du trajet
-        return redirect()->route('showTrajet', ['id' => $trajetO->idTraj]);
+        return redirect()->route('detailRecherche', ['id' => $trajetO->idTraj]);
 
     }
 

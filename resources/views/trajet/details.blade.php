@@ -2,9 +2,6 @@
 
 @section('content')
 	<script src="{{ URL::asset('/js/script2.js') }}"></script>
-	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
-	<script>
-	</script>
 	<div class="container-fluid">
 		<h2>Publier votre annonce</h2>
 		<div class="row" id="r_timeline">
@@ -30,7 +27,7 @@
 						<hr>
 						<div class="ligneStep">
 							{{$ligneSteps[0]["from"]}} -> {{$ligneSteps[count($ligneSteps)-1]["to"]}}
-							<input type="number" value="0" name="totalPrice" min="0" max="0">
+							<input type="number" value="{{ $datas['prix'] }}" name="totalPrice" min="0" max="{{ $datas['prix'] }}">
 						</div>
 					</div>
 					<h3>
@@ -39,12 +36,14 @@
 					</h3>
 					<h3>Détails du voyage</h3>
 					<textarea name="description"></textarea><br>
+					<!--
 					<label>
 						Vehicule :
 						<select name="vehicule">
 							<option value="0">Renault Scénic</option>
 						</select>
 					</label><br>
+					-->
 					<label>
 						Bagages :
 						<select name="bagages">
@@ -74,14 +73,13 @@
 
 					<label>
 						CGU :
-						<input type="checkbox" value="cgu" name="cgu">
+						<input type="checkbox" value="cgu" name="cgu" required="required">
 					</label><br>
 					<input type="hidden" name="duree" id="inputDuree">
 					<input type="submit" value="Continuer">
 				</form>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6">
-				<div id="map" style="width:400px;height:400px"></div>
 				<p>
 					{{$ligneSteps[0]['from']}}
 					->

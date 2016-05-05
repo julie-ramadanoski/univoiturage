@@ -205,6 +205,7 @@ updateDistances = function(legs){
 	var distances = legs; //Toutes les distances, dans l'ordre du trajet
 	var totalDistance = 0;
 	var totalDuree = 0;
+	var totalPrice = 0;
 
 	//Pour chaque donnée
 	for(var i = 0; i<distances.length; i++){
@@ -215,13 +216,15 @@ updateDistances = function(legs){
 			priceInputs[i+1].value 	= parseInt((distances[i].distance.value)/1000*0.04);
 		}
 
-		totalDistance += distances[i].distance.value;
-		totalDuree += distances[i].duration.value;
+		totalDistance += parseInt(distances[i].distance.value);
+		totalDuree += parseInt(distances[i].duration.value);
+		totalPrice += parseInt(distances[i].distance.value/1000*0.04);
 	}
 
 	console.log(distances);
 
 	_n('totalDistance')[0].value = totalDistance; //display values in hidden input, for the next page
 	_n('totalDuree')[0].value = totalDuree;
+	_n('totalPrice')[0].value = totalPrice;
 };
 window.addEventListener("load",init);

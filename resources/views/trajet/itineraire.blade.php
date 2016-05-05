@@ -36,6 +36,7 @@
 				{{-- data for the database and the next page --}}
 				<input type="hidden" name="totalDistance">
 				<input type="hidden" name="totalDuree">
+				<input type="hidden" name="totalPrice">
 						
 				<input type="submit" value="Envoyer et Continuer">
 			</form>

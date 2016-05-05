@@ -1,57 +1,7 @@
-googleObjects = { //Objets google
-	map : null,
-	directionsService : null,
-	directionsDisplay : null,
-	geocoder : null,
-	startOptions : {zoom: 6, center: {lat: 45, lng: 0}}
-};
-
-fauxObj = {
-	propertyF : null
-}
-
 init = function(){
-	/* Création des objets google map */
-	googleObjects.map 				= new google.maps.Map(document.getElementById('map'),googleObjects.startOptions);
-	googleObjects.directionsService = new google.maps.DirectionsService;
-	googleObjects.directionsDisplay = new google.maps.DirectionsRenderer({map: googleObjects.map});
-	googleObjects.geocoder 			= new google.maps.Geocoder();
-
-	/* Evenement de changement de trajet sur la carte */
-	googleObjects.directionsDisplay.addListener('directions_changed', function() {
-		updateDistances(googleObjects.directionsDisplay.getDirections().routes[0].legs);
-	});
-
-	if(trajet.from != "" && trajet.to != ""){
-		var options = { //Création des options de recherche de trajet
-			origin: trajet.from,
-			destination: trajet.to,
-			travelMode: google.maps.TravelMode.DRIVING,
-			unitSystem: google.maps.UnitSystem.METRIC,
-			region : 'FR',
-			avoidHighways : !trajet.highway //péage
-		};
-		var steps = trajet.steps;
-		if(steps.length > 0){
-			options.waypoints = [];
-			for(var i = 0; i<steps.length; i++){
-				if(steps[i] != ""){
-					options.waypoints.push({location:steps[i]});
-				}
-			}
-		}
-		googleObjects.directionsService.route(options, function(response, status) {
-			if (status === google.maps.DirectionsStatus.OK) {
-				googleObjects.directionsDisplay.setDirections(response);
-			} else {
-				console.log("Une erreur s'est produite :" + status);
-			}
-		});
-	}
-
 	var priceInputs = _n("price[]");
 	for(var i =0; i<priceInputs.length; i++){
-		linkVarToInput(fauxObj,"propertyF",priceInputs[i],changePrice);
+		callbackWhenInputChange(priceInputs[i],changePrice);
 	}
 }
 
@@ -82,43 +32,17 @@ getTimeFormat = function(seconds){
 	return time;
 }
 
-/* Lie un input et un propriété d'un objet */
-linkVarToInput = function(object,property,input,callback){
-	if( input.type == "checkbox"){
-		Events.addEvent(input,"change",function(event){
-			console.log(input.checked);
-			object[property] = input.checked;
-			callback(input.checked);
-		});
-	}
+/* fonction qui apelle un callback quand l'input en parametre subit un changement */
+/* le callback reçoit pour parametre l'état de l'input */
+callbackWhenInputChange = function(input, callback){
+	if( input.type == "checkbox"){Events.addEvent(input,"change",function(event){callback(input.checked);});}
 	else if(input.type == "radio"){
 		var radios = _n(input.name);
-		console.log(radios);
 		for(var i = 0; i<radios.length;  i++){
-			Events.addEvent(radios[i],"change",function(event){
-				console.log(this);
-				if(this == input){
-					object[property] = input.checked;
-				}
-				else{
-					object[property] = !input.checked;
-				}
-				callback(input.checked);				
-			});
+			Events.addEvent(radios[i],"change",function(event){callback(input.checked);});
 		}
 	}
-	else if(input.type == "number"){
-		Events.addEvent(input,"change",function(event){
-			object[property] = input.value;
-			callback(input.value);
-		});
-	}
-	else{
-		Events.addEvent(input,"keyup",function(event){
-			object[property] = input.value;
-			callback(input.value);
-		});
-	}
+	else{Events.addEvent(input,"keyup",function(event){callback(input.value);});}
 }
 
 changePrice = function(){
