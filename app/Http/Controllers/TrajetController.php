@@ -29,8 +29,8 @@ class TrajetController extends Controller
 
         $highway = is_null($request->input('highway'))?false:true;
         //remplissage du tableau avec les données que l'itinéraire à défini
-        $trajet['dateTraj']     = \DateTime::createFromFormat('m/d/Y', $request->input('goDate'));
-        //$trajet['dateTraj']     = \DateTime::createFromFormat('Y-m-d', $request->input('goDate'));
+        //$trajet['dateTraj']     = \DateTime::createFromFormat('m/d/Y', $request->input('goDate'));
+        $trajet['dateTraj']     = \DateTime::createFromFormat('Y-m-d', $request->input('goDate'));
         $trajet['heureTraj']    = $request->input('goHour').":".$request->input('goMinute');
         $trajet['autoRoutTraj'] = $highway;
         $trajet['distTraj']     = $request->input('totalDistance');
