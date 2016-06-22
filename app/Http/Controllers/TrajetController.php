@@ -24,6 +24,7 @@ class TrajetController extends Controller
 
     /* traitement des données de l'itinéraire */
     public function postItineraire(Request $request){
+        /*
         //création de l'objet trajet (tableau associatif)
         $trajet = [];
 
@@ -65,6 +66,108 @@ class TrajetController extends Controller
 
         //retourne la vue des détails
         return redirect()->route('detailsG');
+        */
+        //be sure a member is authenticated
+        /*
+        $idUser = Auth::check()?Auth::user()->id:-1;
+        if($idUser == -1){throw new \Exception("Vous n'êtes pas authentifié");}
+        */
+        $idUser = 1;
+
+        //search for vehicule
+        //TODO
+        $idVeh = 1;
+
+        //create insee list and dist list
+        $insees = [Ville::where("nomVille",$request->input('startCity'))->first()->inseeVille];
+        $adresses = $request->input('stepAdress');
+        $cps      = $request->input('stepsCP');
+        $villes   = $request->input('stepsCity');        
+        $c = count($villes);
+        for($i=0; $i<$c; $i++){
+            $insees[] = Ville::where("nomVille",$villes[i])->first()->inseeVille;
+        }
+        $insees[] = Ville::where("nomVille",$request->input('endCity'))->first()->inseeVille;
+        $dists = [0,0];
+
+        //creating trajet object
+        $trajetO =  Trajet::create([
+            'dateTraj'      => \DateTime::createFromFormat('d/m/Y', $request->input('date')),
+            'heureTraj'     => $request->input('hour').":".$request->input('minute'),
+            'nbPlacesTraj'  => $request->input('places') || 1,
+            'tarifTraj'     => $request->input('totalPrice') || 0,
+            'autoRoutTraj'  => is_null($request->input('highway'))?false:true,
+            'detoursTraj'   => $request->input('detours') || 0,
+            'depaDecTraj'   => $request->input('late') || 0,
+            'bagageTraj'    => $request->input('luggage') || 0,
+            'infoTraj'      => $request->input('infos') || "No infos for this travel",
+            'distTraj'      => $request->input('totalDistance') || 0,
+            'dureeTraj'     => $request->input('totalDuree') || 0,
+            'idMemb'        => $idUser, 
+            'idVeh'         => $idVeh,
+            'listeInseeEtapeTrajet' =>join("/",$insees),
+            'listeDistEtapeTrajet'  =>join("/",$dists)
+        ]);
+        $trajetO->save();
+
+        //creating each steps
+        $etape = Etape::create([
+            'adresseEtape'  => $request->input('startAdress') ." ". $request->input('startCP') ." ". $request->input('startCity'),
+            'inseeVille'    => $insees[0]
+        ]);
+        $etape->save();
+
+        $etapeTrajet = EtapeTrajet::create([
+            'idEtape'   => $etape->idEtape,
+            'idTraj'    => $trajetO->idTraj,
+            'numOrdreEtapeTrajet'   => 0,
+            'distEtapeTrajet'       => 0,
+            'prixEtapeTrajet'       => 0,
+            'dureeEtapeTrajet'      => 0,
+            'placePrisesEtapeTrajet' => 0
+        ]);
+        $etapeTrajet->save();
+
+        for($i = 1; $i<$c; $i++){
+            $etape = Etape::create([
+                'adresseEtape'  => $adresses[$i-1] ." ". $cps[$i-1] ." ". $cps[$i-1],
+                'inseeVille'    => $insees[$i]
+            ]);
+            $etape->save();
+
+            $etapeTrajet = EtapeTrajet::create([
+                'idEtape'   => $etape->idEtape,
+                'idTraj'    => $trajetO->idTraj,
+                'numOrdreEtapeTrajet'   => $i,
+                'distEtapeTrajet'       => 0, //TODO
+                'prixEtapeTrajet'       => 0, //TODO
+                'dureeEtapeTrajet'      => 0, //TODO
+                'placePrisesEtapeTrajet' => 0
+            ]);
+            $etapeTrajet->save(); 
+        }
+
+        $etape = Etape::create([
+            'adresseEtape'  => $request->input('endAdress') ." ". $request->input('endCP') ." ". $request->input('endCity'),
+            'inseeVille'    => $insees[count($insees)-1]
+        ]);
+        $etape->save();
+
+        $etapeTrajet = EtapeTrajet::create([
+            'idEtape'   => $etape->idEtape,
+            'idTraj'    => $trajetO->idTraj,
+            'numOrdreEtapeTrajet'   => count($insees)-1,
+            'distEtapeTrajet'       => 0, //TODO
+            'prixEtapeTrajet'       => 0, //TODO
+            'dureeEtapeTrajet'      => 0, //TODO
+            'placePrisesEtapeTrajet' => 0
+        ]);
+        $etapeTrajet->save();
+
+        dd($trajetO);
+        
+        //show us 
+        return redirect()->route('detailRecherche', ['id' => $trajetO->idTraj]);
     }
 
     /* renvoie la vue qui sert à définir les détails de l'itinéraire de l'utilisateur */

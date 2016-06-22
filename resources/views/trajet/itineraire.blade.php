@@ -2,49 +2,81 @@
 @section('content')	{{-- on prend place dans la section content --}}
 
 	{{-- on inclut google map avec notre clé --}}
-	<script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script>
+	{{-- <script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script> --}}
 
 	{{-- on inclut notre script JS pour gerer google map et les étapes --}}
-	<script src="{{ URL::asset('/js/script.js') }}"></script>
+	{{-- <script src="{{ URL::asset('/js/script.js') }}"></script> --}}
 
 	<h2>Publier votre annonce</h2>
-
-	{{-- todo later : timeline --}}
-
-	<div class="row">
-
 		{{-- form --}}
-		<div class="col-xs-12 col-sm-12 col-md-6 container-form-itineraire">
-			<form class="form-horizontal" name="formulaire" id="form" action="{{ url('/trajet/itineraire') }}" method="post" autocomplete="off">
-				
-				{{-- token d'authentification --}}
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				
-				{{-- import the fromAndHow section --}}
-				@include('trajet.trajet_parts.fromAndHow')
-				
-				<h3> Votre itinéraire </h3>
-				
-				{{-- import the itineraire section, and add the etape section in it --}}
-				@include('trajet.trajet_parts.itineraire')
-				
-				<h3>Date et horraire</h3>
+	<form class="form-horizontal" name="formulaire" id="form" action="{{ url('/trajet/itineraire') }}" method="post" autocomplete="off">
+		
+		
 
-				{{-- import the date section --}}
-				@include('trajet.trajet_parts.date')
+		{{-- form part : start point and end point --}}
+		<fieldset class="form_part">
+			<legend>Lieu de départ et d'arrivée</legend>
+			<div class="input_container">
+				<label for="start-point">Adresse de départ :</label>
+				<input type="text" placeholder="adresse de départ" name="startAdress" class="adress-input" id="start-point">
+				<input type="text" placeholder="code postal"       name="startCP"     class="cp-input"   required>
+				<input type="text" placeholder="ville de depart"   name="startCity"   class="city-input" required>
+			</div>
 
-				{{-- data for the database and the next page --}}
-				<input type="hidden" name="totalDistance">
-				<input type="hidden" name="totalDuree">
-				<input type="hidden" name="totalPrice">
-						
-				<input type="submit" value="Envoyer et Continuer">
-			</form>
-		</div>
+			<div class="input_container">
+				<label for="end-point">Adresse d'arrivée :</label>
+				<input type="text" placeholder="adresse d'arrivée" name="endAdress" class="adress-input" id="end-point">
+				<input type="text" placeholder="code postal"       name="endCP" 	class="cp-input"   required>
+				<input type="text" placeholder="ville d'arrivée"   name="endCity" 	class="city-input" required>
+			</div>
+		</fieldset>
 
-		{{-- map --}}
-		<div class="col-xs-12 col-sm-12 col-md-6">
-			<div id="map" style="width:400px;height:400px"></div>
-		</div>
-	</div>
+		{{-- form part : steps --}}
+		<fieldset class="form_part">
+			<legend>Les étapes de votre trajet</legend>
+			<div class="steps_container">
+				<div class="input_container">
+					<label for="step-point-1">Etape :</label>
+					<input type="text" placeholder="lieu d'étape" name="stepAdress[]" class="adress-input" id="step-point-1">
+					<input type="text" placeholder="code postal"  name="stepCP[]" 	  class="cp-input">
+					<input type="text" placeholder="ville étape"  name="stepCity[]"   class="city-input">
+				</div>
+			</div>
+			<div class="add-button_container">
+				<button type="button" class="add-button">Ajouter une étape</button>
+			</div>
+		</fieldset>
+
+		{{-- form part : departure date --}}
+		<fieldset class="form_part">
+			<legend>Date de départ</legend>
+			<div class="input_container input_container-date">
+				<input type="date"   placeholder="Date de départ (jj/mm/aaaa)"   name="date"   class="date-input"   required>
+				<input type="number" placeholder="Heure de départ"  			 name="hour"   class="number-input" required>
+				<input type="number" placeholder="Minute de départ" 			 name="minute" class="number-input" required>
+			</div>
+		</fieldset>
+
+		{{-- form part : steps price --}}
+		<fieldset class="form_part">
+			<legend>Participation financière des voyageurs</legend>
+			<p>
+				Not implemented yet, this travel is free.
+			</p>
+		</fieldset>
+
+		{{-- form part : details--}}
+		<fieldset class="form_part">
+			<legend>Détails supplémentaires</legend>
+			<p>
+				Not implemented yet, we will consider that your travel as no description, accept small luggage, and you don't accept late or detour.
+			</p>
+		</fieldset>
+
+		{{-- form part : token, hiddens, cgu accepted and submit button --}}
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<label for="cgu">J'accepte les conditions d'utilisation</label>
+		<input type="checkbox" required id="cgu">
+		<input type="submit" value="Valider ce trajet">
+	</form>
 @endsection
