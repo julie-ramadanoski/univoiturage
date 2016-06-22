@@ -10,7 +10,7 @@ use App\Trajet;
 use App\Etape;
 use App\User;
 use App\Ville;
-use App\EtapeTrajet;
+use App\Etapetrajet;
 use Auth;
 use App\Http\Controllers\Controller;
 use DateTime;
