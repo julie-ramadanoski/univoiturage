@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Trajet;
 use App\Etape;
 use App\User;
+use App\Vehicule;
 use App\Ville;
 use App\Etapetrajet;
 use Auth;
@@ -19,7 +20,9 @@ class TrajetController extends Controller
 {
     /* renvoie la vue qui sert à définir l'itinéraire de l'utilisateur */
     public function getItineraire(){
-        return view('trajet.itineraire');
+        $userId = Auth::user()->id;
+        $vehicule = Vehicule::where('idMemb',$userId)->get();
+        return view('trajet.itineraire', ['id' => $vehicule]);
     }
 
     /* traitement des données de l'itinéraire */
@@ -73,7 +76,7 @@ class TrajetController extends Controller
         if($idUser == -1){throw new \Exception("Vous n'êtes pas authentifié");}
         */
         $idUser = 1;
-
+        $idUser = Auth::user()->id;
         //search for vehicule
         //TODO
         $idVeh = 1;
@@ -164,7 +167,7 @@ class TrajetController extends Controller
         ]);
         $etapeTrajet->save();
 
-        dd($trajetO);
+        // dd($trajetO);
         
         //show us 
         return redirect()->route('detailRecherche', ['id' => $trajetO->idTraj]);
