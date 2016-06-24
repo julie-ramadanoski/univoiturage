@@ -80,6 +80,7 @@ Route::group(['prefix' => 'trajet'],function(){
 
 
 Route::any('trajet/add', 'TrajetController@getView');
+Route::any('api/cities', 'VilleController@getVillesApi');
 Route::any('trajet/addDetails', 'TrajetController@getView2'); 
 Route::any('trajet/show/{id}', ['as'=>'showTrajet','uses' => 'TrajetController@show']);
 

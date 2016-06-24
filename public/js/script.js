@@ -17,6 +17,9 @@ trajet = {
 /* fonction d'initialisation, lancée au chargement de la page */
 init = function(event){
 	/* Création des objets google map */
+	var chosen = $('.chosen_select').chosen({no_results_text: "Oops, nothing found!"});
+	exit();
+
 	googleObjects.map 				= new google.maps.Map(document.getElementById('map'),googleObjects.startOptions);
 	googleObjects.directionsService = new google.maps.DirectionsService;
 	googleObjects.directionsDisplay = new google.maps.DirectionsRenderer({map: googleObjects.map});

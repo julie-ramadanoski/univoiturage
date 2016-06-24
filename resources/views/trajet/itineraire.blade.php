@@ -5,7 +5,9 @@
 	{{-- <script src="http://maps.google.fr/maps/api/js?key=AIzaSyBwbDVyor_fGiLjXlwAJ9RlDKn9NRDVZag" type="text/javascript"></script> --}}
 
 	{{-- on inclut notre script JS pour gerer google map et les étapes --}}
-	{{-- <script src="{{ URL::asset('/js/script.js') }}"></script> --}}
+	<script src="{{ URL::asset('/js/script.js') }}"></script>
+	<script src="{{ URL::asset('/js/chosen.jquery.js') }}"></script>
+	{{-- <script src="{{ URL::asset('/js/chosen.proto.min.js') }}"></script> --}}
 
 	<h2>Publier votre annonce</h2>
 		{{-- form --}}
@@ -21,6 +23,12 @@
 				<input type="text" placeholder="adresse de départ" name="startAdress" class="adress-input" id="start-point">
 				<input type="text" placeholder="code postal"       name="startCP"     class="cp-input"   required>
 				<input type="text" placeholder="ville de depart"   name="startCity"   class="city-input" required>
+				<select id="start" data-placeholder="Choose a country..." class="chosen_select" name="start" style="width:150px;">
+					<option value="1">mareuil</option>
+					<option value="2">ay</option>
+					<option value="3">reims</option>
+					<option value="4">paris</option>
+				</select>
 			</div>
 
 			<div class="input_container">

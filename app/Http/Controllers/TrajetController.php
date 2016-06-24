@@ -78,11 +78,13 @@ class TrajetController extends Controller
         //TODO
         $idVeh = 1;
 
+        dd($request);
+
         //create insee list and dist list
         $insees = [Ville::where("nomVille",$request->input('startCity'))->first()->inseeVille];
         $adresses = $request->input('stepAdress');
         $cps      = $request->input('stepsCP');
-        $villes   = $request->input('stepsCity');        
+        $villes   = $request->input('stepsCity');
         $c = count($villes);
         for($i=0; $i<$c; $i++){
             $insees[] = Ville::where("nomVille",$villes[i])->first()->inseeVille;

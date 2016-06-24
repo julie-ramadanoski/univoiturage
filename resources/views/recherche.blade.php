@@ -10,7 +10,8 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('/css/app.css') }}"                                      rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('/css/datepicker.css') }}"                               rel="stylesheet" type="text/css">
-        <link href="{{ URL::asset('/css/ui-autocomplete.css') }}"                          rel="stylesheet" type="text/css">                
+        <link href="{{ URL::asset('/css/ui-autocomplete.css') }}"                          rel="stylesheet" type="text/css"> 
+        <link href="{{ URL::asset('/css/chosen.min.css') }}"                               rel="stylesheet" type="text/css">              
 
 
         <!-- Chargement de la carte -->

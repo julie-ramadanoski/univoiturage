@@ -43,4 +43,10 @@ class VilleController extends Controller
         $ville->save();
         return redirect()->route('backville');
     }
+
+    public function getVillesApi(Request $request){
+        $city = $request->input('city','');
+        $villes = Ville::where("nomVille",'like',$city."%")->take(5)->get();
+        return response()->json($villes);
+    }
 }
