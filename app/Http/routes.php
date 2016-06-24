@@ -48,6 +48,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/trajet/{idTrajet}/{idMemb}/refuser', ['uses'=>'InscriptionController@refuser']);
 	Route::get('/reservations/{idTrajet}/{idMemb}/annuler', ['uses'=>'InscriptionController@annuler']);
 	Route::any('trajet/addTrajet', ['as'=>'creationTrajet','uses'=>'TrajetController@creationTrajet']);
+	/* Florian G. */
+	/* Routes en rapport avec les ajouts de trajets */
+		Route::group(['prefix' => 'trajet'],function(){
+		Route::get('itineraire', ['as'=>'itineraireG','uses'=>'TrajetController@getItineraire']);
+		Route::post('itineraire', ['as'=>'itineraireP','uses'=>'TrajetController@postItineraire']);
+
+		Route::get('details', ['as'=>'detailsG','uses'=>'TrajetController@getDetails']);
+		Route::post('details', ['as'=>'detailsP','uses'=>'TrajetController@postDetails']);
+	});
 });
 
 Route::get('/autocomplete/ville/{univ?}', ['uses'=>'AutocompleteController@ville']);
@@ -68,15 +77,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
     Route::get('authenticate/coord/{lat}/{lon}/{zoneKm}', 'AuthenticateController@getGeoloc');
 });
 
-/* Florian G. */
-/* Routes en rapport avec les ajouts de trajets */
-Route::group(['prefix' => 'trajet'],function(){
-	Route::get('itineraire', ['as'=>'itineraireG','uses'=>'TrajetController@getItineraire']);
-	Route::post('itineraire', ['as'=>'itineraireP','uses'=>'TrajetController@postItineraire']);
-
-	Route::get('details', ['as'=>'detailsG','uses'=>'TrajetController@getDetails']);
-	Route::post('details', ['as'=>'detailsP','uses'=>'TrajetController@postDetails']);
-});
 
 
 Route::any('trajet/add', 'TrajetController@getView');

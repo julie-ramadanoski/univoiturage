@@ -11,7 +11,7 @@
 
 	<h2>Publier votre annonce</h2>
 		{{-- form --}}
-	<form class="form-horizontal" name="formulaire" id="form" action="{{ url('/trajet/itineraire') }}" method="post" autocomplete="off">
+	<form class="form-horizontal" name="formulaire" id="form" action="{{ url('/trajet/itineraireP') }}" method="post" autocomplete="off">
 		
 		
 
