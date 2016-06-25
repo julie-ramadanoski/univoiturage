@@ -143,21 +143,7 @@ class EtapeTrajetTableSeeder extends Seeder
 		'prixEtapeTrajet'=>'0',
 		'dureeEtapeTrajet'=>'20',
 		'placePrisesEtapeTrajet'=>NULL
-		] );
-
-					
-
-		Etapetrajet::create( [
-		'idEtape'=>12,
-		'idTraj'=>4,
-		'numOrdreEtapeTrajet'=>3,
-		'distEtapeTrajet'=>20,
-		'prixEtapeTrajet'=>'20',
-		'dureeEtapeTrajet'=>'50',
-		'placePrisesEtapeTrajet'=>NULL
-		] );
-
-					
+		] );					
 
 		Etapetrajet::create( [
 		'idEtape'=>13,
@@ -174,11 +160,7 @@ class EtapeTrajetTableSeeder extends Seeder
 		Etapetrajet::create( ['idEtape'=>16, 'idTraj'=>5, 'numOrdreEtapeTrajet'=>3,	'distEtapeTrajet'=>120, 'prixEtapeTrajet'=>'20', 'dureeEtapeTrajet'=>'90', 'placePrisesEtapeTrajet'=>1] );
 		
 		Etapetrajet::create( ['idEtape'=>17, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>1,	'distEtapeTrajet'=>0, 'prixEtapeTrajet'=>'0', 'dureeEtapeTrajet'=>'0', 'placePrisesEtapeTrajet'=>0] );
-		Etapetrajet::create( ['idEtape'=>18, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>2,	'distEtapeTrajet'=>70, 'prixEtapeTrajet'=>'15', 'dureeEtapeTrajet'=>'50', 'placePrisesEtapeTrajet'=>1] );
 		Etapetrajet::create( ['idEtape'=>19, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>3,	'distEtapeTrajet'=>20, 'prixEtapeTrajet'=>'7', 'dureeEtapeTrajet'=>'15', 'placePrisesEtapeTrajet'=>2] );
-		Etapetrajet::create( ['idEtape'=>20, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>4,	'distEtapeTrajet'=>20, 'prixEtapeTrajet'=>'7', 'dureeEtapeTrajet'=>'15', 'placePrisesEtapeTrajet'=>2] );
-		Etapetrajet::create( ['idEtape'=>21, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>5,	'distEtapeTrajet'=>20, 'prixEtapeTrajet'=>'7', 'dureeEtapeTrajet'=>'15', 'placePrisesEtapeTrajet'=>3] );
-		Etapetrajet::create( ['idEtape'=>22, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>6,	'distEtapeTrajet'=>80, 'prixEtapeTrajet'=>'15', 'dureeEtapeTrajet'=>'15', 'placePrisesEtapeTrajet'=>0] );
 		Etapetrajet::create( ['idEtape'=>23, 'idTraj'=>6, 'numOrdreEtapeTrajet'=>7,	'distEtapeTrajet'=>40, 'prixEtapeTrajet'=>'10', 'dureeEtapeTrajet'=>'15', 'placePrisesEtapeTrajet'=>2] );
 		
 		Etapetrajet::create( ['idEtape'=>24, 'idTraj'=>7, 'numOrdreEtapeTrajet'=>1,	'distEtapeTrajet'=>0, 'prixEtapeTrajet'=>'0', 'dureeEtapeTrajet'=>'0', 'placePrisesEtapeTrajet'=>0] );

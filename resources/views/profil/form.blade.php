@@ -81,17 +81,17 @@
 				<div class="form-group">
 				    <label for="pref0" class="control-label col-md-2">Aimez vous discuter?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref0" value="11" required @if (preg_match("/11[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-11.png') }}"/>
-				    	<input type="radio" name="pref0" value="12" @if (preg_match("/12[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-12.png') }}"/>
-				    	<input type="radio" name="pref0" value="13" @if (preg_match("/13[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-13.png') }}"/>
+				    	<input type="radio" name="pref0" value="11" required @if (preg_match("/11[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-21.png') }}"/>
+				    	<input type="radio" name="pref0" value="12" @if (preg_match("/12[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-22.png') }}"/>
+				    	<input type="radio" name="pref0" value="13" @if (preg_match("/13[0-9]{6}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-23.png') }}"/>
 				    </div>
 				</div>	
 				<div class="form-group">
 				    <label for="pref1" class="control-label col-md-2">Acceptez vous de fumer en voiture?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref1" value="21" required @if (preg_match("/[0-9]{2}21[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-21.png') }}"/>
-				    	<input type="radio" name="pref1" value="22" @if (preg_match("/[0-9]{2}22[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-22.png') }}"/>
-				    	<input type="radio" name="pref1" value="23" @if (preg_match("/[0-9]{2}23[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-23.png') }}"/>
+				    	<input type="radio" name="pref1" value="21" required @if (preg_match("/[0-9]{2}21[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-41.png') }}"/>
+				    	<input type="radio" name="pref1" value="22" @if (preg_match("/[0-9]{2}22[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-42.png') }}"/>
+				    	<input type="radio" name="pref1" value="23" @if (preg_match("/[0-9]{2}23[0-9]{4}/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-43.png') }}"/>
 				    </div>
 				</div>
 				<div class="form-group">
@@ -105,9 +105,9 @@
 				<div class="form-group">
 				    <label for="pref3" class="control-label col-md-2">Acceptez vous les animaux?</label>
 				    <div class="col-md-10">
-				    	<input type="radio" name="pref3" value="41" required @if (preg_match("/[0-9]{6}41/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-41.png') }}"/>
-				    	<input type="radio" name="pref3" value="42" @if (preg_match("/[0-9]{6}42/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-42.png') }}"/>
-				    	<input type="radio" name="pref3" value="43" @if (preg_match("/[0-9]{6}43/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-43.png') }}"/>
+				    	<input type="radio" name="pref3" value="11" required @if (preg_match("/[0-9]{6}41/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-41.png') }}"/>
+				    	<input type="radio" name="pref3" value="12" @if (preg_match("/[0-9]{6}42/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-42.png') }}"/>
+				    	<input type="radio" name="pref3" value="13" @if (preg_match("/[0-9]{6}43/", auth()->user()->prefMemb) == 1) checked @endif> <img src="{{ URL::asset('images/pref-43.png') }}"/>
 				    </div>
 				</div>
 				<input type='hidden' name='prefMemb'>
