@@ -42,7 +42,7 @@ class InscriptionController extends Controller
                     ->insert(array("idMemb"=>$membId, "idTraj"=>$idTraj, "idEtapeDepartInscrit"=>$idDep, "idEtapeArriveeInscrit"=>$idArr));
                 $message = "Inscription effectuée";
             } catch (\Illuminate\Database\QueryException $e) {
-                $message = "Vous êtes déjà inscrit à ce trajet";
+                $message = "Vous ne pouvez pas vous inscrire deux fois au même trajet";
             }
         }
         $trajet = new Trajet;
