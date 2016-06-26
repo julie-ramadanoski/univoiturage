@@ -78,7 +78,7 @@ class TrajetController extends Controller
 
     private function createTravelFromRequest($request, $insees, $dists){
         $travel =  Trajet::create([
-            'dateTraj'      => date('d/m/Y',strtotime($request->input('date'))),
+            'dateTraj'      => date('Y/m/d',strtotime($request->input('date'))),
             'heureTraj'     => $request->input('hour').":".$request->input('minute'),
             'nbPlacesTraj'  => $request->input('place'),
             'tarifTraj'     => $request->input('totalPrice'),
