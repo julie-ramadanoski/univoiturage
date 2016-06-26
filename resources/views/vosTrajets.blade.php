@@ -8,7 +8,7 @@
                     <div class="list">
                     @if (count($trajets)==0)
                          <div class="col-xs-12 col-sm-12">
-                        <h3 style="text-align: center">Aucun trajet, ajoutez en un <a href="{{ url('/trajet/add') }}">ici</a>.</h3>
+                        <h3 style="text-align: center">Aucun trajet, ajoutez en un <a href="{{ url('/trajet/itineraire') }}">ici</a>.</h3>
                         </div>
                     @endif
                     @if (isset($message))
