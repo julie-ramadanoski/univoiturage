@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use Carbon;
 use App\Http\Requests;
 use App\Trajet;
 use App\Etape;
@@ -64,7 +65,7 @@ class TrajetController extends Controller
 
     private function createTravelFromRequest($request, $insees, $dists){
         $travel =  Trajet::create([
-            'dateTraj'      => \DateTime::createFromFormat('d/m/Y', $request->input('date')),
+            'dateTraj'      => date('Y/m/d',strtotime($request->input('date'))),
             'heureTraj'     => $request->input('hour').":".$request->input('minute'),
             'nbPlacesTraj'  => $request->input('place') || 1,
             'tarifTraj'     => $request->input('totalPrice') || 0,
@@ -133,5 +134,26 @@ class TrajetController extends Controller
 
         $message = "Avis attribué.";
          return view('vosTrajets', compact('trajets', 'now', 'message'));
+    }
+
+    public function annuler($idTraj){
+        $trajet = Trajet::where('idTraj',$idTraj)->get()->first();
+        $etapeTrajet = EtapeTrajet::where('idTraj',$idTraj)->get();
+        $inscrits = $trajet->inscrits;
+        foreach ($inscrits as $inscrit) {
+            DB::table("inscrit")
+                    ->whereRaw("idTraj = ".$idTraj)
+                    ->delete();
+        }
+        foreach ($etapeTrajet as $etapeTraj) {
+            DB::table("etapetrajet")
+                    ->whereRaw("idTraj = ".$idTraj)
+                    ->delete();
+        }
+        $trajet->delete();
+        $trajets = Auth::user()->trajets; 
+        $now = time();
+        $message = "Trajet supprimé.";
+        return view('vosTrajets', compact('trajets', 'now', 'message'));
     }
 }
