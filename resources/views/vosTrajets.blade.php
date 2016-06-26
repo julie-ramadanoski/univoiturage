@@ -8,7 +8,7 @@
                     <div class="list">
                     @if (count($trajets)==0)
                          <div class="col-xs-12 col-sm-12">
-                        <h3 style="text-align: center">Auncun trajet, ajoutez en un <a href="{{ url('/trajet/add') }}">ici</a>.</h3>
+                        <h3 style="text-align: center">Aucun trajet, ajoutez en un <a href="{{ url('/trajet/add') }}">ici</a>.</h3>
                         </div>
                     @endif
                     @if (isset($message))
@@ -32,7 +32,7 @@
                                     @endif
                                         <p>Arrivée : {{ $trajet->etapetrajets[count($trajet->etapetrajets)-1]->etape->ville->nomVille }}</p>
                                     @if (strtotime($trajet->dateTraj) > $now)
-                                        <p><a href="trajet/{{$trajet->idTraj}}/annuler"><button class="btn btn-primary">Annuler le Trajet</button></a></p>
+                                        <p><a href="/trajet/{{$trajet->idTraj}}/annuler"><button class="btn btn-primary">Annuler le Trajet</button></a></p>
                                     @endif
                                 </div>
                                 <div class="col-md-6">
