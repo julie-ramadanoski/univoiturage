@@ -45,7 +45,7 @@ class TrajetController extends Controller
         for($i=0, $order=0; $i<$count; $i++){
             if($request->input($slugs[$i].'City') != null){
                 $step = $this->createStepFromRequest($request, $slugs[$i], $insees[$order]);
-                $stepTravel= $this->createStepTravelFromRequest($trajetO->idTraj, $step, $dists[$order], $prices[$order], $durations[$order], $order++);
+                $stepTravel= $this->createStepTravelFromRequest($trajetO->idTraj, $step->idEtape, $dists[$order], $prices[$order], $durations[$order], $order++);
             }
         }
 
@@ -63,7 +63,7 @@ class TrajetController extends Controller
                 if($city == null){
                     //search in WEB : http://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&q=Marseille&rows=1
                     $newCity =  Ville::create([
-                        'codePostalVille' => $request->input($slugs[$i].'Postal') || "00000",
+                        'codePostalVille' => "00000",
                         'nomVille'         => $request->input($slugs[$i].'City')
                     ]);
                     $newCity->save();
@@ -78,17 +78,17 @@ class TrajetController extends Controller
 
     private function createTravelFromRequest($request, $insees, $dists){
         $travel =  Trajet::create([
-            'dateTraj'      => date('Y/m/d',strtotime($request->input('date'))),
+            'dateTraj'      => date('d/m/Y',strtotime($request->input('date'))),
             'heureTraj'     => $request->input('hour').":".$request->input('minute'),
-            'nbPlacesTraj'  => $request->input('place') || 1,
-            'tarifTraj'     => $request->input('totalPrice') || 0,
-            'autoRoutTraj'  => is_null($request->input('highway'))?false:true,
-            'detoursTraj'   => $request->input('detour') || 0,
-            'depaDecTraj'   => $request->input('late') || 0,
-            'bagageTraj'    => $request->input('luggage') || 0,
+            'nbPlacesTraj'  => $request->input('place'),
+            'tarifTraj'     => $request->input('totalPrice'),
+            'autoRoutTraj'  => $request->input('highway') == "no"?false:true,
+            'detoursTraj'   => $request->input('detour'),
+            'depaDecTraj'   => $request->input('late'),
+            'bagageTraj'    => $request->input('luggage'),
             'infoTraj'      => $request->input('infos') || "No infos for this travel",
-            'distTraj'      => $request->input('totalDistance') || 0,
-            'dureeTraj'     => $request->input('totalDuree') || 0,
+            'distTraj'      => $request->input('totalDistance'),
+            'dureeTraj'     => $request->input('totalDuree'),
             'idMemb'        => Auth::user()->id, 
             'idVeh'         => $request->input('usedCar') == "-1" ? null : $request->input('usedCar'),
             'listeInseeEtapeTrajet' =>join("/",$insees),
@@ -109,7 +109,7 @@ class TrajetController extends Controller
 
     private function createStepTravelFromRequest($travelId, $stepId, $dist, $price, $duration, $order){
         $stepTravel = EtapeTrajet::create([
-            'idEtape'   => $stepId->idEtape,
+            'idEtape'   => $stepId,
             'idTraj'    => $travelId,
             'numOrdreEtapeTrajet'   => $order,
             'distEtapeTrajet'       => $dist,

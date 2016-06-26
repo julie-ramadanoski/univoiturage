@@ -14,23 +14,23 @@
 			{{-- Start adress --}}
 			<div class="input-container xs-12" data-autocomplete="true">
 				<label for="startCityInput" class="input-label">Adresse de départ</label>
-				<input type="text" name="startCity"   class="input --hidden --city"  data-valid="false">
+				<input type="text" name="startCity"   class="input --hidden --city"  data-valid="false" required>
 				<input type="text" name="startPostal" class="input --hidden --postal">
 				<input type="text" name="dists[]"	  class="input --hidden --distance">
 				<input type="text" name="durations[]"  class="input --hidden --duration">
 				<input type="text" name="prices[]"  class="input --hidden --price">
-				<input type="text" name="startAdress" class="input --autocomplete" id="startCityInput" placeholder="Ville de départ"> 
+				<input type="text" name="startAdress" class="input --autocomplete" id="startCityInput" placeholder="Ville de départ" required> 
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 				<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 			</div>
 			{{-- End adress --}}
 			<div class="input-container xs-12" data-autocomplete="true">
 				<label for="endCityInput" class="input-label">Adresse d'arrivée</label>
-				<input type="text" name="endCity"   class="input --hidden --city" data-valid="false">
+				<input type="text" name="endCity"   class="input --hidden --city" data-valid="false" required>
 				<input type="text" name="endPostal" class="input --hidden --postal">
 				<input type="text" name="dists[]"	  class="input --hidden --distance">
 				<input type="text" name="durations[]"  class="input --hidden --duration">
-				<input type="text" name="endAdress" class="input --autocomplete" id="endCityInput" placeholder="Ville d'arrivée">
+				<input type="text" name="endAdress" class="input --autocomplete" id="endCityInput" placeholder="Ville d'arrivée" required>
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 				<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> 
 			</div>

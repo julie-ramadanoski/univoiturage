@@ -12,7 +12,11 @@
 
     $prix = 0;
     $nbPlacePrises = 0;
+    if($trajet->idVeh == null){
+    $nbPlacesMaxi = 5;
+}else{
     $nbPlacesMaxi = $trajet->vehicule->nbPlaceVeh;
+}
    	$dist    = 0;
     $tps     = 0;       
     $moyTps  = 0;
@@ -165,10 +169,12 @@
                                 @endfor 	
 						</p>
 						<div class="col-md-9">
-							@if(isset($dernierAvis->avisCInscrit) && isset($dernierAvis->commentaireCInscrit))
-								<h4>Dernier avis sur le conducteur :</h4>
-								<b>{{$dernierAvis->avisCInscrit}}/5</b>
-								<em>{{$dernierAvis->commentaireCInscrit}}</em>
+							@if(isset($dernierAvis))
+								@if(isset($dernierAvis->avisCInscrit) && isset($dernierAvis->commentaireCInscrit))
+									<h4>Dernier avis sur le conducteur :</h4>
+									<b>{{$dernierAvis->avisCInscrit}}/5</b>
+									<em>{{$dernierAvis->commentaireCInscrit}}</em>
+								@endif
 							@endif
 						</div>
 	        		</div>

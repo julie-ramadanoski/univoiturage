@@ -225,8 +225,6 @@ updateDistances = function(legs){
 		totalDuree += parseInt(distances[i].duration.value);
 		totalPrice += parseInt(distances[i].distance.value/1000*0.04);
 	}
-
-	console.log(document.getElementsByName('totalDistance'));
 	document.getElementsByName('totalDistance')[0].value = totalDistance; //display values in hidden input, for the next page
 	document.getElementsByName('totalDuree')[0].value = totalDuree;
 	document.getElementsByName('totalPrice')[0].value = totalPrice;

@@ -97,11 +97,13 @@ class RechercheController extends Controller
         $trajet = $trajet->with('user', 'vehicule', 'etapetrajets.etape.ville', 'inscrits', 'questions')
                          ->where('idTraj', $id)
                          ->first();
-        /*$query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
+        $query = "SELECT distinct a.avisCInscrit ,a.commentaireCInscrit, a.dateCommentCInscrit FROM inscrit a, trajet b, users c WHERE a.idTraj = b.idTraj and b.idMemb = :idmemb order by a.dateCommentCInscrit DESC";
         $dernierAviss = DB::select( DB::raw($query), array(
                     'idmemb' => $trajet->user->id
         ));
-        $dernierAvis = $dernierAviss[0];*/
+        if(count($dernierAviss) > 0){
+            $dernierAvis = $dernierAviss[0];
+        }
         return view('recherche.detail',compact('trajet', 'dernierAvis'));
     }
     
