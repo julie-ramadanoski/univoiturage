@@ -31,8 +31,8 @@
                                         <p>autoroute : Non</p>
                                     @endif
                                         <p>Arrivée : {{ $trajet->etapetrajets[count($trajet->etapetrajets)-1]->etape->ville->nomVille }}</p>
-                                    @if (strtotime($trajet->dateTraj) < $now)
-                                        <p><a href="#"><button class="btn btn-primary">Annuler le Trajet</button></a></p>
+                                    @if (strtotime($trajet->dateTraj) > $now)
+                                        <p><a href="trajet/{{$trajet->idTraj}}/annuler"><button class="btn btn-primary">Annuler le Trajet</button></a></p>
                                     @endif
                                 </div>
                                 <div class="col-md-6">
