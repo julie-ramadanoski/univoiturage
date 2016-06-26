@@ -11,7 +11,8 @@
         <link href="{{ URL::asset('/css/app.css') }}"                                      rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('/css/datepicker.css') }}"                               rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('/css/ui-autocomplete.css') }}"                          rel="stylesheet" type="text/css"> 
-        <link href="{{ URL::asset('/css/chosen.min.css') }}"                               rel="stylesheet" type="text/css">              
+        <link href="{{ URL::asset('/css/gridSystem.css') }}"                               rel="stylesheet" type="text/css">              
+        <link href="{{ URL::asset('/css/addTravel.css') }}"                                rel="stylesheet" type="text/css">
 
 
         <!-- Chargement de la carte -->

@@ -4,93 +4,115 @@ googleObjects = { //Objets google
 	directionsService : null,
 	directionsDisplay : null,
 	geocoder : null,
-	startOptions : {zoom: 6, center: {lat: 45, lng: 0}}
+	startOptions : {zoom: 6, center: {lat: 44.9391495, lng: 4.1430941}}
 };
 
-trajet = {
-	start : "",
-	end : "",
-	roundTrip : false,
-	highway : false 		//Booleen représentant si oui ou non le trajet passe par une autoroute
-};
+highway = false;
 
-/* fonction d'initialisation, lancée au chargement de la page */
-init = function(event){
-	/* Création des objets google map */
-	var chosen = $('.chosen_select').chosen({no_results_text: "Oops, nothing found!"});
-	exit();
+/* Object which takes care of autocomplete */
+function Autocompleter(container) {
+	this.container         = container;
+	this.autocompleteInput = container.querySelectorAll('.input.--autocomplete')[0];
+	this.cityNameInput     = container.querySelectorAll('.input.--city')[0];
+	this.postalCodeInput   = container.querySelectorAll('.input.--postal')[0];
+	this.autocomplete      = new google.maps.places.Autocomplete(this.autocompleteInput, {componentRestrictions: {country: 'fr'}});
 
-	googleObjects.map 				= new google.maps.Map(document.getElementById('map'),googleObjects.startOptions);
-	googleObjects.directionsService = new google.maps.DirectionsService;
-	googleObjects.directionsDisplay = new google.maps.DirectionsRenderer({map: googleObjects.map});
-	googleObjects.geocoder 			= new google.maps.Geocoder();
-
-	/* Evenement de changement de trajet sur la carte */
-	googleObjects.directionsDisplay.addListener('directions_changed', function() {
-		updateDistances(googleObjects.directionsDisplay.getDirections().routes[0].legs);
-	});
-
-	/* Création des écouteurs */
-	callbackWhenInputChange(_id("from"),updateTrajet);
-	callbackWhenInputChange(_id("to"),updateTrajet);
-	callbackWhenInputChange(_id("highway"),updateTrajet);
-
-	/* creation des datepicker */
-	$("#goDate").datepicker();
-
-	/* ecouteur sur l'ajout d'un etape */
-	_id("add-step").addEventListener("click",addStepInput);
-
-	/* Ajout d'une étape vide */
-	addStepInput();
-	updateTrajet();
-};
-
-/* fonction qui apelle un callback quand l'input en parametre subit un changement */
-/* le callback reçoit pour parametre l'état de l'input */
-callbackWhenInputChange = function(input, callback){
-	if( input.type == "checkbox"){Events.addEvent(input,"change",function(event){callback(input.checked);});}
-	else if(input.type == "radio"){
-		var radios = _n(input.name);
-		for(var i = 0; i<radios.length;  i++){
-			Events.addEvent(radios[i],"change",function(event){callback(input.checked);});
+	this.fillInput = function(){
+		var place = this.autocomplete.getPlace();
+		// Input for the city's name
+		var city = false;
+		var c = place.address_components.length;
+		for(var i=0; i<c; i++){
+			if(place.address_components[i].types.length >= 1 && (
+				place.address_components[i].types[0] == "locality" || 
+				place.address_components[i].types[1] == "locality" )
+			){
+				city = place.address_components[i].short_name;
+			}
 		}
-	}
-	else{Events.addEvent(input,"keyup",function(event){callback(input.value);});}
+		this.cityNameInput.value=city;
+		this.cityNameInput.dataset.valid = true;
+
+		//Input for the city's postal code
+		var cp = false;
+		var k = place.address_components.length;
+		for(var i=0; i<k; i++){
+			if(place.address_components[i].types.length >= 1 && 
+				place.address_components[i].types[0] == "postal_code"){
+				cp = place.address_components[i].short_name;
+			}
+		}
+		this.postalCodeInput.value = cp;
+
+		displayPath();
+	};
+	google.maps.event.addListener(this.autocomplete, 'place_changed', this.fillInput.bind(this));
 }
 
-/* Trace le trajet suivant les informations de l'objet trajet */
-updateTrajet = function(){
-	// get from and to cities
-	var from = _id("from").value;
-	var to = _id("to").value;
+function createAutocomplete() {
+	//get all the autocomplete-able input
+	var input_containers = document.querySelectorAll('[data-autocomplete=\'true\']');
+	var c = input_containers.length;
+	var autocompleters = [];
+	for(var i = 0; i < c; i++){
+		autocompleters.push(new Autocompleter(input_containers[i]));
+	}
+}
 
-	// if the two fields are not empty
-	if(from != "" && to != ""){
+function createAddStep(){
+	var addStepButton = document.getElementById('addStepButton');
+	addStepButton.addEventListener('click', function(event){
+	  var stepsInputs = document.getElementsByClassName('step-container');
+	  var l = stepsInputs.length;
+	  for(var i = 0; i < l; i++){
+	    if(stepsInputs[i].dataset.show == "false"){
+	      stepsInputs[i].dataset.show = true;
+	      if( i == l-1 ){
+	        this.dataset.show = "false";
+	      }
+	      break;
+	    }
+	  }
+	});
+
+	var delStepButtons = document.getElementsByClassName("step__container__del-button");
+	var k = delStepButtons.length;
+	for(var j = 0; j < k; j++){
+	  delStepButtons[j].addEventListener('click', function(){
+	    var parent = this.parentElement;
+	    parent.dataset.show = "false";
+	    var inputs = parent.getElementsByTagName('input');
+	    var c = inputs.length;
+	    for(var m = 0; m < c; m++){
+	      inputs[m].value = "";
+	      if(inputs[m].dataset.valid){
+	        inputs[m].dataset.valid = "false";
+	      }
+	    }
+	    addStepButton.dataset.show = "true";
+	  })
+	}
+}
+
+
+
+//use the map and the inputs to display the path on the map
+function displayPath(){
+	var startAdress = document.getElementsByName('startAdress')[0].value;
+
+	var endAdress = document.getElementsByName('endAdress')[0].value;
+
+	if(startAdress != "" && endAdress != ""){
+
 		var options = { //Création des options de recherche de trajet
-			origin: from,
-			destination: to,
+			origin: startAdress,
+			destination: endAdress,
 			travelMode: google.maps.TravelMode.DRIVING,
 			unitSystem: google.maps.UnitSystem.METRIC,
 			region : 'FR',
-			avoidHighways : !trajet.highway //péage
+			waypoints: setupWaypoints(),
+			avoidHighways : highway
 		};
-
-		//get all the created steps
-		var steps = document.getElementsByClassName("inputStep");
-
-		//if we have some steps to work with
-		if(steps.length > 0){
-			//create the waypoint array in google option object
-			options.waypoints = [];
-
-			//fill it with steps's value
-			for(var i = 0; i<steps.length; i++){
-				if(steps[i].value != ""){
-					options.waypoints.push({location:steps[i].value});
-				}
-			}
-		}
 
 		//ask google for create the way
 		googleObjects.directionsService.route(options, function(response, status) {
@@ -102,104 +124,26 @@ updateTrajet = function(){
 			}
 		});
 	}
-};
+}
 
-/* Echange les inputs de départs et d'arrivée, surtout leurs autocomplétion */
-switchFromAndTo = function(){
-	//TODO
-};
-
-/* Fonction d'ajout d'un input d'étape */
-addStepInput = function(){
-	var inputGroup = _ce("div");
-	inputGroup.className = "input-group";
-
-	var inputGroupAddon = _ce("span",inputGroup);
-	inputGroupAddon.className="input-group-addon";
-	inputGroupAddon.id="sizing-addon2";
-
-	var glyphicon = _ce("span",inputGroupAddon);
-	glyphicon.className="glyphicon glyphicon-flag";
-	glyphicon['aria-hidden'] = "true";
-
-	var stepInput = _ce("input",inputGroup);
-	stepInput.type="text";
-	stepInput.className="form-control inputStep";
-	stepInput['aria-describedby']="sizing-addon2";
-	stepInput.name = "villes[]";
-
-	var buttonGroup = _ce("div",inputGroup);
-	buttonGroup.className = "input-group-btn";
-
-	var btnDelete = _ce("button", buttonGroup);
-	btnDelete.type="button";
-	btnDelete.className="btn btn-default";
-
-	var spanDelete = _ce("span", btnDelete);
-	spanDelete.className="glyphicon glyphicon-remove";
-	spanDelete['aria-hidden'] = "true";
-
-	var btnTop = _ce("button", buttonGroup);
-	btnTop.type="button";
-	btnTop.className="btn btn-default";
-
-	var spanTop = _ce("span", btnTop);
-	spanTop.className="glyphicon glyphicon-arrow-up";
-	spanTop['aria-hidden'] = "true";
-
-	var btnBot = _ce("button", buttonGroup);
-	btnBot.type="button";
-	btnBot.className="btn btn-default";
-
-	var spanBot = _ce("span", btnBot);
-	spanBot.className="glyphicon glyphicon-arrow-down";
-	spanBot['aria-hidden'] = "true";
-
-	var distanceInput = _ce("input",inputGroup);
-	distanceInput.type="hidden";
-	distanceInput.name="distances[]";
-
-	var dureeInput = _ce("input",inputGroup);
-	dureeInput.type="hidden";
-	dureeInput.name="durees[]";
-
-	var priceInput = _ce("input",inputGroup);
-	priceInput.type="hidden";
-	priceInput.name="prices[]";
-
-	Events.addEvent(btnDelete,"click",function(event){
-		var inputGroup = this.parentElement.parentElement;
-		var inputZone = inputGroup.parentElement;
-		inputZone.removeChild(inputGroup);
-		updateTrajet();
-	});
-
-	Events.addEvent(btnTop,"click",function(event){
-		var inputGroup = this.parentElement.parentElement;
-		var siblingTop = inputGroup.previousSibling;
-		if(!siblingTop){return false;}
-		var inputZone = inputGroup.parentElement;
-		inputZone.insertBefore(inputGroup,siblingTop);
-		updateTrajet();
-	});
-
-	Events.addEvent(btnBot,"click",function(event){
-		var inputGroup = this.parentElement.parentElement;
-		var siblingBot = inputGroup.nextSibling;
-		if(!siblingBot){return false;}
-		var inputZone = inputGroup.parentElement;
-		inputZone.insertBefore(siblingBot,inputGroup);
-		updateTrajet();
-	});
-
-	Events.addEvent(stepInput,"keyup",updateTrajet);
-
-	_id("steps").appendChild(inputGroup);
-};
+//create a, array of steps, ready to be used by google
+function setupWaypoints(){
+	var waypoints = [];
+	var slugs = ['step1', 'step2', 'step3', 'step4'];
+	var c = slugs.length;
+	for(var i = 0; i<c; i++){
+		var adress = document.getElementsByName(slugs[i]+'Adress')[0].value;
+		if(adress != ""){
+			waypoints.push({location:adress});
+		}
+	}
+	return waypoints;			
+}
 
 /* Fonction de maj des distances */
-/* trggered when google update the map */
+/* trggered when google updates the map */
 updateDistances = function(legs){
+	return;
 	var distanceInputs = document.getElementsByName("distances[]"); //Tous les inputs distances, dans l'ordre du trajet
 	var dureeInputs = document.getElementsByName("durees[]"); 
 	var priceInputs = document.getElementsByName("prices[]");
@@ -230,4 +174,35 @@ updateDistances = function(legs){
 	_n('totalDuree')[0].value = totalDuree;
 	_n('totalPrice')[0].value = totalPrice;
 };
-window.addEventListener("load",init);
+
+function createHighwayWatcher(){
+	document.querySelector('[for="yesHighway"]').addEventListener('click',function(event){
+		highway = false;
+		displayPath();
+	});
+	document.querySelector('[for="noHighway"]').addEventListener('click',function(event){
+		highway = true;
+		displayPath();
+	});
+}
+
+/* called when google map API is loaded*/
+init = function(event){
+	// create all the autocomplete systems
+	createAutocomplete();
+	// create the step system
+	createAddStep();
+	// create highway watcher
+	createHighwayWatcher();
+
+	/* Creating Google's objects */
+	googleObjects.map 				= new google.maps.Map(document.getElementById('map'),googleObjects.startOptions);
+	googleObjects.directionsService = new google.maps.DirectionsService;
+	googleObjects.directionsDisplay = new google.maps.DirectionsRenderer({map: googleObjects.map});
+	googleObjects.geocoder 			= new google.maps.Geocoder();
+
+	/* Trigger updateDistances when the map display a new path */
+	googleObjects.directionsDisplay.addListener('directions_changed', function() {
+		updateDistances(googleObjects.directionsDisplay.getDirections().routes[0].legs);
+	});
+};
