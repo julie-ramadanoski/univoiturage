@@ -17,8 +17,8 @@
 				<input type="text" name="startCity"   class="input --hidden --city"  data-valid="false">
 				<input type="text" name="startPostal" class="input --hidden --postal">
 				<input type="text" name="dists[]"	  class="input --hidden --distance">
-				<input type="text" name="prices[]"	  class="input --hidden --price">
 				<input type="text" name="durations[]"  class="input --hidden --duration">
+				<input type="text" name="prices[]"  class="input --hidden --price">
 				<input type="text" name="startAdress" class="input --autocomplete" id="startCityInput" placeholder="Ville de départ"> 
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 				<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
@@ -29,7 +29,6 @@
 				<input type="text" name="endCity"   class="input --hidden --city" data-valid="false">
 				<input type="text" name="endPostal" class="input --hidden --postal">
 				<input type="text" name="dists[]"	  class="input --hidden --distance">
-				<input type="text" name="prices[]"	  class="input --hidden --price">
 				<input type="text" name="durations[]"  class="input --hidden --duration">
 				<input type="text" name="endAdress" class="input --autocomplete" id="endCityInput" placeholder="Ville d'arrivée">
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -49,7 +48,6 @@
 					<input type="text" name="step1City"   class="input --hidden --city" data-valid="false">
 					<input type="text" name="step1Postal" class="input --hidden --postal">
 					<input type="text" name="dists[]"	  class="input --hidden --distance">
-					<input type="text" name="prices[]"	  class="input --hidden --price">
 					<input type="text" name="durations[]"  class="input --hidden --duration">
 					<input type="text" name="step1Adress" class="input --autocomplete" id="step1">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -60,7 +58,6 @@
 					<input type="text" name="step2City"   class="input --hidden --city" data-valid="false">
 					<input type="text" name="step2Postal" class="input --hidden --postal">
 					<input type="text" name="dists[]"	  class="input --hidden --distance">
-					<input type="text" name="prices[]"	  class="input --hidden --price">
 					<input type="text" name="durations[]"  class="input --hidden --duration">
 					<input type="text" name="step2Adress" class="input --autocomplete" id="step2">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -71,7 +68,6 @@
 					<input type="text" name="step3City"   class="input --hidden --city" data-valid="false">
 					<input type="text" name="step3Postal" class="input --hidden --postal">
 					<input type="text" name="dists[]"	  class="input --hidden --distance">
-					<input type="text" name="prices[]"	  class="input --hidden --price">
 					<input type="text" name="durations[]"  class="input --hidden --duration">
 					<input type="text" name="step3Adress" class="input --autocomplete" id="step3">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -82,7 +78,6 @@
 					<input type="text" name="step4City"   class="input --hidden --city" data-valid="false">
 					<input type="text" name="step4Postal" class="input --hidden --postal">
 					<input type="text" name="dists[]"	  class="input --hidden --distance">
-					<input type="text" name="prices[]"	  class="input --hidden --price">
 					<input type="text" name="durations[]"  class="input --hidden --duration">
 					<input type="text" name="step4Adress" class="input --autocomplete" id="step4">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -126,6 +121,11 @@
 		<div class="inputs-wrapper">
 			<div class="input-container">
 				<p class="input-label">Prix proposés</p>
+			</div>
+			<div class="price-container" id="price-container">
+				<p class="input-container-desc">
+					Une fois qu'un trajet minimum aura été défini, vous pourrez modifier les prix.
+				</p>
 			</div>
 		</div>
 		{{-- options container --}}
@@ -217,6 +217,9 @@
 				</div>
 			</div>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="text" name="totalDistance" class="input --hidden">
+			<input type="text" name="totalDuree" class="input --hidden">
+			<input type="text" name="totalPrice" class="input --hidden">
 			<button class="btn btn-primary xs-12 sm-4 off-sm-4 add-travel-button" type="submit">
 				Enregistrer le trajet
 			</button>

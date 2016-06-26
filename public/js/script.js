@@ -17,8 +17,6 @@ function Autocompleter(container) {
 	this.postalCodeInput   = container.querySelectorAll('.input.--postal')[0];
 	this.autocomplete      = new google.maps.places.Autocomplete(this.autocompleteInput, {componentRestrictions: {country: 'fr'}});
 
-	this.autocompleteInput.addEventListener('keyDown', this.emptyContainer.bond(this));
-
 	this.fillInput = function(){
 		var place = this.autocomplete.getPlace();
 		// Input for the city's name
@@ -49,11 +47,17 @@ function Autocompleter(container) {
 		displayPath();
 	};
 
-	this.emptyContainer = function(){
-		this.cityNameInput.value="";
-		this.postalCodeInput.value="";
-		displayPath();
+	this.emptyContainer = function(event){
+		if(event.keyCode == 8 || this.autocompleteInput.value == ""){
+			this.cityNameInput.value="";
+			this.postalCodeInput.value="";
+			displayPath();
+		}			
 	}
+
+	this.autocompleteInput.addEventListener('keydown', this.emptyContainer.bind(this));
+	this.autocompleteInput.addEventListener('blur', this.emptyContainer.bind(this));
+
 
 	google.maps.event.addListener(this.autocomplete, 'place_changed', this.fillInput.bind(this));
 }
@@ -107,6 +111,8 @@ function createAddStep(){
 
 //use the map and the inputs to display the path on the map
 function displayPath(){
+	updatePriceContainer();
+
 	var startAdress = document.getElementsByName('startAdress')[0].value;
 
 	var endAdress = document.getElementsByName('endAdress')[0].value;
@@ -135,6 +141,37 @@ function displayPath(){
 	}
 }
 
+function updatePriceContainer(){
+	cleanPriceContainer();
+	var cities = [];
+	var citiesInput = document.querySelectorAll('[name*="City"]');
+	var citiesInput = [citiesInput[0],citiesInput[2],citiesInput[3],citiesInput[4],citiesInput[5],citiesInput[1]];
+	var c = citiesInput.length;
+	for(var i=0; i<c; i++){
+		if(citiesInput[i].value != ""){
+			cities.push(citiesInput[i].value);
+		}
+	}
+	if(cities.length >= 2){
+		var c = cities.length;
+		for(var i = 1; i<c; i++){
+			var cityFrom = cities[i-1];
+			var cityTo = cities[i];
+			createPriceRow(cityFrom, cityTo);
+		}
+	}
+}
+
+function createPriceRow(from, to){
+	var container = document.getElementById('price-container');
+	container.innerHTML += "<div class=\"input-container --price\"><span class=\"input-label\">De "+from+" à "+to+"</span><input type=\"number\" name=\"prices[]\" class=\"input --price\"></div>"
+}
+
+function cleanPriceContainer(){
+	var container = document.getElementById('price-container');
+	container.innerHTML = "";
+}
+
 //create a, array of steps, ready to be used by google
 function setupWaypoints(){
 	var waypoints = [];
@@ -157,7 +194,6 @@ function setupWaypoints(){
 /* Fonction de maj des distances */
 /* trggered when google updates the map */
 updateDistances = function(legs){
-	return;
 	var distanceInputs 	= document.getElementsByName("dists[]");
 	var dureeInputs 	= document.getElementsByName("durations[]"); 
 	var priceInputs 	= document.getElementsByName("prices[]");
@@ -170,16 +206,19 @@ updateDistances = function(legs){
 	var c = distances.length;
 	//Pour chaque donnée
 
+	//firstCity
 	distanceInputs[0].value = 0;
 	dureeInputs[0].value 	= 0;
 	priceInputs[0].value 	= 0;
 
 	for(var i = 0; i<c; i++){
 		/* pick the +1 input because the first is for the from input, and doesn't have to have value */
-		if(textInputs[i+1].value.length > 0){
-			distanceInputs[i+1].value = parseInt((distances[i].distance.value)/1000);
-			dureeInputs[i+1].value 	= parseInt((distances[i].duration.value));
-			priceInputs[i+1].value 	= parseInt((distances[i].distance.value)/1000*0.04);
+		var cityInput = distanceInputs[i+1].parentElement.querySelector('.input.--city');
+		if(cityInput.value.length > 0){
+			distanceInputs[i+1].value 	= parseInt((distances[i].distance.value)/1000);
+			dureeInputs[i+1].value 		= parseInt((distances[i].duration.value));
+			priceInputs[i+1].value 		= parseInt((distances[i].distance.value)/1000*0.04);
+			priceInputs[i+1].max 		= priceInputs[i+1].value;
 		}
 
 		totalDistance += parseInt(distances[i].distance.value);
@@ -187,11 +226,10 @@ updateDistances = function(legs){
 		totalPrice += parseInt(distances[i].distance.value/1000*0.04);
 	}
 
-	console.log(distances);
-
-	_n('totalDistance')[0].value = totalDistance; //display values in hidden input, for the next page
-	_n('totalDuree')[0].value = totalDuree;
-	_n('totalPrice')[0].value = totalPrice;
+	console.log(document.getElementsByName('totalDistance'));
+	document.getElementsByName('totalDistance')[0].value = totalDistance; //display values in hidden input, for the next page
+	document.getElementsByName('totalDuree')[0].value = totalDuree;
+	document.getElementsByName('totalPrice')[0].value = totalPrice;
 };
 
 function createHighwayWatcher(){

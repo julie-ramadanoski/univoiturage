@@ -29,19 +29,13 @@ class TrajetController extends Controller
     /* traitement des données de l'itinéraire */
     public function postItineraire(Request $request){
         
-        dd($request);
+        //dd($request);
+        $dists = $request->input('dists');
+        $prices = $request->input('prices');
+        $durations = $request->input('durations');
 
-        //create insee list and dist list
-        $insees = [Ville::where("nomVille",$request->input('startCity'))->first()->inseeVille];
-        $adresses = $request->input('stepAdress');
-        $cps      = $request->input('stepsCP');
-        $villes   = $request->input('stepsCity');
-        $c = count($villes);
-        for($i=0; $i<$c; $i++){
-            $insees[] = Ville::where("nomVille",$villes[i])->first()->inseeVille;
-        }
-        $insees[] = Ville::where("nomVille",$request->input('endCity'))->first()->inseeVille;
-        $dists = [0,0];
+        //create insee list
+        $insees = self::createInseeListFromRequest($request);
 
         // creating the travel, using a private method and the request object
         $trajetO = $this->createTravelFromRequest($request, $insees, $dists);
@@ -49,9 +43,9 @@ class TrajetController extends Controller
         $slugs = ['start', 'step1', 'step2', 'step3', 'step4', 'end'];
         $count = count($slugs);
         for($i=0, $order=0; $i<$count; $i++){
-            if($request->input($slugs[$i].'City') != ""){
-                $step = $this->createStepFromRequest($request, $slugs[$i], $insees[$i]);
-                $stepTravel= $this->createStepTravelFromRequest($trajetO->idTraj, $dists[$i], $prices[$i], $durations[$i], $order++);
+            if($request->input($slugs[$i].'City') != null){
+                $step = $this->createStepFromRequest($request, $slugs[$i], $insees[$order]);
+                $stepTravel= $this->createStepTravelFromRequest($trajetO->idTraj, $step, $dists[$order], $prices[$order], $durations[$order], $order++);
             }
         }
 
@@ -59,8 +53,27 @@ class TrajetController extends Controller
         return redirect()->route('detailRecherche', ['id' => $trajetO->idTraj]);
     }
 
-    private function createInseeListFromRequest(){
-
+    private function createInseeListFromRequest($request){
+        $insees = []; 
+        $slugs = ['start', 'step1', 'step2', 'step3', 'step4', 'end'];
+        $count = count($slugs);
+        for($i=0; $i<$count; $i++){
+            if($request->input($slugs[$i].'City') != ""){
+                $city = Ville::where("nomVille",$request->input($slugs[$i].'City'))->first();
+                if($city == null){
+                    //search in WEB : http://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&q=Marseille&rows=1
+                    $newCity =  Ville::create([
+                        'codePostalVille' => $request->input($slugs[$i].'Postal') || "00000",
+                        'nomVille'         => $request->input($slugs[$i].'City')
+                    ]);
+                    $newCity->save();
+                    $insees[] = $newCity->inseeVille;
+                } else {
+                    $insees[] = $city->inseeVille;
+                }
+            }
+        }
+        return $insees;
     }
 
     private function createTravelFromRequest($request, $insees, $dists){
@@ -94,9 +107,9 @@ class TrajetController extends Controller
         return $step;
     }
 
-    private function createStepTravelFromRequest($travelId, $dist, $price, $duration, $order){
+    private function createStepTravelFromRequest($travelId, $stepId, $dist, $price, $duration, $order){
         $stepTravel = EtapeTrajet::create([
-            'idEtape'   => $step->idEtape,
+            'idEtape'   => $stepId->idEtape,
             'idTraj'    => $travelId,
             'numOrdreEtapeTrajet'   => $order,
             'distEtapeTrajet'       => $dist,
