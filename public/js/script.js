@@ -17,6 +17,8 @@ function Autocompleter(container) {
 	this.postalCodeInput   = container.querySelectorAll('.input.--postal')[0];
 	this.autocomplete      = new google.maps.places.Autocomplete(this.autocompleteInput, {componentRestrictions: {country: 'fr'}});
 
+	this.autocompleteInput.addEventListener('keyDown', this.emptyContainer.bond(this));
+
 	this.fillInput = function(){
 		var place = this.autocomplete.getPlace();
 		// Input for the city's name
@@ -46,6 +48,13 @@ function Autocompleter(container) {
 
 		displayPath();
 	};
+
+	this.emptyContainer = function(){
+		this.cityNameInput.value="";
+		this.postalCodeInput.value="";
+		displayPath();
+	}
+
 	google.maps.event.addListener(this.autocomplete, 'place_changed', this.fillInput.bind(this));
 }
 
@@ -132,9 +141,14 @@ function setupWaypoints(){
 	var slugs = ['step1', 'step2', 'step3', 'step4'];
 	var c = slugs.length;
 	for(var i = 0; i<c; i++){
-		var adress = document.getElementsByName(slugs[i]+'Adress')[0].value;
-		if(adress != ""){
-			waypoints.push({location:adress});
+		var city =  document.getElementsByName(slugs[i]+'City')[0].value;
+		if(city == ""){
+			break;
+		} else {
+			var adress = document.getElementsByName(slugs[i]+'Adress')[0].value;
+			if(adress != ""){
+				waypoints.push({location:adress});
+			}
 		}
 	}
 	return waypoints;			
@@ -144,18 +158,23 @@ function setupWaypoints(){
 /* trggered when google updates the map */
 updateDistances = function(legs){
 	return;
-	var distanceInputs = document.getElementsByName("distances[]"); //Tous les inputs distances, dans l'ordre du trajet
-	var dureeInputs = document.getElementsByName("durees[]"); 
-	var priceInputs = document.getElementsByName("prices[]");
-	var textInputs = document.getElementsByName("villes[]");
+	var distanceInputs 	= document.getElementsByName("dists[]");
+	var dureeInputs 	= document.getElementsByName("durations[]"); 
+	var priceInputs 	= document.getElementsByName("prices[]");
 
 	var distances = legs; //Toutes les distances, dans l'ordre du trajet
 	var totalDistance = 0;
 	var totalDuree = 0;
 	var totalPrice = 0;
 
+	var c = distances.length;
 	//Pour chaque donnée
-	for(var i = 0; i<distances.length; i++){
+
+	distanceInputs[0].value = 0;
+	dureeInputs[0].value 	= 0;
+	priceInputs[0].value 	= 0;
+
+	for(var i = 0; i<c; i++){
 		/* pick the +1 input because the first is for the from input, and doesn't have to have value */
 		if(textInputs[i+1].value.length > 0){
 			distanceInputs[i+1].value = parseInt((distances[i].distance.value)/1000);
